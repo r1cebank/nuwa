@@ -1,4 +1,4 @@
-# nuwa
+# pangu
 My Personal HomeLab Infrastructure as Code
 
 ## Terraform
