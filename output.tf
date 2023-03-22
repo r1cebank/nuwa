@@ -1,11 +1,17 @@
-output "k3s_instances" {
-  value  = {
-    for k, v in var.k3s_hosts : v.name => xenorchestra_vm.k3s_vm[k].network
+output "k3s_worker_instances" {
+  value = {
+    for k, v in module.k3s_worker_cluster : module.k3s_worker_cluster[k].label => module.k3s_worker_cluster[k]
+  }
+}
+
+output "k3s_master_instances" {
+  value = {
+    for k, v in module.k3s_master_cluster : module.k3s_master_cluster[k].label => module.k3s_master_cluster[k]
   }
 }
 
 output "arch_mirror_instances" {
-  value  = {
-    for k, v in var.arch_mirror_hosts : v.name => xenorchestra_vm.arch_mirror_vm[k].network
+  value = {
+    for k, v in module.arch_mirror : module.arch_mirror[k].label => module.arch_mirror[k]
   }
 }

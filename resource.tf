@@ -1,5 +1,5 @@
 data "xenorchestra_pool" "pool" {
-  name_label = "hachune-xenlab"
+  name_label = "owo-xenlab"
 }
 
 data "xenorchestra_template" "vm_template_2204" {
