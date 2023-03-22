@@ -21,6 +21,6 @@ module "k3s_master_cluster" {
   
   tags = [
     "k3s",
-    "k3s-master"
+    "master"
   ]
 }

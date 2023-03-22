@@ -1,0 +1,21 @@
+#cloud-config
+hostname: ${hostname}
+users:
+  - name: k3s
+    gecos: k3s user
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users
+    lock_passwd: true
+    ssh_import_id:
+      - gh:r1cebank
+    shell: /bin/bash
+  - name: ubuntu
+    sudo: false
+    ssh_redirect_user: true
+packages:
+  - jq
+  - open-iscsi
+runcmd:
+  - [ systemctl, start, iscsid ]
+preserve_hostname: false
+resize_rootfs: true

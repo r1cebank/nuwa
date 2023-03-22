@@ -14,4 +14,8 @@ module "arch_mirror" {
   
   cloud_config_file = "resource/arch_mirror_cloudconfig.tftpl"
   mac_address = element(slice(var.vm_macs, var.arch_mirror_resources.mac_pool.start, var.arch_mirror_resources.mac_pool.end), count.index)
+
+  tags = [
+    "no-backup"
+  ]
 }

@@ -48,6 +48,19 @@ variable "k3s_master_cluster_resources" {
   }
 }
 
+variable "k3s_longhorn_cluster_resources" {
+  default = {
+    memory_max = 2 * 1024 * 1024 * 1024 # 2gb
+    disk_size = 300 * 1024 * 1024 * 1024 # 300gb
+    size = 3
+    cpus = 2
+    mac_pool = {
+      start = 3
+      end = 6
+    }
+  }
+}
+
 variable "k3s_worker_cluster_resources" {
   default = {
     memory_max = 8 * 1024 * 1024 * 1024 # 8gb
@@ -55,8 +68,8 @@ variable "k3s_worker_cluster_resources" {
     size = 3
     cpus = 4
     mac_pool = {
-      start = 3
-      end = 6
+      start = 6
+      end = 9
     }
   }
 }
@@ -68,8 +81,8 @@ variable "arch_mirror_resources" {
     size = 1
     cpus = 1
     mac_pool = {
-      start = 6
-      end = 7
+      start = 9
+      end = 10
     }
   }
 }

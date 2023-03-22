@@ -21,6 +21,6 @@ module "k3s_worker_cluster" {
   
   tags = [
     "k3s",
-    "k3s-worker"
+    "worker"
   ]
 }
