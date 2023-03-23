@@ -11,6 +11,11 @@ Using terraform to easily setup and destroy the vms on my xenserver. The provide
 - 3 k3s master vm on nvme storage
 - 1 low cpu large storage for arch mirror
 
+## Run Terraform
+```sh
+terraform apply -parallelism=3 # parallelism due to xen migration error (too many disk migration)
+```
+
 ## Resource Definition
 
 ```hcl

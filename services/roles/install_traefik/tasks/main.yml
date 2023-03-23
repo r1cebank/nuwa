@@ -1,0 +1,42 @@
+---
+
+- name: Add traefik chart repo
+  kubernetes.core.helm_repository:
+    name: traefik
+    repo_url: "https://traefik.github.io/charts"
+
+- name: Deploy traefik chart with custom setting
+  become: true
+  kubernetes.core.helm:
+    name: traefik
+    release_namespace: traefik-system
+    chart_ref: traefik/traefik
+    create_namespace: true
+    update_repo_cache: true
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    wait: true
+    values:
+      service:
+        spec:
+          loadBalancerIP: "{{ ingress_loadbalancer_ip }}"
+
+- name: Apply TLS options
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    definition:
+      apiVersion: traefik.containo.us/v1alpha1
+      kind: TLSOption
+      metadata:
+        name: default
+        namespace: traefik-system
+      spec:
+        minVersion: VersionTLS12
+        cipherSuites:
+          - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+          - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+          - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+          - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+          - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+          - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305

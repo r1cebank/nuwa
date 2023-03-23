@@ -1,0 +1,19 @@
+---
+- name: Create random k3s token
+  ansible.builtin.set_fact:
+    k3s_token: "{{ lookup('ansible.builtin.password', '/dev/null', length=30, chars=['ascii_letters', 'digits']) }}"
+
+- name: Install k3s
+  ansible.builtin.shell: |
+    curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="{{ k3s_version }}" K3S_TOKEN="{{ k3s_token }}" sh -s - server --disable=traefik --disable servicelb --cluster-init
+  register: k3s_install_outout
+  changed_when: k3s_install_outout != 0
+
+- name: "Wait until k3s service is running"
+  ansible.builtin.service:
+    name: k3s
+    state: started
+  register: k3s_service
+  until: k3s_service.status.ActiveState == "active"
+  retries: 10
+  delay: 20

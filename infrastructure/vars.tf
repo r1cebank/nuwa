@@ -37,52 +37,70 @@ variable "vm_macs" {
 
 variable "k3s_master_cluster_resources" {
   default = {
-    memory_max = 2 * 1024 * 1024 * 1024 # 2gb
-    disk_size = 10 * 1024 * 1024 * 1024 # 10gb
-    size = 3
-    cpus = 1
+    memory_max = 2 * 1024 * 1024 * 1024  # 2gb
+    disk_size  = 10 * 1024 * 1024 * 1024 # 10gb
+    size       = 3
+    cpus       = 1
+    ips = [
+      "192.168.1.200",
+      "192.168.1.201",
+      "192.168.1.202"
+    ]
     mac_pool = {
       start = 0
-      end = 3
+      end   = 3
     }
   }
 }
 
 variable "k3s_longhorn_cluster_resources" {
   default = {
-    memory_max = 2 * 1024 * 1024 * 1024 # 2gb
-    disk_size = 300 * 1024 * 1024 * 1024 # 300gb
-    size = 3
-    cpus = 2
+    memory_max = 2 * 1024 * 1024 * 1024   # 2gb
+    disk_size  = 300 * 1024 * 1024 * 1024 # 300gb
+    size       = 3
+    cpus       = 2
+    ips = [
+      "192.168.1.203",
+      "192.168.1.204",
+      "192.168.1.205"
+    ]
     mac_pool = {
       start = 3
-      end = 6
+      end   = 6
     }
   }
 }
 
 variable "k3s_worker_cluster_resources" {
   default = {
-    memory_max = 8 * 1024 * 1024 * 1024 # 8gb
-    disk_size = 50 * 1024 * 1024 * 1024 # 50gb
-    size = 3
-    cpus = 4
+    memory_max = 8 * 1024 * 1024 * 1024  # 8gb
+    disk_size  = 50 * 1024 * 1024 * 1024 # 50gb
+    size       = 3
+    cpus       = 4
+    ips = [
+      "192.168.1.206",
+      "192.168.1.207",
+      "192.168.1.208"
+    ]
     mac_pool = {
       start = 6
-      end = 9
+      end   = 9
     }
   }
 }
 
 variable "arch_mirror_resources" {
   default = {
-    memory_max = 1 * 1024 * 1024 * 1024 # 1 gb
-    disk_size = 200 * 1024 * 1024 * 1024 # 200 gb
-    size = 1
-    cpus = 1
+    memory_max = 1 * 1024 * 1024 * 1024   # 1 gb
+    disk_size  = 200 * 1024 * 1024 * 1024 # 200 gb
+    size       = 1
+    cpus       = 1
+    ips = [
+      "192.168.1.209"
+    ]
     mac_pool = {
       start = 9
-      end = 10
+      end   = 10
     }
   }
 }

@@ -1,0 +1,32 @@
+---
+
+- name: Add metallb chart repo
+  kubernetes.core.helm_repository:
+    name: metallb
+    repo_url: "https://metallb.github.io/metallb"
+
+- name: Deploy metallb chart
+  become: true
+  kubernetes.core.helm:
+    name: metallb
+    release_namespace: metallb-system
+    chart_ref: metallb/metallb
+    create_namespace: true
+    update_repo_cache: true
+    wait: true
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+
+- name: Create a metallb config
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    definition:
+      apiVersion: metallb.io/v1beta1
+      kind: IPAddressPool
+      metadata:
+        name: pool-1
+        namespace: metallb-system
+      spec:
+        addresses:
+          - "{{ metallb_address_range }}"

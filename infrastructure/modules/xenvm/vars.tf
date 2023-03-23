@@ -38,9 +38,18 @@ variable "cloud_config_file" {
   description = "The cloud config file path for the vm"
 }
 
+variable "cloud_network_config_file" {
+  description = "The cloud network config file path for the vm"
+}
+
+variable "cloud_network_config_args" {
+  description = "The cloud network config arguments for the vm"
+  default     = {}
+}
+
 variable "tags" {
   description = "The tags to set on the vm"
-  default = []
+  default     = []
 }
 
 variable "mac_address" {

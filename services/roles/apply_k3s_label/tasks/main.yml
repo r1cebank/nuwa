@@ -1,0 +1,33 @@
+---
+
+- name: Get hostname
+  ansible.builtin.command: "cat /etc/hostname"
+  register: hostname
+  changed_when: hostname != 0
+
+- name: Apply labels to each master nodes
+  become: true
+  ansible.builtin.shell: |
+    kubectl label node {{ hostname.stdout }} k3s.owo.ac/nodetype=master
+  when: inventory_hostname in groups["k3s_master"]
+  register: k3s_outout
+  changed_when: k3s_outout != 0
+
+- name: Apply labels to each worker nodes
+  become: true
+  ansible.builtin.shell: |
+    kubectl label node {{ hostname.stdout }} k3s.owo.ac/nodetype=worker
+  delegate_to: "{{ groups['k3s_master'][0] }}"
+  when: inventory_hostname in groups["k3s_worker"]
+  register: k3s_outout
+  changed_when: k3s_outout != 0
+
+- name: Apply labels to each longhorn nodes
+  become: true
+  ansible.builtin.shell: |
+    kubectl label node {{ hostname.stdout }} k3s.owo.ac/nodetype=longhorn &&
+    kubectl label node {{ hostname.stdout }} node.longhorn.io/create-default-disk=true
+  delegate_to: "{{ groups['k3s_master'][0] }}"
+  when: inventory_hostname in groups["k3s_longhorn"]
+  register: k3s_outout
+  changed_when: k3s_outout != 0

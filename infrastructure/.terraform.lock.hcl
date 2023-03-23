@@ -5,6 +5,7 @@ provider "registry.terraform.io/hashicorp/external" {
   version = "2.3.1"
   hashes = [
     "h1:3pi8UzZsZ0LH4fl7cglkLKkSXPPol8cugI1iqwNw+VA=",
+    "h1:gznGscVJ0USxy4CdihpjRKPsKvyGr/zqPvBoFLJTQDc=",
     "zh:001e2886dc81fc98cf17cf34c0d53cb2dae1e869464792576e11b0f34ee92f54",
     "zh:2eeac58dd75b1abdf91945ac4284c9ccb2bfb17fa9bdb5f5d408148ff553b3ee",
     "zh:2fc39079ba61411a737df2908942e6970cb67ed2f4fb19090cd44ce2082903dd",
@@ -24,6 +25,7 @@ provider "registry.terraform.io/hashicorp/local" {
   version = "2.4.0"
   hashes = [
     "h1:7RnIbO3CFakblTJs7o0mUiY44dc9xGYsLhSNFSNS1Ds=",
+    "h1:ZUEYUmm2t4vxwzxy1BvN1wL6SDWrDxfH7pxtzX8c6d0=",
     "zh:53604cd29cb92538668fe09565c739358dc53ca56f9f11312b9d7de81e48fab9",
     "zh:66a46e9c508716a1c98efbf793092f03d50049fa4a83cd6b2251e9a06aca2acf",
     "zh:70a6f6a852dd83768d0778ce9817d81d4b3f073fab8fa570bff92dcb0824f732",
@@ -42,6 +44,7 @@ provider "registry.terraform.io/hashicorp/local" {
 provider "registry.terraform.io/terra-farm/xenorchestra" {
   version = "0.24.0"
   hashes = [
+    "h1:7UTJ0SODswKG+DULj+ZrALTRg7B9ocGR61UKbu5/ngs=",
     "h1:sFWflB6uYzfw3sAy13SaFO7dvA2gPJUxIEankKSHzA0=",
     "zh:30778042769b3668f6080d2335fe0730508e6d1ad9a1fbb60594ca3e03a4f8e8",
     "zh:53cdd86ce4b1e1c2ea5e2e4fca172fe971c847ce9c8912d93c09a0fab43fdc6f",

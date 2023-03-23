@@ -1,0 +1,14 @@
+---
+- name: Get k3s master token
+  register: k3s_master_token
+  become: true
+  become_user: root
+  delegate_to: "{{ groups['k3s_master'][0] }}"
+  ansible.builtin.command: "cat /var/lib/rancher/k3s/server/node-token"
+  changed_when: k3s_master_token != 0
+
+- name: Install k3s
+  ansible.builtin.shell: |
+    curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="{{ k3s_version }}" K3S_TOKEN="{{ k3s_master_token.stdout }}" K3S_URL=https://{{hostvars[groups['k3s_master'][0]].ansible_default_ipv4.address}}:6443 sh -
+  register: k3s_install_outout
+  changed_when: k3s_install_outout != 0

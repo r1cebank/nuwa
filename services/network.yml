@@ -1,0 +1,11 @@
+---
+
+- name: Install network required files
+  hosts: k3s_master[0]
+  gather_facts: true
+  remote_user: k3s
+  become: true
+  roles:
+    - role: install_metallb
+    - role: install_traefik
+    - role: install_cert_manager

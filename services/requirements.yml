@@ -1,0 +1,7 @@
+# /Users/siyuangao/Documents/nuwa/services/roles
+---
+collections:
+  # With just the collection name
+  - community.general
+  - ansible.posix
+  - kubernetes.core

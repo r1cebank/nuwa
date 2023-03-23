@@ -1,0 +1,9 @@
+---
+
+- name: Resetting k3s nodes
+  hosts: k3s_nodes
+  gather_facts: true
+  remote_user: k3s
+  become: true
+  roles:
+    - role: uninstall_k3s

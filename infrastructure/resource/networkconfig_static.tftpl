@@ -1,0 +1,12 @@
+network:
+  version: 1
+  config:
+    - type: physical
+      name: eth0
+      subnets:
+        - type: static
+          address: ${ip_address}
+          netmask: ${sunbet_mask}
+          gateway: ${gateway_address}
+          dns_nameservers:
+            - ${dns_server1}

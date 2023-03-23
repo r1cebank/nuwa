@@ -1,0 +1,8 @@
+---
+- name: Install longhorn on longhorn nodes
+  hosts: k3s_master[0]
+  remote_user: k3s
+  gather_facts: true
+  become: true
+  roles:
+    - role: install_longhorn

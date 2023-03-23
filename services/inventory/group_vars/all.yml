@@ -1,0 +1,37 @@
+---
+k3s_version: v1.26.2+k3s1
+k3s_storage_class: longhorn
+longhorn_version: 1.4.1
+longhorn_backup_target: nfs://192.168.1.131:/volume2/k8s/longhorn
+systemd_dir: /etc/systemd/system
+extra_server_args: ""
+extra_agent_args: ""
+
+# network related
+metallb_mode: layer2
+ingress_class: traefik
+ingress_loadbalancer_ip: 192.168.1.201
+metallb_address_range: 192.168.1.201-192.168.1.250
+traefik_tls_min_version: VersionTLS12
+traefik_dashboard_enabled: true
+traefik_force_ssl: true
+
+# cert manager
+cert_manager_version: v1.11.0
+cert_manager_crds_url: https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
+cert_manager_issuer_prod: certissuer-prod
+cert_manager_issuer_staging: certissuer-staging
+acme_email: siyuangao@pm.me
+acme_staging_url: https://acme-staging-v02.api.letsencrypt.org/directory
+acme_prod_url: https://acme-v02.api.letsencrypt.org/directory
+
+# cloudflare provider
+cloudflare_email: siyuangao@protonmail.com
+cloudflare_api_token: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  30316235303538626231636563656463653062623261613461306233326431393564356434633563
+  6162656263313033393035393365313336343563643330310a666438653763626538336637613234
+  35623965313962633163343061626264626234623762343935323564376361343930333562313436
+  3365656636323632660a323266656637653030336434613164333937373631623435376664333630
+  62373363346135373234613236653730633739336234376531616632373935653364313037613331
+  3735663639306239356234333534303536363831303866636264
