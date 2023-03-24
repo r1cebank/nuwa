@@ -4,3 +4,4 @@
 - ansible.builtin.import_playbook: k3s.yml
 - ansible.builtin.import_playbook: storage.yml
 - ansible.builtin.import_playbook: network.yml
+- ansible.builtin.import_playbook: services.yml

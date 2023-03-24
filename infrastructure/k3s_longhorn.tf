@@ -16,7 +16,7 @@ module "k3s_longhorn_cluster" {
   cloud_network_config_file = "resource/networkconfig_static.tftpl"
   cloud_network_config_args = {
     ip_address      = element(var.k3s_longhorn_cluster_resources.ips, count.index),
-    sunbet_mask     = "255.255.255.0"
+    subnet_mask     = "255.255.255.0"
     gateway_address = "192.168.1.1"
     dns_server1     = "1.1.1.1"
   }

@@ -1,0 +1,83 @@
+---
+
+- name: Create external-services namespace
+  kubernetes.core.k8s:
+    name: external-services
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    kind: Namespace
+    state: present
+
+- name: Adding external services to cluster
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    definition: |
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: external-{{ item.name }}-http
+        namespace: external-services
+      spec:
+        ports:
+        - name: {{ item.name }}
+          port: {{ item.service_port }}
+          protocol: {{ item.protocol }}
+          targetPort: {{ item.source_port }}
+        clusterIP: None
+        type: ClusterIP
+  with_items: "{{ external_services }}"
+
+- name: Adding external endpoints to cluster
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    definition: |
+      apiVersion: v1
+      kind: Endpoints
+      metadata:
+        name: external-{{ item.name }}-http
+        namespace: external-services
+      subsets:
+      - addresses:
+        # list all external ips for this service
+        - ip: {{ item.ip }}
+        ports:
+        - name: {{ item.name }}
+          port: {{ item.source_port }}
+          protocol: {{ item.protocol }}
+  with_items: "{{ external_services }}"
+
+- name: Adding external ingress to cluster
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    definition: |
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        annotations:
+          # add an annotation indicating the issuer to use.
+          kubernetes.io/ingress.class: "{{ ingress_class }}"
+          cert-manager.io/cluster-issuer: "{{ ingress_issuer }}"
+        name: {{ item.name }}-ingress
+        namespace: external-services
+      spec:
+        rules:
+        - host: {{ item.ingress_domain }}
+          http:
+            paths:
+            - backend:
+                service:
+                  name: external-{{ item.name }}-http
+                  port:
+                    number: {{ item.service_port }}
+              path: /
+              pathType: Prefix
+        tls:
+        - hosts:
+          - {{ item.ingress_domain }}
+          secretName: {{ item.ingress_domain }}-tls
+  with_items: "{{ external_services }}"

@@ -42,9 +42,9 @@ variable "k3s_master_cluster_resources" {
     size       = 3
     cpus       = 1
     ips = [
-      "192.168.1.200",
-      "192.168.1.201",
-      "192.168.1.202"
+      "192.168.1.100",
+      "192.168.1.101",
+      "192.168.1.102"
     ]
     mac_pool = {
       start = 0
@@ -60,9 +60,9 @@ variable "k3s_longhorn_cluster_resources" {
     size       = 3
     cpus       = 2
     ips = [
-      "192.168.1.203",
-      "192.168.1.204",
-      "192.168.1.205"
+      "192.168.1.103",
+      "192.168.1.104",
+      "192.168.1.105"
     ]
     mac_pool = {
       start = 3
@@ -78,9 +78,9 @@ variable "k3s_worker_cluster_resources" {
     size       = 3
     cpus       = 4
     ips = [
-      "192.168.1.206",
-      "192.168.1.207",
-      "192.168.1.208"
+      "192.168.1.106",
+      "192.168.1.107",
+      "192.168.1.108"
     ]
     mac_pool = {
       start = 6
@@ -96,7 +96,7 @@ variable "arch_mirror_resources" {
     size       = 1
     cpus       = 1
     ips = [
-      "192.168.1.209"
+      "192.168.1.109"
     ]
     mac_pool = {
       start = 9

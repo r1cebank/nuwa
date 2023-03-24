@@ -28,14 +28,14 @@
     state: present
     kubeconfig: /etc/rancher/k3s/k3s.yaml
     namespace: cert-manager
-    definition:
+    definition: |
       apiVersion: v1
       kind: Secret
       metadata:
         name: cloudflare-api-key-secret
       type: Opaque
       stringData:
-        api-key: "{{ cloudflare_api_token }}"
+        api-key: {{ cloudflare_api_token }}
 
 - name: Create a letsencrypt staging issuer
   become: true
@@ -43,24 +43,24 @@
     state: present
     kubeconfig: /etc/rancher/k3s/k3s.yaml
     namespace: cert-manager
-    definition:
+    definition: |
       apiVersion: cert-manager.io/v1
-      kind: Issuer
+      kind: ClusterIssuer
       metadata:
-        name: "{{ cert_manager_issuer_staging }}"
+        name: {{ cert_manager_issuer_staging }}
       spec:
         acme:
-          server: "{{ acme_staging_url }}"
-          email: "{{ acme_email }}"
+          server: {{ acme_staging_url }}
+          email: {{ acme_email }}
           privateKeySecretRef:
-            name: "{{ cert_manager_issuer_staging }}"
+            name: {{ cert_manager_issuer_staging }}
           solvers:
             - dns01:
-              cloudflare:
-                email: "{{ cloudflare_email }}"
-                apiKeySecretRef:
-                  name: cloudflare-api-key-secret
-                  key: api-key
+                cloudflare:
+                  email: {{ cloudflare_email }}
+                  apiTokenSecretRef:
+                    name: cloudflare-api-key-secret
+                    key: api-key
 
 - name: Create a letsencrypt prod issuer
   become: true
@@ -68,21 +68,21 @@
     state: present
     kubeconfig: /etc/rancher/k3s/k3s.yaml
     namespace: cert-manager
-    definition:
+    definition: |
       apiVersion: cert-manager.io/v1
-      kind: Issuer
+      kind: ClusterIssuer
       metadata:
-        name: "{{ cert_manager_issuer_prod }}"
+        name: {{ cert_manager_issuer_prod }}
       spec:
         acme:
-          server: "{{ acme_prod_url }}"
-          email: "{{ acme_email }}"
+          server: {{ acme_prod_url }}
+          email: {{ acme_email }}
           privateKeySecretRef:
-            name: "{{ cert_manager_issuer_prod }}"
+            name: {{ cert_manager_issuer_prod }}
           solvers:
             - dns01:
-              cloudflare:
-                email: "{{ cloudflare_email }}"
-                apiKeySecretRef:
-                  name: cloudflare-api-key-secret
-                  key: api-key
+                cloudflare:
+                  email: {{ cloudflare_email }}
+                  apiTokenSecretRef:
+                    name: cloudflare-api-key-secret
+                    key: api-key
