@@ -11,3 +11,6 @@
 
 # install velero service
 - ansible.builtin.import_playbook: velero.yml
+
+# wrap up site installation
+- ansible.builtin.import_playbook: wrap_up.yml

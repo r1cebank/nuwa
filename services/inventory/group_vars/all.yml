@@ -10,6 +10,8 @@ external_snapshotter_tag: release-4.0
 
 longhorn_version: 1.4.1
 longhorn_backup_target: nfs://192.168.1.131:/volume2/k8s/longhorn
+longhorn_backup_cron: "0 5 * * *"
+longhorn_backup_retain: 2
 
 nfs_provisioner_server: 192.168.1.131
 nfs_provisioner_server_path: /volume2/k8s/nfs-provisioner
@@ -37,6 +39,23 @@ minio_root_password: !vault |
 # velero
 velero_backup_bucket: velero
 velero_backup_target: https://s3.owo.ac
+velero_backup_schedule: "0 4 * * *"
+velero_backup_excluded_resources:
+  - persistentvolumes
+  - persistentvolumeclaims
+  - backuptargets.longhorn.io
+  - backupvolumes.longhorn.io
+  - backups.longhorn.io
+  - nodes.longhorn.io
+  - volumes.longhorn.io
+  - engines.longhorn.io
+  - replicas.longhorn.io
+  - backingimagedatasources.longhorn.io
+  - backingimagemanagers.longhorn.io
+  - backingimages.longhorn.io
+  - sharemanagers.longhorn.io
+  - instancemanagers.longhorn.io
+  - engineimages.longhorn.io
 
 # network related
 metallb_mode: layer2

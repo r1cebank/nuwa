@@ -1,0 +1,10 @@
+---
+
+- name: Setup backup schedules on longhorn and velero
+  hosts: k3s_master[0]
+  gather_facts: true
+  remote_user: k3s
+  become: true
+  roles:
+    - role: create_longhorn_backup_job
+    - role: create_velero_backup_job
