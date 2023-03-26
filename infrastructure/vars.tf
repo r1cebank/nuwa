@@ -56,7 +56,7 @@ variable "k3s_master_cluster_resources" {
 variable "k3s_longhorn_cluster_resources" {
   default = {
     memory_max = 2 * 1024 * 1024 * 1024   # 2gb
-    disk_size  = 300 * 1024 * 1024 * 1024 # 300gb
+    disk_size  = 400 * 1024 * 1024 * 1024 # 300gb
     size       = 3
     cpus       = 2
     ips = [
@@ -101,6 +101,22 @@ variable "arch_mirror_resources" {
     mac_pool = {
       start = 9
       end   = 10
+    }
+  }
+}
+
+variable "minio_host_resources" {
+  default = {
+    memory_max = 1 * 1024 * 1024 * 1024   # 1 gb
+    disk_size  = 200 * 1024 * 1024 * 1024 # 10 gb
+    size       = 1
+    cpus       = 1
+    ips = [
+      "192.168.1.110"
+    ]
+    mac_pool = {
+      start = 10
+      end   = 11
     }
   }
 }

@@ -1,8 +1,8 @@
 #cloud-config
 hostname: ${hostname}
 users:
-  - name: k3s
-    gecos: k3s user
+  - name: minio-user
+    gecos: minio user
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups: users
     lock_passwd: true
@@ -18,7 +18,5 @@ packages:
   - jq
   - open-iscsi
   - nfs-common
-runcmd:
-  - [systemctl, start, iscsid]
 preserve_hostname: false
 resize_rootfs: true

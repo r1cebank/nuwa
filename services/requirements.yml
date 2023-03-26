@@ -5,3 +5,4 @@ collections:
   - community.general
   - ansible.posix
   - kubernetes.core
+  - amazon.aws

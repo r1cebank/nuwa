@@ -1,0 +1,90 @@
+---
+
+- name: Create velero namespace
+  kubernetes.core.k8s:
+    name: velero
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    kind: Namespace
+    state: present
+
+- name: Create cloudflare apikey secret
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    namespace: velero
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: velero-s3-creds
+      type: Opaque
+      stringData:
+        cloud: |
+          [default]
+          aws_access_key_id = {{ minio_root_user }}
+          aws_secret_access_key = {{ minio_root_password }}
+
+- name: Add vmware-tanzu chart repo
+  kubernetes.core.helm_repository:
+    name: vmware-tanzu
+    repo_url: "https://vmware-tanzu.github.io/helm-charts"
+
+- name: Deploy velero chart with custom setting
+  become: true
+  kubernetes.core.helm:
+    name: velero
+    release_namespace: velero
+    chart_ref: vmware-tanzu/velero
+    create_namespace: true
+    update_repo_cache: true
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    values:
+      initContainers:
+        - name: velero-plugin-for-csi
+          image: velero/velero-plugin-for-csi:v0.4.2
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /target
+              name: plugins
+        - name: aws
+          image: velero/velero-plugin-for-aws:v1.6.1
+          volumeMounts:
+            - mountPath: /target
+              name: plugins
+      credentials:
+        useSecret: true
+        existingSecret: velero-s3-creds
+      upgradeCRDs: true
+      cleanupCRDs: false
+      snapshotsEnabled: true
+      backupsEnabled: true
+      configuration:
+        features: EnableCSI
+        provider: aws
+        backupStorageLocation:
+          bucket: "{{ velero_backup_bucket }}"
+          config:
+            region: minio
+            s3ForcePathStyle: true
+            s3Url: "http://{{ minio_host_ip }}:9000"
+            insecureSkipTLSVerify: true
+
+# CSI VolumeSnapshot Associated With Longhorn Backup
+- name: Create a VolumeSnapshot Associated With Longhorn Backup
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    definition:
+      kind: VolumeSnapshotClass
+      apiVersion: snapshot.storage.k8s.io/v1
+      metadata:
+        name: velero-longhorn-backup-vsc
+        labels:
+          velero.io/csi-volumesnapshot-class: "true"
+      driver: driver.longhorn.io
+      deletionPolicy: Retain
+      parameters:
+        type: bak
+  when: not restore

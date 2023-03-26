@@ -1,0 +1,15 @@
+---
+
+- name: Install minio server
+  hosts: minio_nodes[0]
+  gather_facts: true
+  remote_user: minio-user
+  become: true
+  roles:
+    - role: mount_nfs
+    - role: setup_minio
+  vars:
+    nfs:
+      source: "{{ minio_nfs_mount_source }}"
+      dest: "{{ minio_nfs_mount_dest }}"
+    restore: true

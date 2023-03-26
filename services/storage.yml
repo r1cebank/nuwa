@@ -6,3 +6,4 @@
   become: true
   roles:
     - role: install_longhorn
+    - role: install_csi_driver_nfs

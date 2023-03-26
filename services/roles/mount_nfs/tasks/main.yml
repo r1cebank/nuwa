@@ -1,0 +1,9 @@
+---
+
+- name: Mount minio NFS volume
+  ansible.posix.mount:
+    src: "{{ nfs.source }}"
+    path: "{{ nfs.dest }}"
+    opts: rw,sync,hard
+    state: mounted
+    fstype: nfs

@@ -20,6 +20,22 @@
         spec:
           loadBalancerIP: "{{ ingress_loadbalancer_ip }}"
 
+- name: Adding HTTPS redirect
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    definition:
+      apiVersion: traefik.containo.us/v1alpha1
+      kind: Middleware
+      metadata:
+        name: redirect-to-https
+        namespace: traefik-system
+      spec:
+        redirectScheme:
+          scheme: https
+          permanent: true
+
 - name: Apply TLS options
   become: true
   kubernetes.core.k8s:

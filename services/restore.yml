@@ -1,0 +1,13 @@
+---
+# setup minio backup host
+- ansible.builtin.import_playbook: minio.yml
+  vars:
+    restore: true
+
+# run k3s installation need clean cluster for restore
+- ansible.builtin.import_playbook: k3s.yml
+
+# install velero service
+- ansible.builtin.import_playbook: velero.yml
+  vars:
+    restore: true

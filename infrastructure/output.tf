@@ -22,6 +22,12 @@ output "arch_mirror_instances" {
   }
 }
 
+output "minio_server_instances" {
+  value = {
+    for k, v in module.minio_server : module.minio_server[k].label => module.minio_server[k]
+  }
+}
+
 resource "local_file" "inventory" {
   filename = "../services/inventory/hosts.ini"
   content  = <<EOF
@@ -37,6 +43,14 @@ resource "local_file" "inventory" {
   %{endfor}
   %{for i, v in module.arch_mirror}
   ${replace(module.arch_mirror[i].label, "-", "_")} ansible_host=${module.arch_mirror[i].network[0].ipv4_addresses[0]}
+  %{endfor}
+  %{for i, v in module.minio_server}
+  ${replace(module.minio_server[i].label, "-", "_")} ansible_host=${module.minio_server[i].network[0].ipv4_addresses[0]}
+  %{endfor}
+
+  [minio_nodes]
+  %{for i, v in module.minio_server}
+  ${replace(module.minio_server[i].label, "-", "_")}
   %{endfor}
 
   [k3s_nodes]

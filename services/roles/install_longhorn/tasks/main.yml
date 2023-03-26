@@ -21,10 +21,42 @@
         createDefaultDiskLabeledNodes: true
       longhornManager:
         nodeSelector:
-          k3s.owo.ac/nodetype: longhorn
+          k3s.owo.ac/nodetype: worker
       longhornUI:
         nodeSelector:
-          k3s.owo.ac/nodetype: longhorn
+          k3s.owo.ac/nodetype: worker
       longhornDriver:
         nodeSelector:
-          k3s.owo.ac/nodetype: longhorn
+          k3s.owo.ac/nodetype: worker
+
+# CSI VolumeSnapshot Associated With Longhorn Snapshot
+- name: Create a VolumeSnapshot Associated With Longhorn Snapshot
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    definition:
+      kind: VolumeSnapshotClass
+      apiVersion: snapshot.storage.k8s.io/v1
+      metadata:
+        name: longhorn-snapshot-vsc
+      driver: driver.longhorn.io
+      deletionPolicy: Delete
+      parameters:
+        type: snap
+
+# CSI VolumeSnapshot Associated With Longhorn Backup
+- name: Create a VolumeSnapshot Associated With Longhorn Backup
+  become: true
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    definition:
+      kind: VolumeSnapshotClass
+      apiVersion: snapshot.storage.k8s.io/v1
+      metadata:
+        name: longhorn-backup-vsc
+      driver: driver.longhorn.io
+      deletionPolicy: Delete
+      parameters:
+        type: bak

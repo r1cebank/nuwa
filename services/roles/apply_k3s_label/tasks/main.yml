@@ -25,7 +25,8 @@
 - name: Apply labels to each longhorn nodes
   become: true
   ansible.builtin.shell: |
-    kubectl label node {{ hostname.stdout }} k3s.owo.ac/nodetype=longhorn &&
+    kubectl label node {{ hostname.stdout }} k3s.owo.ac/nodetype=worker &&
+    kubectl label node {{ hostname.stdout }} k3s.owo.ac/longhorn-node=true &&
     kubectl label node {{ hostname.stdout }} node.longhorn.io/create-default-disk=true
   delegate_to: "{{ groups['k3s_master'][0] }}"
   when: inventory_hostname in groups["k3s_longhorn"]

@@ -7,3 +7,11 @@
   become: true
   roles:
     - role: uninstall_k3s
+
+# - name: Resetting minio nodes
+#   hosts: minio_nodes
+#   gather_facts: true
+#   remote_user: minio-user
+#   become: true
+#   roles:
+#     - role: uninstall_minio

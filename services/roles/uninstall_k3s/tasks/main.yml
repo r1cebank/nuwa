@@ -34,3 +34,19 @@
   when: inventory_hostname in groups["k3s_longhorn"]
   register: longhorn_output
   changed_when: longhorn_output.diff is defined
+
+- name: Remove temp helm repo folder
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: /tmp/helm_repo
+  register: helm_output
+  changed_when: helm_output.diff is defined
+
+- name: Remove temp k8s repo folder
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: /tmp/k8s_repo
+  register: helm_output
+  changed_when: helm_output.diff is defined

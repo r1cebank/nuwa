@@ -59,7 +59,7 @@
       kind: Ingress
       metadata:
         annotations:
-          # add an annotation indicating the issuer to use.
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-system-redirect-to-https@kubernetescrd
           kubernetes.io/ingress.class: "{{ ingress_class }}"
           cert-manager.io/cluster-issuer: "{{ ingress_issuer }}"
         name: {{ item.name }}-ingress

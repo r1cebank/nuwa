@@ -15,6 +15,7 @@
   become: true
   roles:
     - role: install_k3s_control_0
+    - role: enable_csi_snapshot
 
 - name: Setting up k3s with embedded etcd control plane rest of node
   hosts: k3s_master,!k3s_master[0]

@@ -1,0 +1,27 @@
+---
+
+- name: Remove minio config
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: /etc/default/minio
+  register: output
+  changed_when: output.diff is defined
+
+- name: Unmount a minio
+  ansible.posix.mount:
+    path: /mnt/minio
+    state: unmounted
+
+- name: Remove minio mount point
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: /mnt/minio
+  register: output
+  changed_when: output.diff is defined
+
+- name: Uninstall minio
+  ansible.builtin.apt:
+    name: minio
+    state: absent
