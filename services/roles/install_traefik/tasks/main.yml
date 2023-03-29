@@ -1,5 +1,4 @@
 ---
-
 - name: Add traefik chart repo
   kubernetes.core.helm_repository:
     name: traefik
@@ -16,6 +15,11 @@
     kubeconfig: /etc/rancher/k3s/k3s.yaml
     wait: true
     values:
+      ports:
+        ssh:
+          port: 22
+          expose: true
+          protocol: TCP
       service:
         spec:
           loadBalancerIP: "{{ ingress_loadbalancer_ip }}"
