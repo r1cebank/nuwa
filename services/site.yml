@@ -2,6 +2,8 @@
 
 # setup minio backup host
 - ansible.builtin.import_playbook: minio.yml
+  vars:
+    restore: false
 
 # run k3s installation with storage and network, order matters
 - ansible.builtin.import_playbook: k3s.yml
@@ -11,6 +13,8 @@
 
 # install velero service
 - ansible.builtin.import_playbook: velero.yml
+  vars:
+    restore: false
 
 # wrap up site installation
 - ansible.builtin.import_playbook: wrap_up.yml

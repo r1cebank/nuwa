@@ -12,4 +12,3 @@
     nfs:
       source: "{{ minio_nfs_mount_source }}"
       dest: "{{ minio_nfs_mount_dest }}"
-    restore: true

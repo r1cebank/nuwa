@@ -7,6 +7,7 @@
   become: true
   roles:
     - role: install_vaultwarden
+    - role: install_onedev
 
 - name: Install faux services for external access
   hosts: k3s_master[0]
