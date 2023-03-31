@@ -10,7 +10,7 @@ module "k3s_worker_cluster" {
   sr_id          = data.xenorchestra_sr.sr_sata.id
   network_id     = data.xenorchestra_network.network.id
   template_id    = data.xenorchestra_template.vm_template_2204.id
-  affinity_host  = data.xenorchestra_pool.pool.master
+  affinity_host  = data.xenorchestra_host.cerulean.id
 
   cloud_config_file         = "resource/k3s_cloudconfig.tftpl"
   cloud_network_config_file = "resource/networkconfig_static.tftpl"

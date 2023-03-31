@@ -55,7 +55,7 @@ variable "k3s_master_cluster_resources" {
 
 variable "k3s_longhorn_cluster_resources" {
   default = {
-    memory_max = 2 * 1024 * 1024 * 1024   # 2gb
+    memory_max = 4 * 1024 * 1024 * 1024   # 4gb
     disk_size  = 400 * 1024 * 1024 * 1024 # 300gb
     size       = 3
     cpus       = 2
