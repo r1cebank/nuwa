@@ -1,0 +1,64 @@
+---
+
+- name: Remove caddy executable
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: /usr/bin/caddy
+  register: output
+  changed_when: output.diff is defined
+
+- name: Remove caddy systend file
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: /etc/systemd/system/caddy.service
+  register: output
+  changed_when: output.diff is defined
+
+- name: Remove the user "caddy"
+  ansible.builtin.user:
+    name: caddy
+    remove: true
+    force: true
+    state: absent
+
+- name: Remove group "caddy"
+  ansible.builtin.group:
+    name: caddy
+    state: absent
+
+- name: Remove caddy static directory
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: "{{ arch_mirror_dir }}"
+  register: output
+  changed_when: output.diff is defined
+
+- name: Remove caddy static directory
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: "{{ arch_mirror_dir }}"
+  register: output
+  changed_when: output.diff is defined
+
+- name: Remove rsync
+  ansible.builtin.apt:
+    name: rsync
+    update_cache: true
+    state: absent
+
+- name: Remove rsync script file
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: "{{ arch_sync_script_path }}"
+  register: output
+  changed_when: output.diff is defined
+
+- name: Remove arch repo sync job
+  ansible.builtin.cron:
+    name: "sync arch repo"
+    state: absent

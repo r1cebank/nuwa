@@ -5,6 +5,9 @@
   vars:
     restore: false
 
+# setup arch mirror host
+- ansible.builtin.import_playbook: arch_mirror.yml
+
 # run k3s installation with storage and network, order matters
 - ansible.builtin.import_playbook: k3s.yml
 - ansible.builtin.import_playbook: network.yml

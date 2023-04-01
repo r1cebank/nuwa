@@ -152,6 +152,14 @@ onedev_admin_password: !vault |
   36316532313864653737396332363531383038363133613234633637326332346435366135623230
   3233376135663539366432356633613334656230316361623365
 
+# arch mirror
+caddy_download_url: https://caddyserver.com/api/download?os=linux&arch=amd64
+arch_mirror_dir: /home/archmirror/arch
+arch_sync_script_path: /home/archmirror/syncrepo.sh
+arch_repo_rsync_source: rsync://mirror.csclub.uwaterloo.ca/archlinux/
+arch_repo_lastupdate: http://mirror.csclub.uwaterloo.ca/archlinux/lastupdate
+arch_mirror_host: arch.owo.ac
+
 # external service, ingress serve outside services
 external_services:
   - name: synology-nas
@@ -172,3 +180,9 @@ external_services:
     service_port: 80
     protocol: TCP
     ingress_domain: s3.owo.ac
+  - name: arch-mirror
+    ip: 192.168.1.109
+    source_port: 80
+    service_port: 80
+    protocol: TCP
+    ingress_domain: arch.owo.ac

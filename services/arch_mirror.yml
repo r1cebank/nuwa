@@ -1,0 +1,9 @@
+---
+
+- name: Setup arch mirror server
+  hosts: arch_mirror
+  remote_user: archmirror
+  gather_facts: true
+  roles:
+    - role: install_caddy
+    - role: create_arch_repo_sync_job
