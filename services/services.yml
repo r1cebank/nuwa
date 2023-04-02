@@ -8,6 +8,7 @@
   roles:
     - role: install_vaultwarden
     - role: install_onedev
+    - role: install_coder
 
 - name: Install faux services for external access
   hosts: k3s_master[0]

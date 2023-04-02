@@ -2,7 +2,7 @@
 - name: Add onedev chart repo
   kubernetes.core.helm_repository:
     name: onedev
-    repo_url: "{{ onedev_repo }}"
+    repo_url: "{{ onedev_chart_repo }}"
 
 - name: Deploy onedev chart
   become: true

@@ -129,7 +129,7 @@ vaultwarden_yubikey_client_secret: !vault |
   6430376630313163310a323861373838356633313462346130316166626164323534613130326131
   36306631653135613338376262303334333936323963636566366364393461313831
 
-onedev_repo: https://dl.cloudsmith.io/public/onedev/onedev/helm/charts
+onedev_chart_repo: https://dl.cloudsmith.io/public/onedev/onedev/helm/charts
 onedev_host: onedev.owo.ac
 onedev_repo_storage_size: 100Gi
 onedev_sql_storage_size: 20Gi
@@ -151,6 +151,14 @@ onedev_admin_password: !vault |
   3066653562653139620a353161613462646133663066333739613736666435353937653864303462
   36316532313864653737396332363531383038363133613234633637326332346435366135623230
   3233376135663539366432356633613334656230316361623365
+
+# mysql
+mysql_chart_repo: https://charts.bitnami.com/bitnami
+
+# coder
+coder_chart_repo: https://helm.coder.com/v2
+coder_db_size: 10Gi
+coder_host: coder.owo.ac
 
 # arch mirror
 caddy_download_url: https://caddyserver.com/api/download?os=linux&arch=amd64

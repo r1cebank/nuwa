@@ -13,6 +13,14 @@
   register: k3s_outout
   changed_when: k3s_outout != 0
 
+- name: Taint master nodes
+  become: true
+  ansible.builtin.shell: |
+    kubectl taint nodes {{ hostname.stdout }} node-role.kubernetes.io/master=:NoSchedule
+  when: inventory_hostname in groups["k3s_master"]
+  register: k3s_outout
+  changed_when: k3s_outout != 0
+
 - name: Apply labels to each worker nodes
   become: true
   ansible.builtin.shell: |
