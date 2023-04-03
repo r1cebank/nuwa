@@ -1,5 +1,4 @@
 ---
-
 - name: Create random SQL user password
   ansible.builtin.set_fact:
     coder_sql_password: "{{ lookup('ansible.builtin.password', '/dev/null', length=30, chars=['ascii_letters', 'digits']) }}"
@@ -44,7 +43,7 @@
           enable: true
           host: "{{ coder_host }}"
           annotations:
-            traefik.ingress.kubernetes.io/router.middlewares: traefik-system-redirect-to-https@kubernetescrd
+            traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-to-https@kubernetescrd
             kubernetes.io/ingress.class: "{{ ingress_class }}"
             cert-manager.io/cluster-issuer: "{{ ingress_issuer }}"
           tls:

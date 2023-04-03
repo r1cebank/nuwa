@@ -1,5 +1,12 @@
 ---
 
+- name: Create velero bucket
+  ansible.builtin.include_role:
+    name: create_minio_bucket
+  vars:
+    bucket:
+      bucket_name: "{{ velero_backup_bucket }}"
+
 - name: Create velero namespace
   kubernetes.core.k8s:
     name: velero

@@ -1,5 +1,4 @@
 ---
-
 - name: Create external-services namespace
   kubernetes.core.k8s:
     name: external-services
@@ -59,7 +58,7 @@
       kind: Ingress
       metadata:
         annotations:
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-system-redirect-to-https@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-to-https@kubernetescrd
           kubernetes.io/ingress.class: "{{ ingress_class }}"
           cert-manager.io/cluster-issuer: "{{ ingress_issuer }}"
         name: {{ item.name }}-ingress

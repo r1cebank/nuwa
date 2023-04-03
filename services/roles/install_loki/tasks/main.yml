@@ -1,0 +1,89 @@
+---
+- name: Create loki bucket
+  ansible.builtin.include_role:
+    name: create_minio_bucket
+  vars:
+    bucket:
+      bucket_name: "{{ loki_bucket }}"
+
+- name: Add grafana chart repo
+  kubernetes.core.helm_repository:
+    name: grafana
+    repo_url: "{{ grafana_chart_repo }}"
+
+- name: Deploy loki chart to namespace
+  become: true
+  kubernetes.core.helm:
+    name: loki
+    release_namespace: logging
+    chart_ref: grafana/loki
+    create_namespace: true
+    update_repo_cache: true
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    wait: true
+    values:
+      loki:
+        # Disable multi-tenant support
+        auth_enabled: false
+
+        # S3 backend storage configuration
+        storage:
+          bucketNames:
+            chunks: "{{ loki_bucket }}"
+            ruler: "{{ loki_bucket }}"
+          type: s3
+          s3:
+            endpoint: "http://{{ minio_host_ip }}:9000"
+            region: minio
+            secretAccessKey: "{{ minio_root_password }}"
+            accessKeyId: "{{ minio_root_user }}"
+            s3ForcePathStyle: true
+            insecure: true
+            http_config:
+              idle_conn_timeout: 90s
+              response_header_timeout: 0s
+              insecure_skip_verify: true
+
+      # Configuration for the write
+      write:
+        # Number of replicas for the write
+        replicas: 2
+        persistence:
+          # -- Size of persistent disk
+          size: "{{ loki_write_storage_size }}"
+          # -- Storage class to be used.
+          storageClass: "{{ k3s_storage_class }}"
+
+      # Configuration for the read
+      read:
+        # Number of replicas for the read
+        replicas: 2
+        persistence:
+          # -- Size of persistent disk
+          size: "{{ loki_read_storage_size }}"
+          # -- Storage class to be used.
+          storageClass: "{{ k3s_storage_class }}"
+
+      # Configuration for the gateway
+      gateway:
+        # -- Specifies whether the gateway should be enabled
+        enabled: true
+        # -- Number of replicas for the gateway
+        replicas: 1
+
+      # Disable mino installation
+      minio:
+        enabled: false
+
+      # Disable self-monitoring
+      monitoring:
+        selfMonitoring:
+          enabled: false
+          grafanaAgent:
+            installOperator: false
+          lokiCanary:
+            enabled: false
+
+      # Disable helm-test
+      test:
+        enabled: false

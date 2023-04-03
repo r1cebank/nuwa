@@ -21,7 +21,7 @@
         enableDefaultIssuer: false
         tls: true
         annotations:
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-system-redirect-to-https@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-to-https@kubernetescrd
           cert-manager.io/cluster-issuer: "{{ ingress_issuer }}"
       resources:
         onedev:

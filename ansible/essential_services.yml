@@ -1,0 +1,142 @@
+---
+# Install Minio S3 Storage Server
+
+- name: Install Minio S3 Storage Server
+  hosts: minio_nodes
+  gather_facts: true
+  tags: [minio]
+  become: true
+  vars:
+    server_hostname: "{{ minio_hostname }}"
+    caddy:
+      hosts:
+        - hostname: "{{ minio_hostname }}"
+          port: "{{ minio_server_port }}"
+        - hostname: "{{ minio_manage_hostname }}"
+          port: "{{ minio_console_port }}"
+      dns_resolver_email: "{{ cloudflare_email }}"
+      dns_resolver_token: "{{ cloudflare_api_token }}"
+    nfs:
+      source: "{{ minio_nfs_mount_source }}"
+      dest: "{{ minio_nfs_mount_dest }}"
+  pre_tasks:
+    # Include vault variables
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+    # Include acme variables
+    - name: Include acme variables
+      include_vars: "vars/acme.yml"
+    # Include minio variables
+    - name: Include minio variables
+      include_vars: "vars/minio.yml"
+  roles:
+    - role: mount_nfs
+    - role: install_caddy
+    - role: ricsanfre.minio
+
+# Install Hashicorp Vault Server
+- name: Install Vault Server
+  hosts: vault_nodes
+  gather_facts: true
+  tags: [vault]
+  become: true
+  vars:
+    server_hostname: "{{ vault_hostname }}"
+    caddy:
+      hosts:
+        - hostname: "{{ vault_hostname }}"
+          port: 8200
+      dns_resolver_email: "{{ cloudflare_email }}"
+      dns_resolver_token: "{{ cloudflare_api_token }}"
+  pre_tasks:
+    # Include vault variables
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+    # Include acme variables
+    - name: Include acme variables
+      include_vars: "vars/acme.yml"
+    # Include hashicorp vault variables
+    - name: Include hashicorp vault variables
+      include_vars: "vars/hashicorp_vault.yml"
+  roles:
+    - role: install_caddy
+    - role: ricsanfre.vault
+  tasks:
+    # Configure ansible user profile with VAULT environement variables
+    - name: Insert http(s) export in dotfile
+      become: true
+      lineinfile:
+        path: ~{{ ansible_user }}/.bashrc
+        regexp: "^export VAULT_ADDR="
+        line: "export VAULT_ADDR='https://{{ vault_hostname }}'"
+        owner: "{{ ansible_user }}"
+        create: true
+        mode: 0644
+
+    - name: Insert VAULT_TOKEN in dotfile
+      become: true
+      lineinfile:
+        path: ~{{ ansible_user }}/.bashrc
+        regexp: "^export VAULT_TOKEN="
+        line: "export VAULT_TOKEN=$(sudo jq -r '.root_token' /etc/vault/unseal.json)"
+        owner: "{{ ansible_user }}"
+        create: true
+        mode: 0644
+
+## Load all credentials into Hashicorp Vault Server
+- name: Load Vault Credentials
+  hosts: vault_nodes
+  gather_facts: true
+  tags: [vault, credentials]
+  become: false
+  pre_tasks:
+    # Include vault variables
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+    # Include vault variables
+    - name: Include hashicorp_vault variables
+      include_vars: "vars/hashicorp_vault.yml"
+    # Install hashicorp vault collection dependencies (hvac python package) using PIP.
+    - name: Ensure PIP is installed.
+      package:
+        name:
+          - python3-pip
+          - python3-setuptools
+        state: present
+      become: true
+    - name: Ensure hvac Python library is installed.
+      pip:
+        name: hvac
+        state: present
+      become: true
+  tasks:
+    # Vault Login using ansible environement variables for creating token file
+    # token file will be usd in next commands
+    - name: Vault login
+      ansible.builtin.shell: bash -ilc 'vault login $VAULT_TOKEN'
+      become: false
+      register: vault_login
+    # Create write token
+    - name: Create KV write token
+      community.hashi_vault.vault_token_create:
+        url: "https://{{ vault_dns }}"
+        policies: ["write"]
+      register: token_data
+      become: false
+    - name: Load vault credentials
+      include_tasks:
+        file: tasks/load_vault_credentials.yml
+      loop: "{{ vault | dict2items }}"
+      loop_control:
+        loop_var: secret_group
+      when:
+        - vault is defined
+      no_log: true
+    - name: Load http auth_basic credentials
+      include_tasks:
+        file: tasks/create_basic_auth_credentials.yml
+      no_log: true
+    - name: Load minio prometheus bearer credentials
+      include_tasks:
+        file: tasks/create_minio_bearer_token.yml
+      no_log: true

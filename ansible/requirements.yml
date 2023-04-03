@@ -1,5 +1,9 @@
-# /Users/siyuangao/Documents/nuwa/services/roles
 ---
+roles:
+  - name: ricsanfre.minio
+    version: v1.1.2
+  - name: ricsanfre.vault
+    version: v1.0.4
 collections:
   # With just the collection name
   - community.general

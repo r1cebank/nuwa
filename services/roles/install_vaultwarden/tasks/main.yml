@@ -1,5 +1,4 @@
 ---
-
 - name: Git clone vaultwarden chart repo
   ansible.builtin.git:
     repo: "{{ vaultwarden_chart_repo }}"
@@ -23,7 +22,7 @@
       ingress:
         enabled: true
         additionalAnnotations:
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-system-redirect-to-https@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-to-https@kubernetescrd
           cert-manager.io/cluster-issuer: "{{ ingress_issuer }}"
         nginxIngressAnnotations: false
         class: "{{ ingress_class }}"

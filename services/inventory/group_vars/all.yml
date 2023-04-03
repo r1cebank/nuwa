@@ -1,13 +1,16 @@
 ---
-# system and storage
+## system and storage
+
+# system
 k3s_version: v1.26.2+k3s1
 k3s_storage_class: longhorn
 systemd_dir: /etc/systemd/system
-extra_server_args: "--disable=traefik --disable servicelb --resolv-conf /run/systemd/resolve/resolv.conf"
-extra_agent_args: ""
+extra_server_args: "--disable=traefik --disable servicelb --resolv-conf /etc/k3s-resolv.conf --kubelet-arg 'config=/etc/rancher/k3s/kubelet.config' --kube-controller-manager-arg 'bind-address=0.0.0.0' --kube-proxy-arg 'metrics-bind-address=0.0.0.0' --kube-scheduler-arg 'bind-address=0.0.0.0'"
+extra_agent_args: "--kubelet-arg 'config=/etc/rancher/k3s/kubelet.config' --kube-proxy-arg 'metrics-bind-address=0.0.0.0'"
 external_snapshotter_repo: https://github.com/kubernetes-csi/external-snapshotter.git
 external_snapshotter_tag: release-4.0
 
+# storage
 longhorn_version: 1.4.1
 longhorn_backup_target: nfs://192.168.1.131:/volume2/longhorn-backup
 longhorn_backup_cron: "0 5 * * *"
@@ -63,7 +66,7 @@ ingress_class: traefik
 ingress_loadbalancer_ip: 192.168.1.200
 metallb_address_range: 192.168.1.200-192.168.1.250
 traefik_tls_min_version: VersionTLS12
-traefik_dashboard_enabled: true
+traefik_dashboard_host: traefik.owo.ac
 traefik_force_ssl: true
 
 # cert manager
@@ -87,7 +90,7 @@ cloudflare_api_token: !vault |
   37303538393235323232616437333364623837653537396564313364323562363862653930396365
   6134333465333831626531356166353761666363316637393831
 
-# internal services
+## internal services
 
 # smtp config
 service_smtp_host: in-v3.mailjet.com
@@ -129,6 +132,7 @@ vaultwarden_yubikey_client_secret: !vault |
   6430376630313163310a323861373838356633313462346130316166626164323534613130326131
   36306631653135613338376262303334333936323963636566366364393461313831
 
+# onedev
 onedev_chart_repo: https://dl.cloudsmith.io/public/onedev/onedev/helm/charts
 onedev_host: onedev.owo.ac
 onedev_repo_storage_size: 100Gi
@@ -159,6 +163,36 @@ mysql_chart_repo: https://charts.bitnami.com/bitnami
 coder_chart_repo: https://helm.coder.com/v2
 coder_db_size: 10Gi
 coder_host: coder.owo.ac
+
+## Monitoring
+
+monitoring_host: monitoring.owo.ac
+
+# loki
+loki_bucket: loki
+loki_read_storage_size: 10Gi
+loki_write_storage_size: 10Gi
+
+# alertmanager
+alertmanager_storage_size: 50Gi
+
+# grafana
+grafana_chart_repo: https://grafana.github.io/helm-charts
+grafana_admin_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  30393964656466613865313032663933313235313463333864383965613338356138646439333665
+  3338656537393836323834343664656164666631323665330a643761656363313462376334396536
+  64326631616534316235316565353532376133633139383964636666613533653634626263383564
+  3231663739356637660a656638623161653561376331346162316432356334396239313636383162
+  61666464336261313766363462636661656563646337333335386562636462613564626532653735
+  3666373236343030366338636362386139356465373239623839
+
+grafana_plugins:
+  - grafana-piechart-panel
+
+# prometheus
+prometheus_chart_repo: https://prometheus-community.github.io/helm-charts
+prometheus_storage_size: 50Gi
 
 # arch mirror
 caddy_download_url: https://caddyserver.com/api/download?os=linux&arch=amd64

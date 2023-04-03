@@ -30,6 +30,17 @@ resource "xenorchestra_vm" "xenvm" {
     size       = var.disk_size
   }
 
+  dynamic "disk" {
+    for_each = var.additional_disk == true ? toset([1]) : toset([])
+
+    content {
+      sr_id      = var.sr_id
+      name_label = "${var.vm_name} additional volume"
+      size       = var.additional_disk_size
+    }
+  }
+
+
   wait_for_ip = true
 
   tags = var.tags

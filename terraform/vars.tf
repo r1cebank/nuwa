@@ -37,8 +37,8 @@ variable "vm_macs" {
 
 variable "k3s_master_cluster_resources" {
   default = {
-    memory_max = 2 * 1024 * 1024 * 1024  # 2gb
-    disk_size  = 10 * 1024 * 1024 * 1024 # 10gb
+    memory_max = 4 * 1024 * 1024 * 1024   # 4gb
+    disk_size  = 100 * 1024 * 1024 * 1024 # 100gb
     size       = 3
     cpus       = 1
     ips = [
@@ -53,12 +53,13 @@ variable "k3s_master_cluster_resources" {
   }
 }
 
-variable "k3s_longhorn_cluster_resources" {
+variable "k3s_worker_cluster_resources" {
   default = {
-    memory_max = 4 * 1024 * 1024 * 1024   # 4gb
-    disk_size  = 400 * 1024 * 1024 * 1024 # 300gb
-    size       = 3
-    cpus       = 2
+    memory_max           = 12 * 1024 * 1024 * 1024  # 12gb
+    disk_size            = 50 * 1024 * 1024 * 1024  # 50gb
+    additional_disk_size = 500 * 1024 * 1024 * 1024 # 500gb
+    size                 = 3
+    cpus                 = 4
     ips = [
       "192.168.1.103",
       "192.168.1.104",
@@ -71,24 +72,6 @@ variable "k3s_longhorn_cluster_resources" {
   }
 }
 
-variable "k3s_worker_cluster_resources" {
-  default = {
-    memory_max = 8 * 1024 * 1024 * 1024  # 8gb
-    disk_size  = 50 * 1024 * 1024 * 1024 # 50gb
-    size       = 3
-    cpus       = 4
-    ips = [
-      "192.168.1.106",
-      "192.168.1.107",
-      "192.168.1.108"
-    ]
-    mac_pool = {
-      start = 6
-      end   = 9
-    }
-  }
-}
-
 variable "arch_mirror_resources" {
   default = {
     memory_max = 1 * 1024 * 1024 * 1024   # 1 gb
@@ -96,27 +79,43 @@ variable "arch_mirror_resources" {
     size       = 1
     cpus       = 1
     ips = [
-      "192.168.1.109"
+      "192.168.1.106"
     ]
     mac_pool = {
-      start = 9
-      end   = 10
+      start = 6
+      end   = 7
     }
   }
 }
 
 variable "minio_host_resources" {
   default = {
-    memory_max = 1 * 1024 * 1024 * 1024   # 1 gb
-    disk_size  = 200 * 1024 * 1024 * 1024 # 10 gb
+    memory_max = 1 * 1024 * 1024 * 1024  # 1 gb
+    disk_size  = 20 * 1024 * 1024 * 1024 # 20 gb
     size       = 1
     cpus       = 1
     ips = [
-      "192.168.1.110"
+      "192.168.1.107"
     ]
     mac_pool = {
-      start = 10
-      end   = 11
+      start = 7
+      end   = 8
+    }
+  }
+}
+
+variable "hashicorp_vault_resources" {
+  default = {
+    memory_max = 1 * 1024 * 1024 * 1024  # 1 gb
+    disk_size  = 20 * 1024 * 1024 * 1024 # 20 gb
+    size       = 1
+    cpus       = 1
+    ips = [
+      "192.168.1.108"
+    ]
+    mac_pool = {
+      start = 8
+      end   = 9
     }
   }
 }

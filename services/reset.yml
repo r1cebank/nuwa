@@ -8,18 +8,18 @@
   roles:
     - role: uninstall_k3s
 
-- name: Resetting minio nodes
-  hosts: minio_nodes
-  gather_facts: true
-  remote_user: minio-user
-  become: true
-  roles:
-    - role: uninstall_minio
+# - name: Resetting minio nodes
+#   hosts: minio_nodes
+#   gather_facts: true
+#   remote_user: minio-user
+#   become: true
+#   roles:
+#     - role: uninstall_minio
 
-- name: Resetting arch mirror nodes
-  hosts: arch_mirror
-  gather_facts: true
-  remote_user: archmirror
-  become: true
-  roles:
-    - role: uninstall_arch_mirror
+# - name: Resetting arch mirror nodes
+#   hosts: arch_mirror
+#   gather_facts: true
+#   remote_user: archmirror
+#   become: true
+#   roles:
+#     - role: uninstall_arch_mirror

@@ -3,6 +3,35 @@
   ansible.builtin.set_fact:
     k3s_token: "{{ lookup('ansible.builtin.password', '/dev/null', length=30, chars=['ascii_letters', 'digits']) }}"
 
+- name: Create custom resolv.conf
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/k3s-resolv.conf
+    owner: k3s
+    group: k3s
+    mode: "0750"
+    content: |
+      nameserver 192.168.1.1
+
+- name: Ensure rancher directory exist
+  ansible.builtin.file:
+    path: /etc/rancher/k3s/
+    recurse: true
+    state: directory
+
+- name: Create kubelet config
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/rancher/k3s/kubelet.config
+    owner: k3s
+    group: k3s
+    mode: "0750"
+    content: |
+      apiVersion: kubelet.config.k8s.io/v1beta1
+      kind: KubeletConfiguration
+      shutdownGracePeriod: 30s
+      shutdownGracePeriodCriticalPods: 10s
+
 - name: Install k3s
   ansible.builtin.shell: |
     curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="{{ k3s_version }}" K3S_TOKEN="{{ k3s_token }}" sh -s - server {{ extra_server_args }} --cluster-init

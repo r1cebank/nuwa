@@ -1,0 +1,32 @@
+#######################
+# Vault configuration
+#######################
+
+vault_hostname: "vault.miku.cx"
+vault_dns: "{{ vault_hostname }}"
+vault_api_dns_url: "https://{{ vault_hostname }}"
+vault_enable_tls: false
+custom_ca: false
+vault_init: true
+vault_unseal: true
+vault_unseal_service: true
+tls_skip_verify: false
+vault_custom_configuration: |
+  ui = true
+
+# Configure KV
+vault_kv_secrets:
+  path: secret
+
+# Policies
+policies:
+  - name: write
+    hcl: |
+      path "secret/*" {
+        capabilities = [ "create", "read", "update", "delete", "list", "patch" ]
+      }
+  - name: read
+    hcl: |
+      path "secret/*" {
+        capabilities = [ "read" ]
+      }

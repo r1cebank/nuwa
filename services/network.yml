@@ -7,5 +7,5 @@
   become: true
   roles:
     - role: install_metallb
-    - role: install_traefik
     - role: install_cert_manager
+    - role: install_traefik

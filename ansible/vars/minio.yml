@@ -1,0 +1,105 @@
+##########################
+# Minio S3 configuration #
+##########################
+
+minio_nfs_mount_source: 192.168.1.131:/volume2/minio
+minio_nfs_mount_dest: /mnt/minio
+minio_server_port: "9091"
+minio_console_port: "9092"
+
+# Minio S3 Server
+minio_hostname: "s3.miku.cx"
+minio_manage_hostname: "minio.miku.cx"
+minio_endpoint: "{{ minio_hostname }}"
+minio_url: "https://{{ minio_hostname }}"
+
+# Minio data dirs
+minio_server_make_datadirs: true
+minio_server_datadirs:
+  - "{{ minio_nfs_mount_dest }}/data"
+
+# Minio admin credentials
+minio_root_user: "{{ vault.minio.root.user }}"
+minio_root_password: "{{ vault.minio.root.key }}"
+
+# Minio site region configuration
+minio_site_region: "us-west-1"
+
+# Enabling TLS
+minio_enable_tls: false
+minio_validate_certificate: true
+
+# Create Prometheus bearer token
+minio_prometheus_bearer_token: true
+
+# Minio Buckets
+minio_buckets:
+  - name: k3s-longhorn
+    policy: read-write
+  - name: k3s-velero
+    policy: read-write
+  - name: k3s-loki
+    policy: read-write
+  - name: k3s-tempo
+    policy: read-write
+
+# Minio users and ACLs
+minio_users:
+  - name: "{{ vault.minio.longhorn.user }}"
+    password: "{{ vault.minio.longhorn.key }}"
+    buckets_acl:
+      - name: k3s-longhorn
+        policy: read-write
+  - name: "{{ vault.minio.velero.user }}"
+    password: "{{ vault.minio.velero.key }}"
+    buckets_acl:
+      - name: k3s-velero
+        policy: custom
+        custom:
+          - rule: |
+              "Effect": "Allow",
+              "Action": [
+                  "s3:GetObject",
+                  "s3:DeleteObject",
+                  "s3:PutObject",
+                  "s3:AbortMultipartUpload",
+                  "s3:ListMultipartUploadParts"
+              ],
+              "Resource": [
+                  "arn:aws:s3:::k3s-velero/*"
+              ]
+          - rule: |
+              "Effect": "Allow",
+              "Action": [
+                  "s3:ListBucket"
+              ],
+              "Resource": [
+                  "arn:aws:s3:::k3s-velero"
+              ]
+
+  - name: "{{ vault.minio.loki.user }}"
+    password: "{{ vault.minio.loki.key }}"
+    buckets_acl:
+      - name: k3s-loki
+        policy: read-write
+
+  - name: "{{ vault.minio.tempo.user }}"
+    password: "{{ vault.minio.tempo.key }}"
+    buckets_acl:
+      - name: k3s-tempo
+        policy: custom
+        custom:
+          - rule: |
+              "Effect": "Allow",
+              "Action": [
+                  "s3:PutObject",
+                  "s3:GetObject",
+                  "s3:ListBucket",
+                  "s3:DeleteObject",
+                  "s3:GetObjectTagging",
+                  "s3:PutObjectTagging"
+              ],
+              "Resource": [
+                  "arn:aws:s3:::k3s-tempo/*",
+                  "arn:aws:s3:::k3s-tempo"
+              ]

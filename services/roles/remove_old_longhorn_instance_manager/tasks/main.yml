@@ -1,0 +1,7 @@
+---
+
+- name: Remove old longhorn instance managers
+  ansible.builtin.command:
+    cmd: kubectl get pods -n longhorn-system --no-headers=true | awk '/instance-manager/{print $1}' | xargs kubectl --kubeconfig ~/.kube/k3s.yaml delete -n longhorn-system pod
+  register: output
+  changed_when: output.rc != 0

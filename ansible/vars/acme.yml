@@ -1,0 +1,7 @@
+# Cloudflare credentials
+cloudflare_email: "{{ vault.certmanager.cloudflare.email }}"
+cloudflare_api_token: "{{ vault.certmanager.cloudflare.api_key }}"
+
+acme_issuer_email: siyuangao@pm.me
+acme_staging_url: https://acme-staging-v02.api.letsencrypt.org/directory
+acme_prod_url: https://acme-v02.api.letsencrypt.org/directory

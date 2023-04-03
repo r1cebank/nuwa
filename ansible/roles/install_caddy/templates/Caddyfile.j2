@@ -1,0 +1,13 @@
+{% for host in caddy.hosts %}
+{{ host.hostname }} {
+    tls {{ caddy.dns_resolver_email }} {
+            dns cloudflare {{ caddy.dns_resolver_token }}
+            resolvers 1.1.1.1
+    }
+    reverse_proxy http://127.0.0.1:{{ host.port }}
+    request_body {
+        max_size 2048MB
+    }
+}
+{% endfor %}
+

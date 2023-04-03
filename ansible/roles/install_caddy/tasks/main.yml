@@ -17,7 +17,7 @@
   become: true
   ansible.builtin.user:
     name: caddy
-    groups: caddy,users,archmirror
+    groups: caddy,users
     home: /var/lib/caddy
     shell: /usr/sbin/nologin
     system: true
@@ -68,33 +68,18 @@
       [Install]
       WantedBy=multi-user.target
 
+
 - name: Create caddyfile
-  become: true
-  ansible.builtin.copy:
+  become: yes
+  template:
+    src: Caddyfile.j2
     dest: /var/lib/caddy/Caddyfile
     mode: "u=rw,g=r,o=r"
-    content: |
-      http://{{ arch_mirror_host }}
-      root * {{ arch_mirror_dir }}/packages
-      file_server browse
-
-- name: Create caddy static directory
-  ansible.builtin.file:
-    path: "{{ arch_mirror_dir }}"
-    state: directory
-  register: output
-  changed_when: output.diff is defined
-
-- name: Create arch repo package directory
-  ansible.builtin.file:
-    path: "{{ arch_mirror_dir }}/packages"
-    state: directory
-  register: output
-  changed_when: output.diff is defined
 
 - name: Start caddy
   become: true
   ansible.builtin.systemd:
     state: started
+    enabled: true
     name: caddy
     daemon_reload: true
