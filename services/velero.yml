@@ -1,9 +1,0 @@
----
-
-- name: Install velero
-  hosts: k3s_master[0]
-  gather_facts: true
-  remote_user: k3s
-  become: true
-  roles:
-    - role: install_velero

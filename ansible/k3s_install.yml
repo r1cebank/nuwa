@@ -24,7 +24,7 @@
     - name: Include vault variables
       include_vars: "vars/vault.yml"
       tags: ["always"]
-    - name: Include picluster variables
+    - name: Include k3s variables
       include_vars: "vars/k3s.yml"
       tags: ["always"]
   roles:
@@ -38,7 +38,7 @@
     - name: Include vault variables
       include_vars: "vars/vault.yml"
       tags: ["always"]
-    - name: Include picluster variables
+    - name: Include k3s variables
       include_vars: "vars/k3s.yml"
       tags: ["always"]
   roles:
@@ -51,7 +51,7 @@
     - name: Include vault variables
       include_vars: "vars/vault.yml"
       tags: ["always"]
-    - name: Include picluster variables
+    - name: Include k3s variables
       include_vars: "vars/k3s.yml"
       tags: ["always"]
   tasks:
