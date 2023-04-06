@@ -40,29 +40,9 @@ ansible-credentials:
 view-vault-credentials:
 	ansible-vault view --vault-password-file=./ansible/.vault/vault_pass.sh ./ansible/vars/vault.yml
 
-.PHONY: gateway-setup
-gateway-setup:
-	ansible-playbook setup_picluster.yml --tags "gateway"
-
-.PHONY: nodes-setup
-nodes-setup:
-	ansible-playbook setup_picluster.yml --tags "nodes"
-
 .PHONY: essential-services
 essential-services:
 	ansible-playbook ansible/essential_services.yml --vault-password-file=./ansible/.vault/vault_pass.sh
-
-.PHONY: configure-os-backup
-configure-os-backup:
-	ansible-playbook backup_configuration.yml
-
-.PHONY: configure-monitoring-gateway
-configure-monitoring-gateway:
-	ansible-playbook deploy_monitoring_agent.yml
-
-.PHONY: os-backup
-os-backup:
-	ansible -b -m shell -a 'systemctl start restic-backup' raspberrypi
 
 .PHONY: k3s-install
 k3s-install:
@@ -75,19 +55,3 @@ k3s-bootstrap:
 .PHONY: k3s-uninstall
 k3s-uninstall:
 	ansible-playbook ansible/k3s_uninstall.yml
-
-.PHONY: external-services-reset
-external-services-reset:
-	ansible-playbook reset_external_services.yml
-
-.PHONY: shutdown-k3s-worker
-shutdown-k3s-worker:
-	ansible -b -m shell -a "shutdown -h 1 min" k3s_worker
-
-.PHONY: shutdown-k3s-master
-shutdown-k3s-master:
-	ansible -b -m shell -a "shutdown -h 1 min" k3s_master
-
-.PHONY: shutdown-gateway
-shutdown-gateway:
-	ansible -b -m shell -a "shutdown -h 1 min" gateway
