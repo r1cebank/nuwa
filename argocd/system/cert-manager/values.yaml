@@ -1,0 +1,24 @@
+# Custom CA issuer configuration
+# Enable private PKI using a custom CA
+# It creates a ClusterIssuer resource `ca-issuer`
+ca:
+  enabled: true
+
+# ACME (Letsencrypt) issuer configuration
+# https://cert-manager.io/docs/configuration/acme/
+acme:
+  acme_staging_url: https://acme-staging-v02.api.letsencrypt.org/directory
+  acme_prod_url: https://acme-v02.api.letsencrypt.org/directory
+  dns01:
+    cloudflare:
+      enabled: true
+      email: siyuangao@protonmail.com
+  acme_issuer_email: siyuangao@pm.me
+
+########################
+# cert-manager  subchart
+########################
+
+# CDRs installed as part of CDR application
+cert-manager:
+  installCRDs: false

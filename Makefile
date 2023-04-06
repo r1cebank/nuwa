@@ -13,16 +13,16 @@ prepare-terraform:
 	$(shell ./terraform/prepare_terraform.sh)
 	terraform -chdir=terraform init
 
-.PHONY: prepare-vm
-prepare-vm:
+.PHONY: vm-prepare
+vm-prepare:
 	terraform -chdir=terraform plan
 
-.PHONY: apply-vm
-apply-vm:
+.PHONY: vm-apply
+vm-apply:
 	terraform -chdir=terraform apply -parallelism=1
 
-.PHONY: destroy-vm
-destroy-vm:
+.PHONY: vm-destroy
+vm-destroy:
 	terraform -chdir=terraform destroy
 
 .PHONY: prepare-ansible
@@ -66,15 +66,15 @@ os-backup:
 
 .PHONY: k3s-install
 k3s-install:
-	ansible-playbook k3s_install.yml
+	ansible-playbook ansible/k3s_install.yml --vault-password-file=./ansible/.vault/vault_pass.sh
 
 .PHONY: k3s-bootstrap
 k3s-bootstrap:
-	ansible-playbook k3s_bootstrap.yml
+	ansible-playbook ansible/k3s_bootstrap.yml --vault-password-file=./ansible/.vault/vault_pass.sh
 
-.PHONY: k3s-reset
-k3s-reset:
-	ansible-playbook k3s_reset.yml
+.PHONY: k3s-uninstall
+k3s-uninstall:
+	ansible-playbook ansible/k3s_uninstall.yml
 
 .PHONY: external-services-reset
 external-services-reset:

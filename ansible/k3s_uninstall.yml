@@ -1,0 +1,12 @@
+---
+- name: Resetting k3s nodes
+  hosts: k3s_nodes
+  gather_facts: true
+  remote_user: k3s
+  become: true
+  pre_tasks:
+    - name: Include k3s variables
+      include_vars: "vars/k3s.yml"
+      tags: ["always"]
+  roles:
+    - role: k3s/uninstall

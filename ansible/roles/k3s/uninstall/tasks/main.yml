@@ -1,0 +1,35 @@
+---
+- name: Check if k3s is installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/k3s
+  register: k3s_installed
+
+- name: Kill all k3s resources
+  ansible.builtin.command: /usr/local/bin/k3s-killall.sh
+  when: k3s_installed.stat.exists
+  register: output
+  changed_when: output.rc != 0
+
+- name: Uninstall k3s
+  ansible.builtin.command: /usr/local/bin/k3s-uninstall.sh
+  when:
+    - k3s_installed.stat.exists
+    - inventory_hostname in groups["k3s_master"]
+  register: output
+  changed_when: output.rc != 0
+
+- name: Uninstall k3s agent
+  ansible.builtin.command: /usr/local/bin/k3s-agent-uninstall.sh
+  when:
+    - k3s_installed.stat.exists
+    - inventory_hostname in groups["k3s_worker"]
+  register: output
+  changed_when: output.rc != 0
+
+- name: Remove rancher directory
+  become: true
+  ansible.builtin.file:
+    state: absent
+    path: "{{ k3s_config_directory }}"
+  register: output
+  changed_when: output.diff is defined

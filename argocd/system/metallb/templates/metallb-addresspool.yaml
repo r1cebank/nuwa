@@ -1,0 +1,24 @@
+{{- if .Values.ipAddressPool.addresses }}
+
+# Metallb address pool
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: cluster-pool
+  namespace: {{ .Release.Namespace }}
+spec:
+  addresses:
+{{ toYaml .Values.ipAddressPool.addresses | indent 4 }}
+
+---
+# L2 configuration
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2-cluster-pool
+  namespace: {{ .Release.Namespace }}
+spec:
+  ipAddressPools:
+  - cluster-pool
+
+{{- end }}

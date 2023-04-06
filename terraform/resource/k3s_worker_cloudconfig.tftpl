@@ -1,0 +1,37 @@
+#cloud-config
+hostname: ${hostname}
+disk_setup:
+  /dev/xvdb:
+    table_type: gpt
+    layout: True
+    overwrite: True
+
+fs_setup:
+  - label: longhorn
+    filesystem: ext4
+    overwrite: True
+    device: /dev/xvdb1
+
+mounts:
+  - [/dev/xvdb1, /mnt/longhorn, "ext4", "defaults,nofail", "0", "2"]
+
+users:
+  - name: k3s
+    gecos: k3s user
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users
+    lock_passwd: true
+    ssh_import_id:
+      - gh:r1cebank
+    ssh-authorized-keys:
+      - ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOGLjBlTAAI+SiATOlioa7Zgl04F8eoUCYiRikUAhLNGMHoWPgyFl1xcfLkjOrbVOmHK44V/cyWDRC9FB7fEZlk= Home-Servers@secretive.Hachune-M2A.local
+    shell: /bin/bash
+  - name: ubuntu
+    sudo: false
+    ssh_redirect_user: true
+packages:
+  - jq
+  - open-iscsi
+  - nfs-common
+preserve_hostname: false
+resize_rootfs: true

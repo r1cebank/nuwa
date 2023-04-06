@@ -1,0 +1,24 @@
+{{- if .Values.acme.dns01.cloudflare.enabled }}
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging-issuer
+  namespace: {{ .Release.Namespace }}
+spec:
+  acme:
+    # The ACME server URL
+    server: {{ .Values.acme.acme_staging_url }}
+    # Email address used for ACME registration
+    email: {{ .Values.acme.acme_issuer_email }}
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-cloudflare-prod
+    # Enable the dns01 challenge provider
+    solvers:
+      - dns01:
+          cloudflare:
+            email: {{ .Values.acme.dns01.cloudflare.email }}
+            apiTokenSecretRef:
+              name: cloudflare-secret
+              key: CLOUDFLARE_API_KEY
+{{- end -}}

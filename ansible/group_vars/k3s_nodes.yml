@@ -1,1 +1,3 @@
-worker_attached_disk: /dev/xvdb
+ansible_user: k3s
+
+longhorn_disk_nvme: /mnt/longhorn

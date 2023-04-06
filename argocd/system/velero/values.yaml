@@ -1,0 +1,44 @@
+# Prometheus servicemonitor configuration
+serviceMonitor:
+  enable: true
+  release: monitoring
+
+###################
+# velero subchart
+###################
+
+velero:
+  # AWS backend and CSI plugins configuration
+  initContainers:
+    - name: velero-plugin-for-csi
+      image: velero/velero-plugin-for-csi:v0.4.2
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+    - name: aws
+      image: velero/velero-plugin-for-aws:v1.6.1
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+
+  # Velero Configuration
+  configuration:
+    # Configure Minio as backup backend
+    provider: aws
+    backupStorageLocation:
+      provider: aws
+      bucket: k3s-velero
+      config:
+        region: us-west-1
+        s3ForcePathStyle: true
+        s3Url: https://s3.miku.cx
+        # insecureSkipTLSVerify: true
+    # Enable CSI snapshot support
+    features: EnableCSI
+  credentials:
+    existingSecret: velero-secret
+
+  # Enable linkerd
+  podAnnotations:
+    linkerd.io/inject: enabled

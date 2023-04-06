@@ -1,0 +1,35 @@
+---
+- name: Install helm
+  ansible.builtin.shell: |
+    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+  register: helm_install_output
+  when: inventory_hostname in groups["k3s_master"]
+  changed_when: helm_install_output != 0
+
+- name: Install pip3
+  ansible.builtin.apt:
+    name: python3-pip
+    update_cache: true
+    state: present
+
+- name: Install pre-requisites
+  ansible.builtin.pip:
+    name:
+      - openshift
+      - pyyaml
+      - kubernetes
+
+- name: Enable IPv4 forwarding
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    state: present
+    reload: true
+
+- name: Enable IPv6 forwarding
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.all.forwarding
+    value: "1"
+    state: present
+    reload: true
+  when: ansible_all_ipv6_addresses

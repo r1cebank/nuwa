@@ -1,0 +1,52 @@
+---
+
+- name: Create custom resolv.conf
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/k3s-resolv.conf
+    owner: k3s
+    group: k3s
+    mode: "0750"
+    content: "{{ resolv_content }}"
+
+- name: Ensure rancher directory exist
+  ansible.builtin.file:
+    path: "{{ k3s_config_directory }}"
+    recurse: true
+    state: directory
+
+- name: Create kubelet config
+  become: true
+  ansible.builtin.copy:
+    dest: "{{ k3s_config_directory }}/kubelet.config"
+    owner: k3s
+    group: k3s
+    mode: "0750"
+    content: "{{ k3s_kubelet_config }}"
+
+- name: Install k3s control plane etcd master
+  ansible.builtin.shell: |
+    curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="{{ k3s_version }}" K3S_TOKEN="{{ k3s_token }}" sh -s - server {{ k3s_server_extra_args }} --cluster-init
+  register: k3s_install_outout
+  changed_when: k3s_install_outout != 0
+  when:
+    - inventory_hostname in groups["k3s_master"]
+    - inventory_hostname == groups["k3s_master"][0]
+
+- name: Install k3s control plane etcd worker
+  ansible.builtin.shell: |
+    curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="{{ k3s_version }}" K3S_TOKEN="{{ k3s_token }}" sh -s - server {{ k3s_server_extra_args }} --server https://{{ hostvars[groups['k3s_master'][0]].ansible_default_ipv4.address }}:6443
+  register: k3s_install_outout
+  changed_when: k3s_install_outout != 0
+  when:
+    - inventory_hostname in groups["k3s_master"]
+    - inventory_hostname != groups["k3s_master"][0]
+
+- name: "Wait until k3s service is running"
+  ansible.builtin.service:
+    name: k3s
+    state: started
+  register: k3s_service
+  until: k3s_service.status.ActiveState == "active"
+  retries: 10
+  delay: 20

@@ -1,0 +1,22 @@
+---
+
+- name: Ensure rancher directory exist
+  ansible.builtin.file:
+    path: "{{ k3s_config_directory }}"
+    recurse: true
+    state: directory
+
+- name: Create kubelet config
+  become: true
+  ansible.builtin.copy:
+    dest: "{{ k3s_config_directory }}/kubelet.config"
+    owner: k3s
+    group: k3s
+    mode: "0750"
+    content: "{{ k3s_kubelet_config }}"
+
+- name: Install k3s worker
+  ansible.builtin.shell: |
+    curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="{{ k3s_version }}" K3S_TOKEN="{{ k3s_token }}" K3S_URL=https://{{ hostvars[groups['k3s_master'][0]].ansible_default_ipv4.address }}:6443 sh -s - {{ k3s_worker_extra_args }}
+  register: k3s_install_outout
+  changed_when: k3s_install_outout != 0

@@ -1,0 +1,99 @@
+---
+
+- name: Install K3S prerequisites
+  hosts: k3s_nodes
+  gather_facts: true
+  tags: [install]
+  become: true
+  pre_tasks:
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+      tags: ["always"]
+    - name: Include k3s variables
+      include_vars: "vars/k3s.yml"
+      tags: ["always"]
+  roles:
+    - role: k3s/prereq
+
+- name: Install K3S master node
+  hosts: k3s_master
+  tags: [install]
+  become: true
+  serial: 1
+  pre_tasks:
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+      tags: ["always"]
+    - name: Include picluster variables
+      include_vars: "vars/k3s.yml"
+      tags: ["always"]
+  roles:
+    - role: k3s/master
+
+- name: Install K3S worker nodes
+  hosts: k3s_worker
+  tags: [install]
+  become: true
+  pre_tasks:
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+      tags: ["always"]
+    - name: Include picluster variables
+      include_vars: "vars/k3s.yml"
+      tags: ["always"]
+  roles:
+    - role: k3s/worker
+
+- name: Wait for K3S worker nodes
+  hosts: k3s_master[0]
+  tags: [config]
+  pre_tasks:
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+      tags: ["always"]
+    - name: Include picluster variables
+      include_vars: "vars/k3s.yml"
+      tags: ["always"]
+  tasks:
+    - name: "Wait for worker nodes to be ready"
+      command:
+        cmd: "kubectl get nodes {{ item | replace('_','-') }}"
+      register: nodes
+      until:
+        - '" Ready "  in nodes.stdout'
+      retries: 10
+      delay: 5
+      with_items: "{{ groups['k3s_worker'] }}"
+
+- name: Apply k3s labels
+  hosts: k3s_nodes
+  gather_facts: true
+  tags: [install]
+  become: true
+  pre_tasks:
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+      tags: ["always"]
+    - name: Include k3s variables
+      include_vars: "vars/k3s.yml"
+      tags: ["always"]
+  roles:
+    - role: k3s/label
+
+- name: Get Kubernets config file
+  hosts: k3s_master[0]
+  tags: [kube-config]
+  tasks:
+    - name: Retrieve kubeconfig
+      become: true
+      ansible.builtin.fetch:
+        src: /etc/rancher/k3s/k3s.yaml
+        dest: ~/.kube/k3s.yaml
+        flat: true
+
+    - name: Update ip address of kube config
+      ansible.builtin.replace:
+        path: ~/.kube/k3s.yaml
+        regexp: '(?:[0-9]{1,3}\.){3}[0-9]{1,3}'
+        replace: "{{ hostvars[groups['k3s_master'][0]].ansible_default_ipv4.address }}"
+      delegate_to: localhost
