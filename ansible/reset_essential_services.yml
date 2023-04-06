@@ -1,0 +1,27 @@
+---
+- name: Clean Minio Installation
+  hosts: minio_nodes
+  become: true
+  gather_facts: false
+  tags: [s3]
+  tasks:
+    - name: Stop and disable Minio Server
+      systemd:
+        name: minio
+        state: stopped
+        enabled: false
+      become: true
+    - name: Delete directories and files
+      become: true
+      file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - /storage/minio/
+        - /etc/minio/
+        - /usr/local/bin/minio
+        - /usr/local/bin/mc
+        - /etc/systemd/system/minio.service
+    - name: Reload systemd daemon
+      systemd:
+        daemon_reload: true

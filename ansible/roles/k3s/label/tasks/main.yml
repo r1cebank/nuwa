@@ -24,10 +24,9 @@
 - name: Apply labels to each worker nodes
   become: true
   ansible.builtin.shell: |
-    kubectl label node {{ hostname.stdout }} node.longhorn.io/create-default-disk=config &&
+    kubectl label node {{ hostname.stdout }} node.longhorn.io/create-default-disk=true &&
     kubectl label node {{ hostname.stdout }} kubernetes.io/role=worker &&
-    kubectl label node {{ hostname.stdout }} k3s.owo.ac/nodetype=worker &&
-    kubectl annotate node {{ hostname.stdout }} --overwrite 'node.longhorn.io/default-disks-config=[{"path":"{{ longhorn_disk_nvme }}", "allowScheduling":true}]'
+    kubectl label node {{ hostname.stdout }} k3s.owo.ac/nodetype=worker
   delegate_to: "{{ groups['k3s_master'][0] }}"
   when: inventory_hostname in groups["k3s_worker"]
   register: k3s_outout

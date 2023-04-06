@@ -55,3 +55,7 @@ k3s-bootstrap:
 .PHONY: k3s-uninstall
 k3s-uninstall:
 	ansible-playbook ansible/k3s_uninstall.yml
+
+.PHONY: services-uninstall
+services-uninstall:
+	ansible-playbook ansible/reset_essential_services.yml
