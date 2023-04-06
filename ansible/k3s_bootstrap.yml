@@ -31,17 +31,17 @@
         plugin_path: "https://github.com/databus23/helm-diff"
         state: present
   tasks:
-    - name: Create namespaces.
-      kubernetes.core.k8s:
-        name: "{{ item }}"
-        api_version: v1
-        kind: Namespace
-        state: present
-      with_items:
-        - "argocd"
-        - "vault"
-    - name: Configure Vault integration
-      ansible.builtin.include_tasks: tasks/configure_vault_integration.yml
+    # - name: Create namespaces.
+    #   kubernetes.core.k8s:
+    #     name: "{{ item }}"
+    #     api_version: v1
+    #     kind: Namespace
+    #     state: present
+    #   with_items:
+    #     - "argocd"
+    #     - "vault"
+    # - name: Configure Vault integration
+    #   ansible.builtin.include_tasks: tasks/configure_vault_integration.yml
 
     - name: Copy argocd chart files
       ansible.builtin.copy:
@@ -71,14 +71,14 @@
         cmd: "kubectl wait --for condition=Established crd/applications.argoproj.io crd/applicationsets.argoproj.io --timeout=600s"
       changed_when: false
 
-    - name: Deploy root application
-      kubernetes.core.k8s:
-        definition: "{{ lookup('template', 'templates/' + item) }}"
-        state: present
-      with_items:
-        - argocd_root_app.yml.j2
+    # - name: Deploy root application
+    #   kubernetes.core.k8s:
+    #     definition: "{{ lookup('template', 'templates/' + item) }}"
+    #     state: present
+    #   with_items:
+    #     - argocd_root_app.yml.j2
 
-    - name: Recursively remove tmp directory
-      ansible.builtin.file:
-        path: /tmp/charts
-        state: absent
+    # - name: Recursively remove tmp directory
+    #   ansible.builtin.file:
+    #     path: /tmp/charts
+    #     state: absent
