@@ -1,6 +1,6 @@
 gitops:
   repo: https://github.com/r1cebank/nuwa
-  revision: master
+  revision: main
 
 # List of application corresponding to different sync waves
 apps:
