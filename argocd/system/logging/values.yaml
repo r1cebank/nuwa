@@ -7,7 +7,7 @@ elasticsearch:
   # elastic search version
   version: 8.1.2
   # Number of Elastic Search nodes
-  clusterNodes: 1
+  clusterNodes: 2
   # Enable/Disable memory map
   enableMmap: false
   # Storage Settings
