@@ -3,7 +3,7 @@ ingress:
   host: argocd.owo.ac
   # configure cert-manager issuer
   certmanager:
-    tlsIssuer: letsencrypt-prod-issuer
+    tlsIssuer: letsencrypt-staging-issuer
 
 argo-cd:
   configs:

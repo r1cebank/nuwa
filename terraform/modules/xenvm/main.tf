@@ -34,7 +34,7 @@ resource "xenorchestra_vm" "xenvm" {
     for_each = var.additional_disk == true ? toset([1]) : toset([])
 
     content {
-      sr_id      = var.sr_id
+      sr_id      = var.additional_disk_sr_id
       name_label = "${var.vm_name} additional volume"
       size       = var.additional_disk_size
     }

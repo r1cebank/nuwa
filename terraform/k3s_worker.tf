@@ -7,7 +7,7 @@ module "k3s_worker_cluster" {
   cpus           = var.k3s_worker_cluster_resources.cpus
   max_memory     = var.k3s_worker_cluster_resources.memory_max
   disk_size      = var.k3s_worker_cluster_resources.disk_size
-  sr_id          = data.xenorchestra_sr.sr_nvme.id
+  sr_id          = data.xenorchestra_sr.sr_sata.id
   network_id     = data.xenorchestra_network.network.id
   template_id    = data.xenorchestra_template.vm_template_2204.id
   affinity_host  = data.xenorchestra_host.cerulean.id
@@ -28,6 +28,7 @@ module "k3s_worker_cluster" {
 
   additional_disk      = true
   additional_disk_size = var.k3s_worker_cluster_resources.additional_disk_size
+  additional_disk_sr_id = data.xenorchestra_sr.sr_nvme.id
 
   tags = [
     "k3s",

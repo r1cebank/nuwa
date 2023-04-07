@@ -26,7 +26,7 @@ elasticsearch:
     host: elasticsearch.owo.ac
     # configure cert-manager issuer
     certmanager:
-      tlsIssuer: letsencrypt-prod-issuer
+      tlsIssuer: letsencrypt-staging-issuer
 
 # Kibana configuration
 kibana:
@@ -42,7 +42,7 @@ kibana:
     host: kibana.owo.ac
     # configure cert-manager issuer
     certmanager:
-      tlsIssuer: letsencrypt-prod-issuer
+      tlsIssuer: letsencrypt-staging-issuer
 
 # LoadBalancer and DNS config
 external:

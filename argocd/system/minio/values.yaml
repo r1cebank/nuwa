@@ -4,7 +4,7 @@ ingress:
   console: minio.owo.ac
   # configure cert-manager issuer
   certmanager:
-    tlsIssuer: letsencrypt-prod-issuer
+    tlsIssuer: letsencrypt-staging-issuer
 
 ###################
 # minio subchart

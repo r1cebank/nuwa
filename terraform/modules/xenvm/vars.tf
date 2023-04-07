@@ -44,6 +44,12 @@ variable "additional_disk_size" {
   default     = 0
 }
 
+variable "additional_disk_sr_id" {
+  description = "The storage repository id for additional disk"
+  default = ""
+}
+
+
 variable "cloud_config_file" {
   description = "The cloud config file path for the vm"
 }
