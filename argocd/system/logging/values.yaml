@@ -213,8 +213,8 @@ fluentd:
     - name: FLUENT_ELASTICSEARCH_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: "efk-es-elastic-user"
-          key: elastic
+          name: elasticsearch-shared-key
+          key: elasticsearch-shared-key
     # Fluentd forward security
     - name: FLUENTD_FORWARD_SEC_SHARED_KEY
       valueFrom:
@@ -696,11 +696,11 @@ prometheus-elasticsearch-exporter:
   env:
     ES_USERNAME: elastic
 
-  # Elastic search passord from secret
+  # Elastic search password from secret
   extraEnvSecrets:
     ES_PASSWORD:
-      secret: efk-es-elastic-user
-      key: elastic
+      secret: elasticsearch-shared-key
+      key: elasticsearch-shared-key
 
   # Elastic search URI
   es:

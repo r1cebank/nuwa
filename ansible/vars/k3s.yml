@@ -17,6 +17,7 @@ k3s_kubelet_config: |
   kind: KubeletConfiguration
   shutdownGracePeriod: 30s
   shutdownGracePeriodCriticalPods: 10s
+  resolvConf: /etc/rancher/k3s/resolv.conf
 
 # Extra arguments for k3s server installation
 k3s_server_extra_args: >-
@@ -24,7 +25,6 @@ k3s_server_extra_args: >-
   --disable 'servicelb'
   --disable 'traefik'
   --disable 'local-storage'
-  --resolv-conf '/etc/k3s-resolv.conf'
   --kube-controller-manager-arg 'bind-address=0.0.0.0'
   --kube-proxy-arg 'metrics-bind-address=0.0.0.0'
   --kube-scheduler-arg 'bind-address=0.0.0.0'

@@ -6,6 +6,15 @@
     recurse: true
     state: directory
 
+- name: Create custom resolv.conf
+  become: true
+  ansible.builtin.copy:
+    dest: "{{ {{ k3s_config_directory }} }}/resolv.conf"
+    owner: k3s
+    group: k3s
+    mode: "0750"
+    content: "{{ resolv_content }}"
+
 - name: Create kubelet config
   become: true
   ansible.builtin.copy:
