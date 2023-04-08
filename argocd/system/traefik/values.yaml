@@ -4,12 +4,12 @@
 # Creating with specific template
 ingress:
   enabled: true
-  host: traefik.picluster.ricsanfre.com
+  host: traefik.owo.ac
   # configure cert-manager issuer
   certmanager:
     # tlsIssuer=letsecrypt to generate valid TLS certficiate using IONOS API
     # tlsIssuer=ca to generate a CA-signed certificate (not valid)
-    tlsIssuer: letsencrypt
+    tlsIssuer: letsencrypt-staging-issuer
   # Enabling traefik basic authorization, reusing global middleware created for Traefik
   basicAuth:
     enable: true
