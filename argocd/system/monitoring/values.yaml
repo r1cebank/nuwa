@@ -25,7 +25,7 @@ k3sMetrics:
 externalServices:
   # External Minio service
   minioMetrics:
-    enabled: true
+    enabled: false
     servers:
       - ip: 192.168.1.107
   # External node (gateway)
