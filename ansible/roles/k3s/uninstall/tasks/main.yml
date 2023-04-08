@@ -50,7 +50,7 @@
   register: longhorn_dirs
   when: inventory_hostname in groups["k3s_worker"]
 
-- name: Removing all files previously found in files dir
+- name: Removing all files and directories in longhorn dir
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: absent
