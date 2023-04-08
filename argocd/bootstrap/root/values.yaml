@@ -4,7 +4,7 @@ gitops:
 
 # List of application corresponding to different sync waves
 apps:
-  # CDRs App
+    # CDRs App
   - name: crds
     namespace: default
     path: argocd/bootstrap/crds

@@ -1,3 +1,4 @@
+
 # Prometheus servicemonitor configuration
 serviceMonitor:
   enable: true
@@ -10,14 +11,15 @@ serviceMonitor:
 velero:
   # AWS backend and CSI plugins configuration
   initContainers:
-    - name: velero-plugin-for-csi
-      image: velero/velero-plugin-for-csi:v0.4.2
+    - name: velero-plugin-for-aws
+      image: velero/velero-plugin-for-aws:v1.3.0
       imagePullPolicy: IfNotPresent
       volumeMounts:
         - mountPath: /target
           name: plugins
-    - name: aws
-      image: velero/velero-plugin-for-aws:v1.6.1
+    - name: velero-plugin-for-csi
+      image: ricsanfre/velero-plugin-for-csi:v0.3.1
+      imagePullPolicy: IfNotPresent
       volumeMounts:
         - mountPath: /target
           name: plugins

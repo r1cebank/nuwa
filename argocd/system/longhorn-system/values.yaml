@@ -25,7 +25,6 @@ serviceMonitor:
 
 longhorn:
   defaultSettings:
-    # Backup S3 configuration
     backupTarget: "s3://k3s-longhorn@us-west-1/"
     backupTargetCredentialSecret: longhorn-minio-secret
     defaultDataPath: /mnt/longhorn

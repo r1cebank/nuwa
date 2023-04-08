@@ -6,6 +6,7 @@ ingress:
   certmanager:
     tlsIssuer: letsencrypt-staging-issuer
 
+
 ###################
 # minio subchart
 ###################
@@ -45,8 +46,8 @@ minio:
     - name: loki
       statements:
         - resources:
-            - "arn:aws:s3:::k3s-loki"
-            - "arn:aws:s3:::k3s-loki/*"
+            - 'arn:aws:s3:::k3s-loki'
+            - 'arn:aws:s3:::k3s-loki/*'
           actions:
             - "s3:DeleteObject"
             - "s3:GetObject"
@@ -55,8 +56,8 @@ minio:
     - name: tempo
       statements:
         - resources:
-            - "arn:aws:s3:::k3s-tempo"
-            - "arn:aws:s3:::k3s-tempo/*"
+            - 'arn:aws:s3:::k3s-tempo'
+            - 'arn:aws:s3:::k3s-tempo/*'
           actions:
             - "s3:DeleteObject"
             - "s3:GetObject"

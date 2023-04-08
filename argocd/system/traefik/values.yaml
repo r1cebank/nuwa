@@ -4,10 +4,12 @@
 # Creating with specific template
 ingress:
   enabled: true
-  host: traefik.owo.ac
+  host: traefik.picluster.ricsanfre.com
   # configure cert-manager issuer
   certmanager:
-    tlsIssuer: letsencrypt-staging-issuer
+    # tlsIssuer=letsecrypt to generate valid TLS certficiate using IONOS API
+    # tlsIssuer=ca to generate a CA-signed certificate (not valid)
+    tlsIssuer: letsencrypt
   # Enabling traefik basic authorization, reusing global middleware created for Traefik
   basicAuth:
     enable: true
@@ -56,20 +58,20 @@ traefik:
       - name: stream-accesslog
         image: busybox
         args:
-          - /bin/sh
-          - -c
-          - tail -n+1 -F /data/access.log
+        - /bin/sh
+        - -c
+        - tail -n+1 -F /data/access.log
         imagePullPolicy: Always
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
-          - mountPath: /data
-            name: data
+        - mountPath: /data
+          name: data
   # Set specific LoadBalancer IP address for Ingress service
   service:
     spec:
-      loadBalancerIP: 192.168.1.200
+      loadBalancerIP: 10.0.0.100
 
   providers:
     kubernetesCRD:

@@ -9,7 +9,7 @@ vault:
   # ca cert base64 encoded and remobed '\n' characteres"
   # <vault-ca> =`cat vault-ca.pem | base64 | tr -d "\n"`
   # caBundle:
-
+  
   # KV path and version
   kv:
     path: secret

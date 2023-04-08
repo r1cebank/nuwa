@@ -33,3 +33,32 @@
     path: "{{ k3s_config_directory }}"
   register: output
   changed_when: output.diff is defined
+
+- name: Locating all files in files longhorn dir
+  ansible.builtin.find:
+    path: "{{ longhorn_disk_nvme }}"
+  register: longhorn_files
+  ignore_errors: true
+  when: inventory_hostname in groups["k3s_worker"]
+
+- name: Locating all directories in files longhorn dir
+  ansible.builtin.find:
+    paths: "{{ longhorn_disk_nvme }}"
+    hidden: true
+    recurse: true
+    file_type: directory
+  register: longhorn_dirs
+  when: inventory_hostname in groups["k3s_worker"]
+
+- name: Removing all files previously found in files dir
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: >
+      {{
+        longhorn_files.files
+        + longhorn_dirs.files
+      }}
+  no_log: true
+  ignore_errors: true
+  when: inventory_hostname in groups["k3s_worker"]
