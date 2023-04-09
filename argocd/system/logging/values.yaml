@@ -462,11 +462,34 @@ fluentd:
       <label @OUTPUT_LOKI>
         # Rename log_proccessed to message
         <filter kube.**>
-          @type record_modifier
-          remove_keys __dummy__, log_processed
-          <record>
-            __dummy__ ${if record.has_key?('log_processed'); record['message'] = record['log_processed']; end; nil}
-          </record>
+          @type parser
+          key_name log_processed
+          reserve_data true
+          remove_key_name_field true
+          <parse>
+            @type multi_format
+            <pattern>
+              format json
+            </pattern>
+            <pattern>
+              format none
+            </pattern>
+          </parse>
+        </filter>
+        <filter kube.**>
+          @type parser
+          key_name message
+          reserve_data true
+          remove_key_name_field true
+          <parse>
+            @type multi_format
+            <pattern>
+              format json
+            </pattern>
+            <pattern>
+              format none
+            </pattern>
+          </parse>
         </filter>
         <match **>
           @type loki
