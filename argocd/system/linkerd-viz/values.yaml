@@ -28,7 +28,8 @@ linkerd-viz:
   prometheus:
     enabled: false
   # External Grafana
-  grafanaUrl: http://monitoring-grafana.monitoring:3000
+  grafana:
+    url: monitoring-grafana.monitoring
   # Disabling DNS rebinding protection
   dashboard:
     enforcedHostRegexp: .*
