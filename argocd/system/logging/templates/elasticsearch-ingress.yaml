@@ -7,7 +7,7 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      l5d-dst-override: {{ .Values.eck.clusterName }}-es-http.{{ .Release.Namespace }}:9200
+      l5d-dst-override: {{ .Values.eck.clusterName }}-es-http.{{ .Release.Namespace }}.svc.cluster.local:9200
 
 ---
 # HTTPS Ingress

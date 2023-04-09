@@ -8,7 +8,7 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      l5d-dst-override: "{{ template "monitoring-stack.name" . }}-prometheus.{{ .Release.Namespace }}:9090"
+      l5d-dst-override: "{{ template "monitoring-stack.name" . }}-prometheus.{{ .Release.Namespace }}.svc.cluster.local:9090"
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -19,7 +19,7 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      l5d-dst-override: "{{ template "monitoring-stack.name" . }}-alertmanager.{{ .Release.Namespace }}:9093"
+      l5d-dst-override: "{{ template "monitoring-stack.name" . }}-alertmanager.{{ .Release.Namespace }}.svc.cluster.local:9093"
 
 ---
 #Linkerd middleware
@@ -31,7 +31,7 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      l5d-dst-override: "{{ .Release.Name }}-grafana.{{ .Release.Namespace }}:80"
+      l5d-dst-override: "{{ .Release.Name }}-grafana.{{ .Release.Namespace }}.svc.cluster.local:80"
 
 ---
 # Strip prefix middleware
