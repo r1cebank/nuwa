@@ -95,3 +95,8 @@ apps:
     namespace: argocd
     path: argocd/bootstrap/argocd
     syncWave: 16
+    # Extras
+  - name: extras
+    namespace: extras
+    path: argocd/extras/apps
+    syncWave: 17
