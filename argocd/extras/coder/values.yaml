@@ -1,0 +1,31 @@
+# Ingress configuration
+ingress:
+  host: coder.owo.ac
+  # configure cert-manager issuer
+  certmanager:
+    tlsIssuer: letsencrypt-staging-issuer
+
+########################
+# coder subchart
+########################
+postgresql:
+  auth:
+    username: coder
+    database: coder
+    existingSecret: coder-secret
+  persistence:
+    storageClass: longhorn
+    size: 10Gi
+
+coder:
+  coder:
+    ingress:
+      enable: false
+    env:
+      - name: CODER_PG_CONNECTION_URL
+        valueFrom:
+          secretKeyRef:
+            name: coder-secret
+            key: url
+      - name: CODER_ACCESS_URL
+        value: "https://coder.owo.ac"
