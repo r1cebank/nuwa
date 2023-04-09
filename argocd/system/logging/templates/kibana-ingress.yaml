@@ -8,7 +8,7 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      l5d-dst-override: {{ .Values.eck.clusterName }}-kb-http.{{ .Release.Namespace }}.svc.cluster.local:5601
+      l5d-dst-override: {{ .Values.eck.clusterName }}-kb-http.{{ .Release.Namespace }}:5601
 ---
 # HTTPS Ingress
 apiVersion: networking.k8s.io/v1

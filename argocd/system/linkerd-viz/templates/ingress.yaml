@@ -8,7 +8,7 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      l5d-dst-override: "web.{{ .Release.Namespace }}.svc.cluster.local:8084"
+      l5d-dst-override: "web.{{ .Release.Namespace }}:8084"
 
 ---
 # HTTPS Ingress
