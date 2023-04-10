@@ -2,7 +2,6 @@
 # vaultwarden subchart
 ########################
 vaultwarden:
-  domain: https://vaultwarden.owo.ac
   ingress:
     enabled: true
     className: traefik
@@ -20,6 +19,7 @@ vaultwarden:
           - vaultwarden.owo.ac
         secretName: vaultwarden-tls
   vaultwarden:
+    domain: https://vaultwarden.owo.ac
     admin:
       enabled: true
       existingSecret: vaultwarden-secret
