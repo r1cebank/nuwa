@@ -1,0 +1,39 @@
+---
+
+- name: Install apps to cluster
+  hosts: k3s_master[0]
+  gather_facts: true
+  environment:
+    K8S_AUTH_KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+  pre_tasks:
+    - name: Include vault variables
+      ansible.builtin.include_vars: "vars/vault.yml"
+    - name: Include k3s variables
+      ansible.builtin.include_vars: "vars/k3s.yml"
+    - name: Include hashicorp_vault variables
+      ansible.builtin.include_vars: "vars/hashicorp_vault.yml"
+    - name: Ensure PIP is installed.
+      ansible.builtin.package:
+        name:
+          - python3-pip
+          - python3-setuptools
+        state: present
+      become: true
+    - name: Ensure kubernetes and vault Python library is installed.
+      ansible.builtin.pip:
+        name:
+          - kubernetes
+          - hvac
+        state: present
+      become: true
+    - name: Intall Helm Plugin
+      kubernetes.core.helm_plugin:
+        plugin_path: "https://github.com/databus23/helm-diff"
+        state: present
+  tasks:
+    - name: Deploy root application
+      kubernetes.core.k8s:
+        definition: "{{ lookup('template', 'templates/' + item) }}"
+        state: present
+      with_items:
+        - argocd_extras_app.yml.j2
