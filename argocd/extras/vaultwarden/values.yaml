@@ -2,6 +2,7 @@
 # vaultwarden subchart
 ########################
 vaultwarden:
+  domain: https://vaultwarden.owo.ac
   ingress:
     enabled: true
     className: traefik
