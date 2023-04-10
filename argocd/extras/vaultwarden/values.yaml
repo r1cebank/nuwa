@@ -27,6 +27,7 @@ vaultwarden:
     requireEmail: true
     signupDomains: "miku.cx,owo.ac"
     yubico:
+      enabled: true
       existingSecret: vaultwarden-secret
     smtp:
       enabled: true
