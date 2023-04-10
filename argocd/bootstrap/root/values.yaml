@@ -95,8 +95,3 @@ apps:
     namespace: argocd
     path: argocd/bootstrap/argocd
     syncWave: 16
-    # Extras applications
-  - name: coder
-    namespace: coder
-    path: argocd/extras/coder
-    syncWave: 17
