@@ -1,0 +1,10 @@
+apiVersion: v2
+name: vaultwarden
+version: 0.0.0
+dependencies:
+  - name: postgresql
+    version: 12.2.7
+    repository: https://charts.bitnami.com/bitnami
+  - name: vaultwarden
+    version: 1.0.0
+    repository: https://gissilabs.github.io/charts/

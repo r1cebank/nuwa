@@ -1,0 +1,55 @@
+########################
+# vaultwarden subchart
+########################
+vaultwarden:
+  ingress:
+    enabled: true
+    className: traefik
+    host: vaultwarden.owo.ac
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: vaultwarden.owo.ac
+    tls:
+      - hosts:
+          - vaultwarden.owo.ac
+        secretName: vaultwarden-tls
+  vaultwarden:
+    admin:
+      enabled: true
+      existingSecret: vaultwarden-secret
+    verifySignup: true
+    requireEmail: true
+    signupDomains: "miku.cx,owo.ac"
+    yubico:
+      existingSecret: vaultwarden-secret
+    smtp:
+      enabled: true
+      host: "in-v3.mailjet.com"
+      from: "noreply@miku.cx"
+      port: 587
+      existingSecret: vaultwarden-secret
+  database:
+    type: postgresql
+    existingSecret: vaultwarden-secret
+  podAnnotations:
+    linkerd.io/inject: enabled
+
+########################
+# postgresql subchart
+########################
+postgresql:
+  primary:
+    podAnnotations:
+      linkerd.io/inject: enabled
+  auth:
+    username: vaultwarden
+    database: vaultwarden
+    existingSecret: vaultwarden-secret
+  persistence:
+    storageClass: longhorn
+    size: 10Gi

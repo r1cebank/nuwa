@@ -6,7 +6,7 @@ ingress:
     tlsIssuer: letsencrypt-staging-issuer
 
 ########################
-# coder subchart
+# postgresql subchart
 ########################
 postgresql:
   primary:
@@ -20,6 +20,9 @@ postgresql:
     storageClass: longhorn
     size: 10Gi
 
+########################
+# coder subchart
+########################
 coder:
   coder:
     ingress:

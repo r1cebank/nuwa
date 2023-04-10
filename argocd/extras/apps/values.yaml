@@ -4,8 +4,13 @@ gitops:
 
 # List of application corresponding to different sync waves
 apps:
-    # CDRs App
+  # coder App
   - name: coder
     namespace: coder
     path: argocd/extras/coder
+    syncWave: 1
+  # vaultwarden
+  - name: vaultwarden
+    namespace: vaultwarden
+    path: argocd/extras/vaultwarden
     syncWave: 1

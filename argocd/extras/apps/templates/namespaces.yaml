@@ -1,9 +1,17 @@
 # Create annotated namespaces
 
-# logging namespace
+# coder namespace
 kind: Namespace
 apiVersion: v1
 metadata:
   name: coder
+  annotations:
+    linkerd.io/inject: enabled
+---
+# vaultwarden namespace
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: vaultwarden
   annotations:
     linkerd.io/inject: enabled

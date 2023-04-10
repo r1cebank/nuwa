@@ -49,3 +49,16 @@ vault:
     db:
       password: {{ coder_db_password }}
       url: {{ coder_db_url }}
+  # Vaultwarden
+  vaultwarden:
+    admin:
+      token: {{ vaultwarden_admin_token }}
+    smtp:
+      username: {{ smtp_username }}
+      password: {{ smtp_password }}
+    yubico:
+      client_id: {{ yubico_clientid }}
+      secret_key: {{ yubico_secretkey }}
+    db:
+      password: {{ vaultwarden_db_password }}
+      url: {{ vaultwarden_db_url }}
