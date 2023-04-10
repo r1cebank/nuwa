@@ -9,6 +9,9 @@ ingress:
 # coder subchart
 ########################
 postgresql:
+  primary:
+    podAnnotations:
+      linkerd.io/inject: enabled
   auth:
     username: coder
     database: coder
@@ -29,3 +32,5 @@ coder:
             key: url
       - name: CODER_ACCESS_URL
         value: "https://coder.owo.ac"
+    podAnnotations:
+      linkerd.io/inject: enabled

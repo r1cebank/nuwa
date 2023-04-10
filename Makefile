@@ -52,6 +52,10 @@ k3s-install:
 k3s-bootstrap:
 	ansible-playbook ansible/k3s_bootstrap.yml --vault-password-file=./ansible/.vault/vault_pass.sh
 
+.PHONY: k3s-apps
+k3s-apps:
+	ansible-playbook ansible/k3s_apps.yml --vault-password-file=./ansible/.vault/vault_pass.sh
+
 .PHONY: k3s-uninstall
 k3s-uninstall:
 	ansible-playbook ansible/k3s_uninstall.yml
