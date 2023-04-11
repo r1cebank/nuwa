@@ -3,6 +3,21 @@ sshingress:
   entrypoint: ssh
 
 ########################
+# postgresql subchart
+########################
+postgresql:
+  primary:
+    podAnnotations:
+      linkerd.io/inject: enabled
+  auth:
+    username: gitea
+    database: gitea
+    existingSecret: gitea-secret
+  persistence:
+    storageClass: longhorn
+    size: 10Gi
+
+########################
 # gitea subchart
 ########################
 gitea:
@@ -21,7 +36,7 @@ gitea:
         valueFrom:
           secretKeyRef:
             name: gitea-secret
-            key: db_url
+            key: url
       - name: ENV_TO_INI__DATABASE__NAME
         value: gitea
       - name: ENV_TO_INI__DATABASE__USER
@@ -32,7 +47,7 @@ gitea:
         valueFrom:
           secretKeyRef:
             name: gitea-secret
-            key: db_password
+            key: postgres-password
     metrics:
       enabled: true
     podAnnotations:
