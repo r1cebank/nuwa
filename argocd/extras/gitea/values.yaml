@@ -38,8 +38,6 @@ gitea:
         value: gitea
       - name: ENV_TO_INI__DATABASE__USER
         value: gitea
-      - name: ENV_TO_INI__DATABASE__SCHEMA
-        value: gitea
       - name: ENV_TO_INI__DATABASE__PASSWD
         valueFrom:
           secretKeyRef:
