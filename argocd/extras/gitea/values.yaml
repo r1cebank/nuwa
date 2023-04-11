@@ -28,15 +28,12 @@ gitea:
     size: 100Gi
   gitea:
     admin:
-      existingSecret: gitea-secret
+      existingSecret: gitea-admin-secret
     additionalConfigFromEnvs:
       - name: ENV_TO_INI__DATABASE__DB_TYPE
         value: postgres
       - name: ENV_TO_INI__DATABASE__HOST
-        valueFrom:
-          secretKeyRef:
-            name: gitea-secret
-            key: url
+        value: gitea-postgresql.gitea.svc.cluster.local:5432
       - name: ENV_TO_INI__DATABASE__NAME
         value: gitea
       - name: ENV_TO_INI__DATABASE__USER
