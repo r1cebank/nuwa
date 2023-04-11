@@ -33,7 +33,7 @@ gitea:
       - name: ENV_TO_INI__DATABASE__DB_TYPE
         value: postgres
       - name: ENV_TO_INI__DATABASE__HOST
-        value: gitea-postgresql.gitea.svc.cluster.local:5432
+        value: gitea-postgresql.gitea:5432
       - name: ENV_TO_INI__DATABASE__NAME
         value: gitea
       - name: ENV_TO_INI__DATABASE__USER
