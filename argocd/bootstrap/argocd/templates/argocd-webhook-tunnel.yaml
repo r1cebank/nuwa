@@ -1,0 +1,31 @@
+{{- if .Values.tunnel.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cloudflared-tunnel
+  name: cloudflared-tunnel
+spec:
+  selector:
+    matchLabels:
+      app: cloudflared-tunnel
+  template:
+    metadata:
+      labels:
+        app: cloudflared-tunnel
+    spec:
+      containers:
+      - name: cloudflared-tunnel
+        image: {{ .Values.tunnel.cloudflared.image }}
+        imagePullPolicy: Always
+        args: ["tunnel", "--no-autoupdate", "run", "--token=$TUNNEL_TOKEN"]
+        env:
+          - name: TUNNEL_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.tunnel.cloudflared.token.existingSecret }}
+                key: tunnel-token
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+{{- end }}

@@ -1,0 +1,43 @@
+sshingress:
+  enabled: true
+  entrypoint: ssh
+
+########################
+# gitea subchart
+########################
+gitea:
+  replicaCount: 1
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 100Gi
+  gitea:
+    admin:
+      existingSecret: gitea-secret
+    additionalConfigFromEnvs:
+      - name: ENV_TO_INI__DATABASE__DB_TYPE
+        value: postgres
+      - name: ENV_TO_INI__DATABASE__HOST
+        valueFrom:
+          secretKeyRef:
+            name: gitea-secret
+            key: db_url
+      - name: ENV_TO_INI__DATABASE__NAME
+        value: gitea
+      - name: ENV_TO_INI__DATABASE__USER
+        value: gitea
+      - name: ENV_TO_INI__DATABASE__SCHEMA
+        value: gitea
+      - name: ENV_TO_INI__DATABASE__PASSWD
+        valueFrom:
+          secretKeyRef:
+            name: gitea-secret
+            key: db_password
+    metrics:
+      enabled: true
+    podAnnotations:
+      linkerd.io/inject: enabled
+  postgresql:
+    enabled: false
+  memcached:
+    enabled: true

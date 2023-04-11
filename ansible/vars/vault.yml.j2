@@ -5,6 +5,11 @@ vault:
   cluster:
     k3s:
      token: {{ k3s_token }}
+  argocd:
+    tunnel:
+      cloudflare:
+        id: {{ argocd_cloudflare_tunnel_id }}
+        token: {{ argocd_cloudflare_tunnel_token }}
   # Traefik secrets
   traefik:
     admin:

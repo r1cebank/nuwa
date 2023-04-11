@@ -1,0 +1,7 @@
+apiVersion: v2
+name: onedev
+version: 0.0.0
+dependencies:
+  - name: onedev
+    version: 8.0.15
+    repository: "file://../dependency_charts/onedev"

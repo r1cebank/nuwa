@@ -68,6 +68,11 @@ traefik:
         volumeMounts:
         - mountPath: /data
           name: data
+  ports:
+    ssh:
+      port: 22
+      expose: true
+      protocol: TCP
   # Set specific LoadBalancer IP address for Ingress service
   service:
     spec:

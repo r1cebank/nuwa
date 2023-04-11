@@ -1,0 +1,16 @@
+{{- if .Values.sshingress.enabled }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: gitea-ssh
+  namespace: {{ .Release.Namespace }}
+spec:
+  entryPoints:
+    - {{ .Values.sshingress.entrypoint }}
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: gitea-ssh
+          port: 22
+{{- end }}

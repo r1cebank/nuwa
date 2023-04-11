@@ -1,3 +1,11 @@
+# Tunnel configuration
+tunnel:
+  enabled: true
+  cloudflared:
+    image: cloudflare/cloudflared:2023.4.0
+    token:
+      existingSecret: argocd-tunnel-secret
+ 
 # Ingress configuration
 ingress:
   host: argocd.owo.ac

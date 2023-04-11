@@ -1,0 +1,16 @@
+{{- if .Values.sshingress.enabled }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: onedev-ssh
+  namespace: {{ .Release.Namespace }}
+spec:
+  entryPoints:
+    - {{ .Values.sshingress.entrypoint }}
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: onedev
+          port: 22
+{{- end }}

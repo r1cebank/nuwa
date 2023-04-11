@@ -1,0 +1,45 @@
+## Chart values
+sshingress:
+  enabled: true
+  entrypoint: ssh
+
+########################
+# onedev subchart
+########################
+
+onedev:
+  ingress:
+    host: onedev.owo.ac
+    class: traefik
+    enableDefaultIssuer: false
+    tls: true
+    annotations:
+       # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: onedev.owo.ac
+  resources:
+    onedev:
+      memory: 1024Mi
+    mysql:
+      memory: 256Mi
+  volumes:
+    onedev:
+      storageClassName: longhorn
+      size: 100Gi
+    mysql:
+      storageClassName: longhorn
+      size: 20Gi
+  secrets:
+    mysql:
+      password: "{{ onedev_sql_password }}"
+  initial:
+    ## Login name of administrator
+    user: "{{ onedev_admin_username }}"
+    ## Password of administrator
+    password: "{{ onedev_admin_password }}"
+    ## Email address of adminsitrator
+    email: "{{ onedev_admin_email }}"
