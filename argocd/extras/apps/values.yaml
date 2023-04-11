@@ -15,7 +15,7 @@ apps:
     path: argocd/extras/vaultwarden
     syncWave: 1
   # gitea
-  # - name: gitea
-  #   namespace: gitea
-  #   path: argocd/extras/gitea
-  #   syncWave: 1
+  - name: gitea
+    namespace: gitea
+    path: argocd/extras/gitea
+    syncWave: 1
