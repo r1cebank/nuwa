@@ -29,25 +29,11 @@ gitea:
   gitea:
     admin:
       existingSecret: gitea-admin-secret
-    additionalConfigFromEnvs:
-      - name: ENV_TO_INI__DATABASE__DB_TYPE
-        value: postgres
-      - name: ENV_TO_INI__DATABASE__HOST
-        value: gitea-postgresql.gitea:5432
-      - name: ENV_TO_INI__DATABASE__NAME
-        value: gitea
-      - name: ENV_TO_INI__DATABASE__USER
-        value: gitea
-      - name: ENV_TO_INI__DATABASE__PASSWD
-        valueFrom:
-          secretKeyRef:
-            name: gitea-secret
-            key: postgres-password
     metrics:
       enabled: true
     podAnnotations:
       linkerd.io/inject: enabled
   postgresql:
-    enabled: false
+    enabled: true
   memcached:
     enabled: true
