@@ -4,6 +4,11 @@ gitops:
 
 # List of application corresponding to different sync waves
 apps:
+  # cloudflare-tunnel
+  - name: cloudflare-tunnel
+    namespace: cloudflare-tunnel
+    path: argocd/extras/cloudflare-tunnel
+    syncWave: 1
   # coder App
   - name: coder
     namespace: coder
@@ -13,4 +18,9 @@ apps:
   - name: vaultwarden
     namespace: vaultwarden
     path: argocd/extras/vaultwarden
+    syncWave: 1
+  # gitea
+  - name: gitea
+    namespace: gitea
+    path: argocd/extras/gitea
     syncWave: 1
