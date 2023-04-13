@@ -69,6 +69,9 @@ vault:
       url: {{ vaultwarden_db_url }}
   # gitea
   gitea:
-  admin:
-      password: {{ gitea_admin_password }}
-      username: gitea-admin
+    smtp:
+      username: {{ smtp_username }}
+      password: {{ smtp_password }}
+    admin:
+        password: {{ gitea_admin_password }}
+        username: gitea-admin
