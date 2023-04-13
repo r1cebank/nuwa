@@ -37,6 +37,9 @@ gitea:
       enabled: true
       serviceMonitor:
         enabled: true
+    config:
+      server:
+        ENABLE_PPROF: true
     podAnnotations:
       linkerd.io/inject: enabled
   postgresql:
