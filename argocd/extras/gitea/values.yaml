@@ -1,6 +1,8 @@
 sshingress:
   enabled: true
   entrypoint: ssh
+serviceMonitor:
+  enabled: true
 
 ########################
 # gitea subchart
