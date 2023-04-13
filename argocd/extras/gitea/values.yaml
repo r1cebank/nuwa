@@ -39,13 +39,13 @@ gitea:
       - name: ENV_TO_INI__PICTURE__GRAVATAR_SOURCE
         value: gravatar
       - name: ENV_TO_INI__MAILER__ENABLED
-        value: true
+        value: "true"
       - name: ENV_TO_INI__MAILER__PROTOCOL
         value: smtp+starttls
       - name: ENV_TO_INI__MAILER__SMTP_ADDR
         value: in-v3.mailjet.com
       - name: ENV_TO_INI__MAILER__SMTP_PORT
-        value: 587
+        value: "587"
       - name: ENV_TO_INI__MAILER__FROM
         value: noreply@miku.cx
       - name: ENV_TO_INI__MAILER__ENVELOPE_FROM
