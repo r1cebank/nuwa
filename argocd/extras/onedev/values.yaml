@@ -3,6 +3,10 @@ sshingress:
   enabled: true
   entrypoint: ssh
 
+image:
+  repository: 1dev/server
+  tag: 8.0.15
+
 ## Set this as true to stop OneDev server to perform various maintenance tasks such as backup, restore.
 ## Check https://code.onedev.io/onedev/manual/~files/main/pages/backup-restore.md for details
 maintenance: false
@@ -37,27 +41,23 @@ ingress:
     cert-manager.io/common-name: onedev.owo.ac
   tls: true
 
-resources:
-  onedev:
-    memory: 1024Mi
-  mysql:
-    memory: 256Mi
-
-volumes:
-  onedev:
-    ## Optionally specify storage class of persistent volume to store OneDev data including git repositories and indexes. 
-    ## Leave empty to use default storage class
+onedev:
+  admin:
+    existingSecret: onedev-admin-secret
+  storage:
     storageClassName: longhorn
     size: 100Gi
-  mysql:
-    ## Optionally specify storage class of persistent volume to store mysql data.
-    ## Leave empty to use default storage class
+  resources:
+    memory: 1024Mi
+  podAnnotations:
+    linkerd.io/inject: enabled
+
+database:
+  existingSecret: onedev-db-secret
+  resources:
+    memory: 256Mi
+  storage:
     storageClassName: longhorn
     size: 20Gi
-initial:
-  existingSecret: onedev-admin-secret
-
-secrets:
-  mysql:
-    ## change mysql root password if desired
-    existingSecret: onedev-db-secret
+  podAnnotations:
+    linkerd.io/inject: enabled

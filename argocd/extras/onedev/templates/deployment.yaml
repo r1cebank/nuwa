@@ -19,6 +19,10 @@ spec:
       labels:
         {{- include "onedev.selectorLabels" . | nindent 8 }}
         tier: onedev
+      {{- with .Values.onedev.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
       serviceAccountName: {{ include "onedev.fullname" . }}
       {{- if .Values.nodeSelector.onedev }}
@@ -31,7 +35,7 @@ spec:
           {{- end }}
           resources:
             requests:
-              memory: {{ .Values.resources.onedev.memory }}
+              memory: {{ .Values.onedev.resources.memory }}
           volumeMounts:
           - name: onedev
             mountPath: "/opt/onedev"
@@ -39,7 +43,7 @@ spec:
           - name: trust-certs
             mountPath: "/opt/onedev/conf/trust-certs"
           {{- end }}
-          image: "1dev/server:{{ .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: 6610
             - containerPort: 6611
@@ -53,12 +57,12 @@ spec:
           - name: initial_user
             valueFrom:
               secretKeyRef:
-                name: {{ if .Values.secrets.mysql.existingSecret }}{{ .Values.secrets.mysql.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-admin{{end}}
+                name: {{ if .Values.onedev.admin.existingSecret }}{{ .Values.onedev.admin.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-admin{{end}}
                 key: username
           - name: initial_password
             valueFrom:
               secretKeyRef:
-                name: {{ if .Values.secrets.mysql.existingSecret }}{{ .Values.secrets.mysql.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-admin{{end}}
+                name: {{ if .Values.onedev.admin.existingSecret }}{{ .Values.onedev.admin.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-admin{{end}}
                 key: password
           {{- if .Values.initial.email }}
           - name: initial_email
@@ -85,7 +89,7 @@ spec:
           - name: hibernate_connection_password
             valueFrom:
               secretKeyRef:
-                name: {{ if .Values.secrets.mysql.existingSecret }}{{ .Values.secrets.mysql.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-db{{end}}
+                name: {{ if .Values.database.existingSecret }}{{ .Values.database.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-db{{end}}
                 key: password
           - name: hibernate_hikari_maximumPoolSize
             value: "25"
@@ -125,6 +129,10 @@ spec:
       labels:
         {{- include "onedev.selectorLabels" . | nindent 8 }}
         tier: mysql
+      {{- with .Values.database.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
       {{- if .Values.nodeSelector.onedev }}
       nodeSelector: {{ toYaml .Values.nodeSelector.mysql | nindent 8 }}
@@ -142,13 +150,13 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ if .Values.secrets.mysql.existingSecret }}{{ .Values.secrets.mysql.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-db{{end}}
+                  name: {{ if .Values.database.existingSecret }}{{ .Values.database.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-db{{end}}
                   key: password
           ports:
             - containerPort: 3306
           resources:
             requests:
-              memory: {{ .Values.resources.mysql.memory }}
+              memory: {{ .Values.database.resources.memory }}
           volumeMounts:
             - name: mysql
               mountPath: /var/lib/mysql

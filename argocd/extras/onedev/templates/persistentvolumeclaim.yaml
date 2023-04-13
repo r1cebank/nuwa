@@ -8,14 +8,14 @@ metadata:
   annotations:
     "helm.sh/resource-policy": keep
 spec:
-  {{- if .Values.volumes.onedev.storageClassName }}
-  storageClassName: {{ .Values.volumes.onedev.storageClassName }}
+  {{- if .Values.onedev.storage.storageClassName }}
+  storageClassName: {{ .Values.onedev.storage.storageClassName }}
   {{- end }}
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.volumes.onedev.size }}
+      storage: {{ .Values.onedev.storage.size }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -27,11 +27,11 @@ metadata:
   annotations:
     "helm.sh/resource-policy": keep
 spec:
-  {{- if .Values.volumes.mysql.storageClassName }}
-  storageClassName: {{ .Values.volumes.mysql.storageClassName }}
+  {{- if .Values.database.storage.storageClassName }}
+  storageClassName: {{ .Values.database.storage.storageClassName }}
   {{- end }}
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.volumes.mysql.size }}
+      storage: {{ .Values.database.storage.size }}
