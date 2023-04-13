@@ -19,6 +19,11 @@ apps:
     namespace: vaultwarden
     path: argocd/extras/vaultwarden
     syncWave: 1
+  # onedev
+  - name: onedev
+    namespace: onedev
+    path: argocd/extras/onedev
+    syncWave: 1
   # # gitea
   # - name: gitea
   #   namespace: gitea
