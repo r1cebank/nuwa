@@ -63,3 +63,5 @@ database:
     linkerd.io/inject: enabled
 
 initial:
+  serverUrl: ""  
+  sshRootUrl: ""
