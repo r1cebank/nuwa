@@ -6,6 +6,25 @@ sshingress:
 # gitea subchart
 ########################
 gitea:
+  ingress:
+    enabled: true
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: gitea.owo.ac
+    hosts:
+      - host: gitea.owo.ac
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - gitea.owo.ac
+        secretName: gitea-tls
   replicaCount: 1
   persistence:
     enabled: true
