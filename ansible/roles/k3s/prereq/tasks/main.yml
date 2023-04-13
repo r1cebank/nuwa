@@ -55,3 +55,10 @@
   loop:
     - net.bridge.bridge-nf-call-iptables
     - net.bridge.bridge-nf-call-ip6tables
+
+- name: Adjust open file limit
+  ansible.builtin.shell: |
+    sysctl -w fs.inotify.max_user_watches=100000 &&
+    sysctl -w fs.inotify.max_user_instances=100000
+  register: output
+  changed_when: output != 0
