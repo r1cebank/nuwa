@@ -34,6 +34,8 @@ gitea:
     admin:
       existingSecret: gitea-admin-secret
     additionalConfigFromEnvs:
+      - name: ENV_TO_INI__SERVER__LFS_START_SERVER
+        value: "true"
       - name: ENV_TO_INI__LFS__STORAGE_TYPE
         value: local
       - name: ENV_TO_INI__PICTURE__GRAVATAR_SOURCE
