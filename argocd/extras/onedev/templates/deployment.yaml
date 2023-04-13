@@ -64,9 +64,9 @@ spec:
               secretKeyRef:
                 name: {{ if .Values.onedev.admin.existingSecret }}{{ .Values.onedev.admin.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-admin{{end}}
                 key: password
-          {{- if .Values.initial.email }}
+          {{- if .Values.onedev.admin.email }}
           - name: initial_email
-            value: {{ .Values.initial.email }}
+            value: {{ .Values.onedev.admin.email }}
           {{- end }}
           {{- if .Values.initial.serverUrl }}
           - name: initial_server_url

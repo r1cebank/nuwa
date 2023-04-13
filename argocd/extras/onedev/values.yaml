@@ -61,3 +61,5 @@ database:
     size: 20Gi
   podAnnotations:
     linkerd.io/inject: enabled
+
+initial:
