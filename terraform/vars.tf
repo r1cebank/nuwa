@@ -56,7 +56,7 @@ variable "k3s_master_cluster_resources" {
 variable "k3s_worker_cluster_resources" {
   default = {
     memory_max           = 12 * 1024 * 1024 * 1024  # 12gb
-    disk_size            = 50 * 1024 * 1024 * 1024  # 50gb
+    disk_size            = 100 * 1024 * 1024 * 1024  # 100gb
     additional_disk_size = 500 * 1024 * 1024 * 1024 # 500gb
     size                 = 3
     cpus                 = 4

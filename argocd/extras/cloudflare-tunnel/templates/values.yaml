@@ -1,0 +1,8 @@
+# Tunnel configuration
+tunnels:
+  argocd:
+    enabled: true
+    image: cloudflare/cloudflared:2023.4.0
+    token:
+      existingSecret: argocd-tunnel-secret
+    namespace: argocd

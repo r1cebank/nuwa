@@ -1,4 +1,4 @@
-{{- if .Values.tunnel.enabled }}
+{{- if .Values.tunnels.argocd.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -6,6 +6,7 @@ metadata:
   labels:
     app: cloudflared-tunnel
   name: cloudflared-tunnel
+  namespace: {{ .Values.tunnels.argocd.namespace }}
 spec:
   selector:
     matchLabels:
@@ -17,14 +18,14 @@ spec:
     spec:
       containers:
       - name: cloudflared-tunnel
-        image: {{ .Values.tunnel.cloudflared.image }}
+        image: {{ .Values.tunnels.argocd.cloudflared.image }}
         imagePullPolicy: Always
         args: ["tunnel", "--no-autoupdate", "run", "--token=$(TUNNEL_TOKEN)"]
         env:
           - name: TUNNEL_TOKEN
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.tunnel.cloudflared.token.existingSecret }}
+                name: {{ .Values.tunnels.argocd.cloudflared.token.existingSecret }}
                 key: tunnel-token
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
