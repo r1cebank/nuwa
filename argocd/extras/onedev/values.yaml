@@ -3,43 +3,61 @@ sshingress:
   enabled: true
   entrypoint: ssh
 
-########################
-# onedev subchart
-########################
-
-onedev:
-  ingress:
-    host: onedev.owo.ac
-    class: traefik
-    enableDefaultIssuer: false
-    tls: true
+## Set this as true to stop OneDev server to perform various maintenance tasks such as backup, restore.
+## Check https://code.onedev.io/onedev/manual/~files/main/pages/backup-restore.md for details
+maintenance: false
+nodeSelector:
+  onedev:
+    kubernetes.io/os: linux
+  mysql:
+    kubernetes.io/os: linux
+service:
+  main:
+    port: 80
+    loadBalancerSourceRanges: []
     annotations:
-       # HTTPS as entry point
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      # Enable TLS
-      traefik.ingress.kubernetes.io/router.tls: "true"
-      # Enable cert-manager to create automatically the SSL certificate and store in Secret
-      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
-      cert-manager.io/common-name: onedev.owo.ac
-  resources:
-    onedev:
-      memory: 1024Mi
-    mysql:
-      memory: 256Mi
-  volumes:
-    onedev:
-      storageClassName: longhorn
-      size: 100Gi
-    mysql:
-      storageClassName: longhorn
-      size: 20Gi
-  secrets:
-    mysql:
-      password: "{{ onedev_sql_password }}"
-  initial:
-    ## Login name of administrator
-    user: "{{ onedev_admin_username }}"
-    ## Password of administrator
-    password: "{{ onedev_admin_password }}"
-    ## Email address of adminsitrator
-    email: "{{ onedev_admin_email }}"
+  ssh:
+    separateService: false
+    port: 22
+    loadBalancerSourceRanges: []
+    annotations:
+
+## Ingress support, check below for more info.
+## Check https://code.onedev.io/onedev/manual/~files/main/pages/deploy-into-k8s-with-helm.md#ingress-setup for details
+ingress:
+  host: "onedev.owo.ac"
+  class: traefik
+  annotations:
+    # HTTPS as entry point
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    # Enable TLS
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # Enable cert-manager to create automatically the SSL certificate and store in Secret
+    cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+    cert-manager.io/common-name: onedev.owo.ac
+  tls: true
+
+resources:
+  onedev:
+    memory: 1024Mi
+  mysql:
+    memory: 256Mi
+
+volumes:
+  onedev:
+    ## Optionally specify storage class of persistent volume to store OneDev data including git repositories and indexes. 
+    ## Leave empty to use default storage class
+    storageClassName: longhorn
+    size: 100Gi
+  mysql:
+    ## Optionally specify storage class of persistent volume to store mysql data.
+    ## Leave empty to use default storage class
+    storageClassName: longhorn
+    size: 20Gi
+initial:
+  existingSecret: onedev-admin-secret
+
+secrets:
+  mysql:
+    ## change mysql root password if desired
+    existingSecret: onedev-db-secret

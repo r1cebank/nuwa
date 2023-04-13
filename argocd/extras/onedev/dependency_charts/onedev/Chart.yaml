@@ -1,7 +1,0 @@
-apiVersion: v2
-name: onedev
-description: All-In-One DevOps Platform
-type: application
-kubeVersion: ">=1.18.0-0"
-version: ${buildVersion}
-appVersion: ${buildVersion}

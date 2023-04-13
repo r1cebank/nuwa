@@ -50,14 +50,16 @@ spec:
           - name: ingress_host
             value: {{ .Values.ingress.host }}
           {{- end }}
-          {{- if .Values.initial.user }}
           - name: initial_user
-            value: {{ .Values.initial.user }}
-          {{- end }}
-          {{- if .Values.initial.password }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ if .Values.secrets.mysql.existingSecret }}{{ .Values.secrets.mysql.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-admin{{end}}
+                key: username
           - name: initial_password
-            value: {{ .Values.initial.password }}
-          {{- end }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ if .Values.secrets.mysql.existingSecret }}{{ .Values.secrets.mysql.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-admin{{end}}
+                key: password
           {{- if .Values.initial.email }}
           - name: initial_email
             value: {{ .Values.initial.email }}
@@ -83,7 +85,7 @@ spec:
           - name: hibernate_connection_password
             valueFrom:
               secretKeyRef:
-                name: {{ include "onedev.fullname" . }}-mysql
+                name: {{ if .Values.secrets.mysql.existingSecret }}{{ .Values.secrets.mysql.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-db{{end}}
                 key: password
           - name: hibernate_hikari_maximumPoolSize
             value: "25"
@@ -140,7 +142,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{include "onedev.fullname" . }}-mysql
+                  name: {{ if .Values.secrets.mysql.existingSecret }}{{ .Values.secrets.mysql.existingSecret }}{{else}}{{ include "onedev.fullname" . }}-db{{end}}
                   key: password
           ports:
             - containerPort: 3306

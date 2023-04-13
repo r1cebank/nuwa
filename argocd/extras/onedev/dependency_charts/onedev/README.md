@@ -1,1 +1,0 @@
-https://docs.onedev.io/installation-guide/deploy-into-k8s
