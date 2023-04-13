@@ -1,8 +1,6 @@
 sshingress:
   enabled: true
   entrypoint: ssh
-serviceMonitor:
-  enabled: true
 
 ########################
 # gitea subchart
@@ -37,6 +35,8 @@ gitea:
       existingSecret: gitea-admin-secret
     metrics:
       enabled: true
+      serviceMonitor:
+        enabled: true
     podAnnotations:
       linkerd.io/inject: enabled
   postgresql:
