@@ -29,3 +29,7 @@ apps:
   #   namespace: gitea
   #   path: argocd/extras/gitea
   #   syncWave: 1
+  - name: searxng
+    namespace: searxng
+    path: argocd/extras/searxng
+    syncWave: 1

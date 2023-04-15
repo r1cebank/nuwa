@@ -1,0 +1,107 @@
+# Default values for searxng.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+
+image:
+  repository: searxng/searxng
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "2023.4.12-b07e44e5"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations:
+  linkerd.io/inject: enabled
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: "traefik"
+  annotations:
+    # HTTPS as entry point
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    # Enable TLS
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # Enable cert-manager to create automatically the SSL certificate and store in Secret
+    cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+    cert-manager.io/common-name: search.owo.ac
+  hosts:
+    - host: search.owo.ac
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+   - secretName: searxng-tls
+     hosts:
+       - search.owo.ac
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+
+config:
+  enabled: true
+  data: |
+    use_default_settings: true
+    general:
+      debug: false
+      instance_name: "SearXNG"
+
+    search:
+      safe_search: 2
+      autocomplete: "duckduckgo"
+    enabled_plugins:
+      - "Hash plugin"
+      - "Search on category select"
+      - "Self Informations"
+      - "Tracker URL remover"
+      - "Ahmia blacklist"
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
