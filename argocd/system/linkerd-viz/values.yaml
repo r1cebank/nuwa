@@ -29,7 +29,7 @@ linkerd-viz:
     enabled: false
   # External Grafana
   grafana:
-    url: monitoring-grafana.monitoring:3000
+    url: monitoring-grafana.monitoring.svc.cluster.local
   # Disabling DNS rebinding protection
   dashboard:
     enforcedHostRegexp: .*
