@@ -8,10 +8,10 @@ hajimari:
     TZ: America/Vancouver
   hajimari:
     instanceName: hajimari
-    defaultEnable: true
     name: Siyuan
     lightTheme: cloud
     darkTheme: tron
+    showAppGroups: true
     namespaceSelector:
       any: true
     customThemes:
