@@ -20,11 +20,6 @@ module "k3s_worker_cluster" {
     gateway_address = "192.168.1.1"
     dns_server1     = "1.1.1.1"
   }
-  mac_address = element(slice(
-    var.vm_macs,
-    var.k3s_worker_cluster_resources.mac_pool.start,
-    var.k3s_worker_cluster_resources.mac_pool.end
-  ), count.index)
 
   additional_disk      = true
   additional_disk_size = var.k3s_worker_cluster_resources.additional_disk_size

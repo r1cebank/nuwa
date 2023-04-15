@@ -20,7 +20,6 @@ module "arch_mirror" {
     gateway_address = "192.168.1.1"
     dns_server1     = "1.1.1.1"
   }
-  mac_address = element(slice(var.vm_macs, var.arch_mirror_resources.mac_pool.start, var.arch_mirror_resources.mac_pool.end), count.index)
 
   tags = [
     "no-backup"

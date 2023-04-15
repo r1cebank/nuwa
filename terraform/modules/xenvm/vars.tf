@@ -67,7 +67,3 @@ variable "tags" {
   description = "The tags to set on the vm"
   default     = []
 }
-
-variable "mac_address" {
-  description = "The mac address for the vm"
-}

@@ -21,7 +21,6 @@ resource "xenorchestra_vm" "xenvm" {
 
   network {
     network_id  = var.network_id
-    mac_address = var.mac_address
   }
 
   disk {

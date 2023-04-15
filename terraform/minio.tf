@@ -20,7 +20,6 @@ module "minio_server" {
     gateway_address = "192.168.1.1"
     dns_server1     = "1.1.1.1"
   }
-  mac_address = element(slice(var.vm_macs, var.minio_host_resources.mac_pool.start, var.minio_host_resources.mac_pool.end), count.index)
 
   tags = [
     "no-backup"
