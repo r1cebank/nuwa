@@ -4,10 +4,14 @@
 # hajimari subchart
 ########################
 hajimari:
+  env:
+    TZ: America/Vancouver
   hajimari:
     instanceName: hajimari
     defaultEnable: true
     name: Siyuan
+    lightTheme: cloud
+    darkTheme: tron
     customThemes:
       - name: danger
         backgroundColor: '#0c0e0c'
@@ -32,12 +36,16 @@ hajimari:
     customApps:
       - group: Infrastructure
         apps:
+          - name: Opnsense
+            url: 'https://opn.miku.cx'
+            icon: 'simple-icons:opnsense'
+            info: Opnsense
           - name: NAS
-            url: 'https://nas.owo.ac'
+            url: 'https://nas.miku.cx'
             icon: 'mdi:network-attached-storage'
             info: Synology NAS
           - name: XOA
-            url: 'https://xoa.owo.ac'
+            url: 'https://xoa.miku.cx'
             icon: 'carbon:virtual-machine'
             info: Xen Orchestra
     globalBookmarks:
