@@ -5,6 +5,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   version: {{ .Values.elasticsearch.version }}
+  auth:
+    fileRealm:
+    - secretName: es-admin-user-file-realm
   http:    # Making elasticsearch service available from outisde the cluster
     tls:
       selfSignedCertificate:
