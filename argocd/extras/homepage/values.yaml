@@ -32,6 +32,20 @@ homepage:
               href: http://localhost/
               description: Homepage is 😎
     widgets:
+      - logo:
+          icon: homepage.png
+      - search:
+          provider: custom
+          url: https://search.owo.ac/?q=
+          icon: searxng.png
+          target: _blank
+      - openmeteo:
+          label: Burnaby
+          latitude: 49.21
+          longitude: -122.95
+          timezone: America/Vancouver
+          units: metric
+          cache: 5
       # show the kubernetes widget, with the cluster summary and individual nodes
       - kubernetes:
           cluster:
@@ -45,11 +59,6 @@ homepage:
             cpu: true
             memory: true
             showLabel: true
-      - search:
-          provider: custom
-          url: https://search.owo.ac/?q=
-          icon: searxng.png
-          target: _blank
     kubernetes:
       mode: cluster
     settings:
