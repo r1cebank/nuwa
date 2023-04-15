@@ -7,7 +7,12 @@ hajimari:
   instanceName: hajimari
   defaultEnable: true
   name: Siyuan
-  defaultSearchProvider:
+  customThemes:
+    - name: danger
+      backgroundColor: '#0c0e0c'
+      primaryColor: '#eaebea'
+      accentColor: '#d8323c'
+  defaultSearchProvider: SearXNG
     - name: Google
       token: g
       icon: simple-icons:google
@@ -18,6 +23,61 @@ hajimari:
       icon: simple-icons:duckduckgo
       searchUrl: https://duckduckgo.com/?q={query}
       url: https://duckduckgo.com
+    - name: SearXNG
+      token: x
+      icon: material-symbols:search
+      searchUrl: https://search.owo.ac/search?q={query}
   searchProviders:
   customApps:
+    - group: Infrastructure
+      apps:
+        - name: NAS
+          url: 'https://nas.owo.ac'
+          icon: 'mdi:network-attached-storage'
+          info: Synology NAS
+    - group: Infrastructure
+      apps:
+        - name: XOA
+          url: 'https://xoa.owo.ac'
+          icon: 'carbon:virtual-machine'
+          info: Xen Orchestra
   globalBookmarks:
+    - group: Communicate
+      bookmarks:
+        - name: Protonmail
+          url: 'https://mail.proton.me'
+        - name: Discord
+          url: 'https://discord.com'
+    - group: Develop
+      bookmarks:
+        - name: GitHub
+          url: 'https://github.com'
+  podAnnotations:
+    linkerd.io/inject: enabled
+  ingress:
+    main:
+      enabled: true
+      className: "traefik"
+      annotations:
+        # HTTPS as entry point
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        # Enable TLS
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        # Enable cert-manager to create automatically the SSL certificate and store in Secret
+        cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+        cert-manager.io/common-name: hajimari.owo.ac
+      hosts:
+        - host: hajimari.owo.ac
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: hajimari-tls
+          hosts:
+            - hajimari.owo.ac
+  persistence:
+    data:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: longhorn
