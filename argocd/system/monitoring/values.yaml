@@ -127,8 +127,7 @@ kube-prometheus-stack:
     # Configuring /grafana subpath
     grafana.ini:
       server:
-        domain: monitoring.owo.ac
-        root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+        root_url: "%(protocol)s://%(domain)s:/grafana/"
         serve_from_sub_path: true
     # Set admin password
     # adminPassword: ""
