@@ -39,7 +39,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 ingress:
   enabled: false
@@ -89,7 +89,6 @@ config:
     general:
       debug: false
       instance_name: "SearXNG"
-
     search:
       safe_search: 2
       autocomplete: "duckduckgo"
