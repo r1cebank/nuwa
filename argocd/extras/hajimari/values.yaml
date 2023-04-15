@@ -38,7 +38,7 @@ hajimari:
         apps:
           - name: Opnsense
             url: 'https://opn.miku.cx'
-            icon: 'simple-icons:opnsense'
+            icon: 'material-symbols:router'
             info: Opnsense
           - name: NAS
             url: 'https://nas.miku.cx'

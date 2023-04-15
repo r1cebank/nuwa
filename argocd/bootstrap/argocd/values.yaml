@@ -5,12 +5,12 @@ ingress:
   certmanager:
     tlsIssuer: letsencrypt-staging-issuer
   annotations:
-    hajimari.io/enable: true
+    hajimari.io/enable: "true"
     hajimari.io/icon: simple-icons:argo
     hajimari.io/group: Infrastructure
     hajimari.io/appName: Argo CD
     hajimari.io/info: Declarative GitOps CD for Kubernetes
-    hajimari.io/targetBlank: true
+    hajimari.io/targetBlank: "true"
 
 argo-cd:
   configs:
