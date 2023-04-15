@@ -3,7 +3,7 @@ ingress:
   host: coder.owo.ac
   # configure cert-manager issuer
   certmanager:
-    tlsIssuer: letsencrypt-prod-issuer
+    tlsIssuer: letsencrypt-staging-issuer
 
 ########################
 # postgresql subchart
