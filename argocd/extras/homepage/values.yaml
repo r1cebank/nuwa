@@ -32,19 +32,6 @@ homepage:
               href: http://localhost/
               description: Homepage is 😎
     widgets:
-      - longhorn:
-          # Show the expanded view
-          expanded: true
-          # Shows a node representing the aggregate values
-          total: true
-          # Shows the node names as labels
-          labels: true
-          # Show the nodes
-          nodes: true
-          include:
-            - k3s-worker-0
-            - k3s-worker-1
-            - k3s-worker-2
       # show the kubernetes widget, with the cluster summary and individual nodes
       - kubernetes:
           cluster:
@@ -59,7 +46,9 @@ homepage:
             memory: true
             showLabel: true
       - search:
-          provider: duckduckgo
+          provider: custom
+          url: https://search.owo.ac/?q=
+          icon: searxng.png
           target: _blank
     kubernetes:
       mode: cluster
