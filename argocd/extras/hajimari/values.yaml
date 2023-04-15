@@ -13,6 +13,7 @@ hajimari:
       primaryColor: '#eaebea'
       accentColor: '#d8323c'
   defaultSearchProvider: SearXNG
+  searchProviders:
     - name: Google
       token: g
       icon: simple-icons:google
@@ -27,7 +28,6 @@ hajimari:
       token: x
       icon: material-symbols:search
       searchUrl: https://search.owo.ac/search?q={query}
-  searchProviders:
   customApps:
     - group: Infrastructure
       apps:
