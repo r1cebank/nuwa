@@ -36,8 +36,6 @@ hajimari:
             url: 'https://nas.owo.ac'
             icon: 'mdi:network-attached-storage'
             info: Synology NAS
-      - group: Infrastructure
-        apps:
           - name: XOA
             url: 'https://xoa.owo.ac'
             icon: 'carbon:virtual-machine'
