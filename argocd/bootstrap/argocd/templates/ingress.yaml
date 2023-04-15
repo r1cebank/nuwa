@@ -13,12 +13,9 @@ metadata:
     # Enable cert-manager to create automatically the SSL certificate and store in Secret
     cert-manager.io/cluster-issuer: {{ .Values.ingress.certmanager.tlsIssuer }}
     cert-manager.io/common-name: {{ .Values.ingress.host }}
-    hajimari.io/enable: "true"
-    hajimari.io/icon: simple-icons:argo
-    hajimari.io/group: Infrastructure
-    hajimari.io/appName: Argo CD
-    hajimari.io/info: Declarative GitOps CD for Kubernetes
-    hajimari.io/targetBlank: "true"
+    {{- with .Values.ingress.annotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   tls:
     - hosts:

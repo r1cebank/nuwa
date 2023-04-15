@@ -1,0 +1,77 @@
+
+homepage:
+  config:
+    bookmarks:
+      - Developer:
+          - Github:
+              - abbr: GH
+                href: https://github.com/
+    services:
+      - My First Group:
+          - My First Service:
+              href: http://localhost/
+              description: Homepage is awesome
+
+      - My Second Group:
+          - My Second Service:
+              href: http://localhost/
+              description: Homepage is the best
+
+      - My Third Group:
+          - My Third Service:
+              href: http://localhost/
+              description: Homepage is 😎
+    widgets:
+      - longhorn:
+        # Show the expanded view
+        expanded: true
+        # Shows a node representing the aggregate values
+        total: true
+        # Shows the node names as labels
+        labels: true
+        # Show the nodes
+        nodes: true
+      # show the kubernetes widget, with the cluster summary and individual nodes
+      - kubernetes:
+          cluster:
+            show: true
+            cpu: true
+            memory: true
+            showLabel: true
+            label: "cluster"
+          nodes:
+            show: true
+            cpu: true
+            memory: true
+            showLabel: true
+      - search:
+          provider: duckduckgo
+          target: _blank
+    kubernetes:
+      mode: cluster
+    settings:
+
+  # The service account is necessary to allow discovery of other services
+  serviceAccount:
+    create: true
+    name: homepage
+
+  # This enables the service account to access the necessary resources
+  enableRbac: true
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        # HTTPS as entry point
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        # Enable TLS
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        # Enable cert-manager to create automatically the SSL certificate and store in Secret
+        cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+        cert-manager.io/common-name: homepage.owo.ac
+      hosts:
+        - host: homepage.owo.ac
+          paths:
+            - path: /
+              pathType: Prefix

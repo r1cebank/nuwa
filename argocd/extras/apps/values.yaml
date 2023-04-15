@@ -33,3 +33,7 @@ apps:
     namespace: searxng
     path: argocd/extras/searxng
     syncWave: 1
+  - name: homepage
+    namespace: homepage
+    path: argocd/extras/homepage
+    syncWave: 1
