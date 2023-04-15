@@ -33,7 +33,3 @@ apps:
     namespace: searxng
     path: argocd/extras/searxng
     syncWave: 1
-  - name: hajimari
-    namespace: hajimari
-    path: argocd/extras/hajimari
-    syncWave: 1
