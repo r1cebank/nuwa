@@ -210,13 +210,13 @@ fluentd:
     - name: FLUENT_ELASTICSEARCH_USER
       valueFrom:
         secretKeyRef:
-          name: "elasticsearch-secret"
+          name: "es-admin-user-file-realm"
           key: username
     # Elastic operator stores elastic user password in a secret
     - name: FLUENT_ELASTICSEARCH_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: "elasticsearch-secret"
+          name: "es-admin-user-file-realm"
           key: password
     # Fluentd forward security
     - name: FLUENTD_FORWARD_SEC_SHARED_KEY
@@ -698,10 +698,10 @@ prometheus-elasticsearch-exporter:
   # Elastic search passord from secret
   extraEnvSecrets:
     ES_USERNAME:
-      secret: elasticsearch-secret
+      secret: es-admin-user-file-realm
       key: username
     ES_PASSWORD:
-      secret: elasticsearch-secret
+      secret: es-admin-user-file-realm
       key: password
 
   # Elastic search URI
