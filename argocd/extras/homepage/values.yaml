@@ -22,15 +22,6 @@ homepage:
               href: https://opn.miku.cx/
               description: Opnsense
               icon: opnsense.png
-      - My Second Group:
-          - My Second Service:
-              href: http://localhost/
-              description: Homepage is the best
-
-      - My Third Group:
-          - My Third Service:
-              href: http://localhost/
-              description: Homepage is 😎
     widgets:
       - logo:
           icon: homepage.png
@@ -46,19 +37,6 @@ homepage:
           timezone: America/Vancouver
           units: metric
           cache: 5
-      # show the kubernetes widget, with the cluster summary and individual nodes
-      - kubernetes:
-          cluster:
-            show: true
-            cpu: true
-            memory: true
-            showLabel: true
-            label: "cluster"
-          nodes:
-            show: true
-            cpu: true
-            memory: true
-            showLabel: true
     kubernetes:
       mode: cluster
     settings:
