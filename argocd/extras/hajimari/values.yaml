@@ -12,6 +12,8 @@ hajimari:
     name: Siyuan
     lightTheme: cloud
     darkTheme: tron
+    namespaceSelector:
+      any: true
     customThemes:
       - name: danger
         backgroundColor: '#0c0e0c'
