@@ -38,6 +38,22 @@ env:
       secretKeyRef:
         name: joplin-secret
         key: postgres-password
+  MAILER_ENABLED: 1
+  MAILER_HOST: "in-v3.mailjet.com"
+  MAILER_PORT: 587
+  MAILER_SECURE: 1
+  MAILER_AUTH_USER: 
+    valueFrom:
+      secretKeyRef:
+        name: joplin-secret
+        key: smtp-user
+  MAILER_AUTH_PASSWORD:
+    valueFrom:
+        secretKeyRef:
+          name: joplin-secret
+          key: smtp-password
+  MAILER_NOREPLY_NAME: "Joplin Server"
+  MAILER_NOREPLY_EMAIL: "noreply@miku.cx"
 
 # -- Configures service settings for the chart.
 # @default -- See values.yaml
