@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: es-prometheus-roles-secret
 stringData:
-  roles.yml: |
+  roles.yml: |-
     prometheus_role:
       cluster: [
         'cluster:monitor/prometheus/metrics',
