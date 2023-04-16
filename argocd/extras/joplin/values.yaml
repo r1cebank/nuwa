@@ -63,6 +63,9 @@ service:
       http:
         port: 22300
 
+podAnnotations:
+    linkerd.io/inject: enabled
+
 ingress:
   main:
     enabled: true

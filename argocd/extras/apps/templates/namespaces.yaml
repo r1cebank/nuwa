@@ -1,25 +1,9 @@
 # Create annotated namespaces
 
-# coder namespace
+# app namespace
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: coder
-  annotations:
-    linkerd.io/inject: enabled
----
-# vaultwarden namespace
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: vaultwarden
-  annotations:
-    linkerd.io/inject: enabled
----
-# gitea namespace
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: gitea
+  name: apps
   annotations:
     linkerd.io/inject: enabled
