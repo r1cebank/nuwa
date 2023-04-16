@@ -10,7 +10,7 @@ stringData:
         'cluster:monitor/health',
         'cluster:monitor/nodes/stats',
         'cluster:monitor/state'
-      ], 
+      ] 
       indices:
       - names: [ '*' ]
         privileges: [ 'indices:monitor/stats' ]

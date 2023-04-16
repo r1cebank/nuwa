@@ -5,7 +5,7 @@ metadata:
 stringData:
   roles.yml: |-
     fluentd_role:
-      cluster: ['manage_index_templates', 'monitor', 'manage_ilm'], 
+      cluster: ['manage_index_templates', 'monitor', 'manage_ilm']
       indices:
       - names: [ '*' ]
         privileges: [ 'write','create','delete','create_index' ]
