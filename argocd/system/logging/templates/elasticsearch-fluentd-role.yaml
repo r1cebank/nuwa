@@ -8,4 +8,12 @@ stringData:
       cluster: ['manage_index_templates', 'monitor', 'manage_ilm']
       indices:
       - names: [ '*' ]
-        privileges: [ 'write','create','delete','create_index' ]
+        privileges: [
+          'indices:admin/create',
+          'write',
+          'create',
+          'delete',
+          'create_index',
+          'manage',
+          'manage_ilm'
+        ]
