@@ -6,10 +6,10 @@ stringData:
   roles.yml: |-
     prometheus_role:
       cluster: [
-        "cluster:monitor/health"
-        "cluster:monitor/nodes/stats"
-        "cluster:monitor/state"
-        "cluster:monitor/nodes/info"
+        "cluster:monitor/health",
+        "cluster:monitor/nodes/stats",
+        "cluster:monitor/state",
+        "cluster:monitor/nodes/info",
         "cluster:monitor/prometheus/metrics"
       ] 
       indices:
