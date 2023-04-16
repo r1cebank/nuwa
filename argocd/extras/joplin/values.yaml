@@ -41,7 +41,7 @@ env:
   MAILER_ENABLED: 1
   MAILER_HOST: "in-v3.mailjet.com"
   MAILER_PORT: 587
-  MAILER_SECURE: 0
+  MAILER_SECURITY: starttls
   MAILER_AUTH_USER: 
     valueFrom:
       secretKeyRef:
