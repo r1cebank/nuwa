@@ -37,3 +37,7 @@ apps:
     namespace: homepage
     path: argocd/extras/homepage
     syncWave: 1
+  - name: joplin
+    namespace: joplin
+    path: argocd/extras/joplin
+    syncWave: 1

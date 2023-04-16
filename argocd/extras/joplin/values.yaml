@@ -1,0 +1,83 @@
+#
+# IMPORTANT NOTE
+#
+# This chart inherits from our common library chart. You can check the default values/options here:
+# https://github.com/geek-cookbook/library-charts/tree/main/charts/stable/common/values.yaml
+#
+
+image:
+  # -- image repository
+  repository: joplin/server
+    # -- image tag
+  tag: 2.10.10-beta
+  # -- image pull policy
+  pullPolicy: IfNotPresent
+
+# -- environment variables. See [image docs](https://github.com/laurent22/joplin) for more details.
+# @default -- See below
+env:
+  # -- Set the container timezone
+  TZ: America/Vancouver
+  # -- joplin-server base URL
+  APP_BASE_URL: https://joplin.owo.ac
+  # -- joplin-server listening port (same as Service port)
+  APP_PORT: 22300
+  # -- Use pg for postgres
+  DB_CLIENT: pg
+  # -- Postgres DB Host
+  POSTGRES_HOST: joplin-postgresql
+  # -- Postgres DB port
+  POSTGRES_PORT: 5432
+  # -- Postgres DB name
+  POSTGRES_DATABASE: joplin
+  # -- Postgres DB Username
+  POSTGRES_USER: joplin
+  # -- Postgres DB password
+  POSTGRES_PASSWORD:
+    valueFrom:
+      secretKeyRef:
+        name: joplin-secret
+        key: postgres-password
+
+# -- Configures service settings for the chart.
+# @default -- See values.yaml
+service:
+  main:
+    ports:
+      http:
+        port: 22300
+
+ingress:
+  main:
+    enabled: true
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: joplin.owo.ac
+    hosts:
+      - host: joplin.owo.ac
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: joplin-tls
+        hosts:
+          - joplin.owo.ac
+
+# -- Enable and configure postgresql database subchart under this key.
+#    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
+# @default -- See values.yaml
+postgresql:
+  enabled: true
+  auth:
+    username: joplin
+    database: joplin
+    existingSecret: joplin-secret
+  persistence:
+    enabled: true
+    storageClass: "longhorn"
+    size: 10Gi

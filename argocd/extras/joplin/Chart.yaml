@@ -1,0 +1,11 @@
+name: joplin
+apiVersion: v2
+version: 5.4.0
+dependencies:
+- name: common
+  repository: http://bjw-s.github.io/helm-charts/
+  version: 0.2.0
+- condition: postgresql.enabled
+  name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 12.2.7

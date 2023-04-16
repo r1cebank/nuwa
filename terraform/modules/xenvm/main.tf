@@ -39,7 +39,6 @@ resource "xenorchestra_vm" "xenvm" {
     }
   }
 
-
   wait_for_ip = true
 
   tags = var.tags
