@@ -6,11 +6,11 @@ stringData:
   roles.yml: |-
     prometheus_role:
       cluster: [
-        'cluster:monitor/prometheus/metrics',
-        'cluster:monitor/health',
-        'cluster:monitor/nodes/stats',
-        'cluster:monitor/state'
+        'monitor/prometheus/metrics',
+        'monitor/health',
+        'monitor/nodes/stats',
+        'monitor/state'
       ] 
       indices:
       - names: [ '*' ]
-        privileges: [ 'indices:monitor/stats' ]
+        privileges: [ 'indices:admin/aliases/get', 'indices:admin/mappings/get', 'indices:monitor/stats', 'indices:data/read/search' ]
