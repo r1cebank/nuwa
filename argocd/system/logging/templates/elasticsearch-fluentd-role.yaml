@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: es-fluentd-roles-secret
 stringData:
-  roles.yml: |-
+  roles.yml: |
     fluentd_role:
       cluster: ['manage_index_templates', 'monitor', 'manage_ilm'], 
       indices:
