@@ -16,8 +16,13 @@ data "xenorchestra_sr" "sr_nvme" {
   pool_id    = data.xenorchestra_pool.pool.id
 }
 
-data "xenorchestra_network" "network" {
+data "xenorchestra_network" "default_network" {
   name_label = "Pool-wide network associated with eth0"
+  pool_id    = data.xenorchestra_pool.pool.id
+}
+
+data "xenorchestra_network" "homelab_network" {
+  name_label = "Homelab VM"
   pool_id    = data.xenorchestra_pool.pool.id
 }
 
