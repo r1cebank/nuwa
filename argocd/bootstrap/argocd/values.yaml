@@ -12,6 +12,8 @@ ingress:
     gethomepage.dev/icon: "arggocd.png"
 
 argo-cd:
+  secret:
+    createSecret: false
   configs:
     params:
       # Run server without TLS

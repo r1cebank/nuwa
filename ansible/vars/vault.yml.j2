@@ -10,6 +10,7 @@ vault:
       github: {{ argocd_github_webhook_secret }}
     admin:
       username: admin
+      password_hash: {{ argocd_admin_password_hash }}
       password: {{ argocd_admin_password }}
     tunnel:
       id: {{ argocd_cloudflare_tunnel_id }}
