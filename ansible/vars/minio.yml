@@ -2,6 +2,7 @@
 # Minio S3 configuration #
 ##########################
 
+minio_nfs_datadir: false
 minio_nfs_mount_source: 10.0.50.131:/volume2/minio
 minio_nfs_mount_dest: /mnt/minio
 minio_server_port: "9091"
@@ -16,7 +17,8 @@ minio_url: "https://{{ minio_hostname }}"
 # Minio data dirs
 minio_server_make_datadirs: true
 minio_server_datadirs:
-  - "{{ minio_nfs_mount_dest }}/data"
+  - /mnt/storage/minio
+  # - "{{ minio_nfs_mount_dest }}/data"
 
 # Minio admin credentials
 minio_root_user: "{{ vault.minio.root.user }}"

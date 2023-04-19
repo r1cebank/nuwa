@@ -31,6 +31,7 @@
       include_vars: "vars/minio.yml"
   roles:
     - role: mount_nfs
+      when: minio_nfs_datadir is true
     - role: install_caddy
     - role: ricsanfre.minio
 

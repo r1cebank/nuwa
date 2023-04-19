@@ -1,5 +1,20 @@
 #cloud-config
 hostname: ${hostname}
+disk_setup:
+  /dev/xvdb:
+    table_type: gpt
+    layout: True
+    overwrite: True
+
+fs_setup:
+  - label: data
+    filesystem: ext4
+    overwrite: True
+    device: /dev/xvdb1
+
+mounts:
+  - [/dev/xvdb1, /mnt/storage, "ext4", "defaults,nofail", "0", "2"]
+
 users:
   - name: minio-user
     gecos: minio user

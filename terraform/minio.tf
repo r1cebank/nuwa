@@ -21,7 +21,11 @@ module "minio_server" {
     dns_server1     = "1.1.1.1"
   }
 
+  additional_disk      = true
+  additional_disk_size = var.minio_host_resources.additional_disk_size
+  additional_disk_sr_id = data.xenorchestra_sr.sr_sata.id
+
   tags = [
-    "no-backup"
+    "minio"
   ]
 }

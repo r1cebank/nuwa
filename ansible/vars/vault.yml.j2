@@ -6,10 +6,14 @@ vault:
     k3s:
      token: {{ k3s_token }}
   argocd:
+    webhook:
+      github: {{ argocd_github_webhook_secret }}
+    admin:
+      username: admin
+      password: {{ argocd_admin_password }}
     tunnel:
-      cloudflare:
-        id: {{ argocd_cloudflare_tunnel_id }}
-        token: {{ argocd_cloudflare_tunnel_token }}
+      id: {{ argocd_cloudflare_tunnel_id }}
+      token: {{ argocd_cloudflare_tunnel_token }}
   # Traefik secrets
   traefik:
     admin:

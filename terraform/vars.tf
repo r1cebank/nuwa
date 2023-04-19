@@ -46,6 +46,7 @@ variable "minio_host_resources" {
   default = {
     memory_max = 1 * 1024 * 1024 * 1024  # 1 gb
     disk_size  = 20 * 1024 * 1024 * 1024 # 20 gb
+    additional_disk_size = 500 * 1024 * 1024 * 1024 # 500gb
     size       = 1
     cpus       = 1
     ips = [
