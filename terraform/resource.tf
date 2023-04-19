@@ -21,8 +21,8 @@ data "xenorchestra_network" "default_network" {
   pool_id    = data.xenorchestra_pool.pool.id
 }
 
-data "xenorchestra_network" "homelab_network" {
-  name_label = "Homelab VM"
+data "xenorchestra_network" "homelab_untrusted_network" {
+  name_label = "Homelab Untrusted"
   pool_id    = data.xenorchestra_pool.pool.id
 }
 

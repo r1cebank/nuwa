@@ -8,7 +8,7 @@ module "minio_server" {
   max_memory     = var.minio_host_resources.memory_max
   disk_size      = var.minio_host_resources.disk_size
   sr_id          = data.xenorchestra_sr.sr_sata.id
-  network_id     = data.xenorchestra_network.homelab_network.id
+  network_id     = data.xenorchestra_network.default_network.id
   template_id    = data.xenorchestra_template.vm_template_2204.id
   affinity_host  = data.xenorchestra_pool.pool.master
 

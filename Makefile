@@ -13,8 +13,8 @@ prepare-terraform:
 	$(shell ./terraform/prepare_terraform.sh)
 	terraform -chdir=terraform init
 
-.PHONY: vm-prepare
-vm-prepare:
+.PHONY: vm-plan
+vm-plan:
 	terraform -chdir=terraform plan
 
 .PHONY: vm-apply

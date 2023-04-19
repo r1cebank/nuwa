@@ -8,7 +8,7 @@ module "k3s_master_cluster" {
   max_memory     = var.k3s_master_cluster_resources.memory_max
   disk_size      = var.k3s_master_cluster_resources.disk_size
   sr_id          = data.xenorchestra_sr.sr_nvme.id
-  network_id     = data.xenorchestra_network.homelab_network.id
+  network_id     = data.xenorchestra_network.default_network.id
   template_id    = data.xenorchestra_template.vm_template_2204.id
   affinity_host  = data.xenorchestra_host.cerulean.id
 
