@@ -17,7 +17,7 @@ module "arch_mirror" {
   cloud_network_config_args = {
     ip_address      = element(var.arch_mirror_resources.ips, count.index),
     subnet_mask     = "255.255.255.0"
-    gateway_address = "10.0.70.1"
+    gateway_address = "10.0.60.1"
     dns_server1     = "1.1.1.1"
   }
 

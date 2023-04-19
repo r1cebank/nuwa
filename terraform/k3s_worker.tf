@@ -17,7 +17,7 @@ module "k3s_worker_cluster" {
   cloud_network_config_args = {
     ip_address      = element(var.k3s_worker_cluster_resources.ips, count.index),
     subnet_mask     = "255.255.255.0"
-    gateway_address = "10.0.70.1"
+    gateway_address = "10.0.60.1"
     dns_server1     = "1.1.1.1"
   }
 

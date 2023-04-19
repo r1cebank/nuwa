@@ -14,12 +14,12 @@ ingress:
 k3sMetrics:
   enabled: true
   servers:
-    - ip: 192.168.1.100
-    - ip: 192.168.1.101
-    - ip: 192.168.1.102
-    - ip: 192.168.1.103
-    - ip: 192.168.1.104
-    - ip: 192.168.1.105
+    - ip: 10.0.60.100
+    - ip: 10.0.60.101
+    - ip: 10.0.60.102
+    - ip: 10.0.60.103
+    - ip: 10.0.60.104
+    - ip: 10.0.60.105
 
 # Enable monitoring of external services
 externalServices:
@@ -27,7 +27,7 @@ externalServices:
   minioMetrics:
     enabled: false
     servers:
-      - ip: 192.168.1.107
+      - ip: 10.0.60.107
   # External node (gateway)
   nodeMetrics:
     enabled: false

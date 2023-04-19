@@ -8,9 +8,9 @@ variable "k3s_master_cluster_resources" {
     size       = 3
     cpus       = 1
     ips = [
-      "10.0.70.100",
-      "10.0.70.101",
-      "10.0.70.102",
+      "10.0.60.100",
+      "10.0.60.101",
+      "10.0.60.102",
     ]
   }
 }
@@ -23,9 +23,9 @@ variable "k3s_worker_cluster_resources" {
     size                 = 3
     cpus                 = 4
     ips = [
-      "10.0.70.103",
-      "10.0.70.104",
-      "10.0.70.105",
+      "10.0.60.103",
+      "10.0.60.104",
+      "10.0.60.105",
     ]
   }
 }
@@ -37,7 +37,7 @@ variable "arch_mirror_resources" {
     size       = 1
     cpus       = 1
     ips = [
-      "10.0.70.106",
+      "10.0.60.106",
     ]
   }
 }
@@ -49,7 +49,7 @@ variable "minio_host_resources" {
     size       = 1
     cpus       = 1
     ips = [
-      "10.0.70.107",
+      "10.0.60.107",
     ]
   }
 }
@@ -61,7 +61,7 @@ variable "hashicorp_vault_resources" {
     size       = 1
     cpus       = 1
     ips = [
-      "10.0.70.108",
+      "10.0.60.108",
     ]
   }
 }

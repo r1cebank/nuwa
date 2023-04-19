@@ -11,33 +11,33 @@ apps:
     syncWave: 1
   # coder App
   - name: coder
-    namespace: apps
+    namespace: coder
     path: argocd/extras/coder
     syncWave: 1
   # vaultwarden
   - name: vaultwarden
-    namespace: apps
+    namespace: vaultwarden
     path: argocd/extras/vaultwarden
     syncWave: 1
   # onedev
   - name: onedev
-    namespace: apps
+    namespace: onedev
     path: argocd/extras/onedev
     syncWave: 1
   # # gitea
   # - name: gitea
-  #   namespace: apps
+  #   namespace: gitea
   #   path: argocd/extras/gitea
   #   syncWave: 1
   - name: searxng
-    namespace: apps
+    namespace: searxng
     path: argocd/extras/searxng
     syncWave: 1
   - name: homepage
-    namespace: apps
+    namespace: homepage
     path: argocd/extras/homepage
     syncWave: 1
   - name: joplin
-    namespace: apps
+    namespace: joplin
     path: argocd/extras/joplin
     syncWave: 1

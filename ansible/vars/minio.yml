@@ -2,7 +2,7 @@
 # Minio S3 configuration #
 ##########################
 
-minio_nfs_mount_source: 192.168.1.131:/volume2/minio
+minio_nfs_mount_source: 10.0.50.131:/volume2/minio
 minio_nfs_mount_dest: /mnt/minio
 minio_server_port: "9091"
 minio_console_port: "9092"

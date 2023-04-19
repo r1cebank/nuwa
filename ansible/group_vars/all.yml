@@ -1,6 +1,6 @@
 dns_domain: owo.ac
 
 resolv_content: |
-  nameserver 192.168.1.1
+  nameserver 10.0.60.1
 
 caddy_download_url: https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare
