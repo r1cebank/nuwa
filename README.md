@@ -9,4 +9,4 @@ Single node XCP-NG host, 9 VM hosting K3s, repo mirror and longhorn
 
 ## Services
 
-[Readme](services/README.md)
+[Readme](argocd/README.md)

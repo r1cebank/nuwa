@@ -43,6 +43,11 @@
     - name: Configure Vault integration
       ansible.builtin.include_tasks: tasks/configure_vault_integration.yml
 
+    - name: Recursively remove tmp directory
+      ansible.builtin.file:
+        path: /tmp/charts
+        state: absent
+
     - name: Copy argocd chart files
       ansible.builtin.copy:
         src: "../argocd/{{ item }}"
@@ -77,8 +82,3 @@
         state: present
       with_items:
         - argocd_root_app.yml.j2
-
-    - name: Recursively remove tmp directory
-      ansible.builtin.file:
-        path: /tmp/charts
-        state: absent
