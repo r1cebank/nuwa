@@ -1,0 +1,24 @@
+name: Sync Tailscale ACLs
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - tailscale/**
+
+jobs:
+  acls:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Sync Tailscale ACLs
+        # You may pin to the exact commit or the version.
+        # uses: tailscale/gitops-acl-action@1a74a50677db13901ce01685fd0f557dad53b343
+        uses: tailscale/gitops-acl-action@v1
+        with:
+          api-key: ${{ secrets.TS_API_KEY }}
+          tailnet: ${{ secrets.TS_TAILNET }}
+          # Path to policy file
+          policy-file: ./tailscale/policy.hujson
+          action: apply
