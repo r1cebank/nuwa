@@ -9,19 +9,24 @@ homepage:
               - abbr: GH
                 href: https://github.com/
     services:
+      - Networking:
+        - Opnsense:
+            href: https://opn.miku.cx/
+            description: Opnsense
+            icon: opnsense.png
+        - Switch:
+            href: http://10.0.10.2
+            description: Opnsense
+            icon: netgear.png
       - Infrastructure:
-          - XOA:
-              href: https://xoa.miku.cx/
-              description: Xen Orchestra
-              icon: xen-orchestra.png
-          - DSM:
-              href: https://nas.miku.cx/
-              description: Synology DSM
-              icon: synology-dsm.png
-          - Opnsense:
-              href: https://opn.miku.cx/
-              description: Opnsense
-              icon: opnsense.png
+        - XOA:
+            href: https://xoa.miku.cx/
+            description: Xen Orchestra
+            icon: xen-orchestra.png
+        - DSM:
+            href: https://nas.miku.cx/
+            description: Synology DSM
+            icon: synology-dsm.png
     widgets:
       - logo:
           icon: homepage.png
