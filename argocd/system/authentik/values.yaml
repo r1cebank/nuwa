@@ -21,6 +21,11 @@ authentik:
       # Enable cert-manager to create automatically the SSL certificate and store in Secret
       cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
       cert-manager.io/common-name: authentik.owo.ac
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Authentik"
+      gethomepage.dev/description: "Making authentication simple."
+      gethomepage.dev/group: "Infrastructure"
+      gethomepage.dev/icon: "authentik.png"
     hosts:
       - host: authentik.owo.ac
         paths:

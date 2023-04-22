@@ -15,6 +15,12 @@ ingress:
     enable: true
     middlewareName: basic-auth
     middlewareNamespace: traefik
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Linkerd"
+    gethomepage.dev/description: "The world's lightest, fastest service mesh."
+    gethomepage.dev/group: "Infrastructure"
+    gethomepage.dev/icon: "https://raw.githubusercontent.com/linkerd/linkerd2/main/web/app/img/favicon.png"
 
 ########################
 # linkerd-viz subchart
