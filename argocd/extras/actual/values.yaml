@@ -1,18 +1,22 @@
+image:
+  # -- image repository
+  repository: actualbudget/actual-server
+  # -- image pull policy
+  pullPolicy: IfNotPresent
+  # -- image tag
+  # this example is not automatically updated, so be sure to use the latest image
+  tag: sha-652d75a-alpine
 
-########################
-# actual subchart
-########################
-actual:
-  images:
-    actualserver:
-      repository: actualbudget/actual-server
-      tag: sha-652d75a-alpine
-  podAnnotations:
-    linkerd.io/inject: enabled
-  ingress:
+# -- Configures service settings for the chart.
+service:
+  main:
+    ports:
+      http:
+        port: 5006
+
+ingress:
+  main:
     enabled: true
-    ingressClassName: traefik
-    tls: true
     annotations:
       # HTTPS as entry point
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -21,14 +25,16 @@ actual:
       # Enable cert-manager to create automatically the SSL certificate and store in Secret
       cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
       cert-manager.io/common-name: actual.owo.ac
-    hostname: actual.owo.ac
-  persistence:
-    data:
-      enabled: true
-      volumeClaimSpec:
-        accessModes: 
-          - ReadWriteOnce
-        resources: 
-          requests: 
-            storage: 2Gi
-        storageClassName: longhorn
+    hosts:
+      - host: actual.owo.ac
+        paths:
+          - path: /
+            pathType: Prefix
+
+persistence:
+  data:
+    enabled: true
+    type: pvc
+    accessMode: ReadWriteOnce
+    storageClass: longhorn
+    size: 2Gi
