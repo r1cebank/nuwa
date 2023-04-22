@@ -4,9 +4,11 @@
 ########################
 authentik:
   authentik:
-    # Disable the existing config and use custom one for secrets
-    postgresql: null
-    email: null
+    email:
+      host: "in-v3.mailjet.com"
+      from: "noreply@miku.cx"
+      port: 587
+      use_tls: true
     error_reporting:
       enabled: true
   ingress:
@@ -35,15 +37,6 @@ authentik:
   prometheus:
     serviceMonitor:
       create: true
-  env:
-    AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
-    AUTHENTIK_POSTGRESQL__NAME: authentik
-    AUTHENTIK_POSTGRESQL__USER: authentik
-    AUTHENTIK_POSTGRESQL__PORT: 5432
-    AUTHENTIK_EMAIL__HOST: "in-v3.mailjet.com"
-    AUTHENTIK_EMAIL__FROM: "noreply@miku.cx"
-    AUTHENTIK_EMAIL__PORT: 587
-    AUTHENTIK_EMAIL__USE_TLS: true
   envValueFrom:
     AUTHENTIK_SECRET_KEY:
       secretKeyRef:
