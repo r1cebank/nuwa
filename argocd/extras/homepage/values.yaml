@@ -28,7 +28,6 @@ homepage:
       - search:
           provider: custom
           url: https://search.owo.ac/?q=
-          icon: searxng.png
           target: _blank
       - openmeteo:
           label: Burnaby
