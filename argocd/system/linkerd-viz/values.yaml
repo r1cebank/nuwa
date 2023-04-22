@@ -19,7 +19,7 @@ ingress:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Linkerd"
     gethomepage.dev/description: "The world's lightest, fastest service mesh."
-    gethomepage.dev/group: "Infrastructure"
+    gethomepage.dev/group: "Monitoring"
     gethomepage.dev/icon: "https://raw.githubusercontent.com/linkerd/linkerd2/main/web/app/img/favicon.png"
 
 ########################

@@ -25,6 +25,11 @@ ingress:
       # Enable cert-manager to create automatically the SSL certificate and store in Secret
       cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
       cert-manager.io/common-name: actual.owo.ac
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Actual"
+      gethomepage.dev/description: "Enjoy managing your finances"
+      gethomepage.dev/group: "Personal"
+      gethomepage.dev/icon: "actual.png"
     hosts:
       - host: actual.owo.ac
         paths:

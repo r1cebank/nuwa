@@ -9,6 +9,12 @@ ingress:
     enable: true
     middlewareName: basic-auth
     middlewareNamespace: traefik
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Longhorn"
+    gethomepage.dev/description: "Kibana: Explore, Visualize, Discover Data."
+    gethomepage.dev/group: "Monitoring"
+    gethomepage.dev/icon: "longhorn.png"
 
 # Backup S3 backend URL
 backup:

@@ -16,6 +16,12 @@ gitea:
       # Enable cert-manager to create automatically the SSL certificate and store in Secret
       cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
       cert-manager.io/common-name: gitea.owo.ac
+
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Gitea"
+      gethomepage.dev/description: "Git with a cup of tea · A painless self-hosted Git service."
+      gethomepage.dev/group: "Development"
+      gethomepage.dev/icon: "gitea.png"
     hosts:
       - host: gitea.owo.ac
         paths:

@@ -23,6 +23,13 @@ kind: IngressRoute
 metadata:
   name: traefik-dashboard
   namespace: {{ .Release.Namespace }}
+  annotations:
+    gethomepage.dev/href: "https://traefik.owo.ac/dashboard"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: "The Cloud Native Application Proxy"
+    gethomepage.dev/group: "Monitoring"
+    gethomepage.dev/icon: "traefik.png"
+    gethomepage.dev/name: "Traefik"
 spec:
   entryPoints:
     - websecure

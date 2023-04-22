@@ -52,6 +52,12 @@ ingress:
     # Enable cert-manager to create automatically the SSL certificate and store in Secret
     cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
     cert-manager.io/common-name: search.owo.ac
+
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Searxng"
+    gethomepage.dev/description: "SearXNG is a free internet metasearch engine which aggregates results from various search services and databases."
+    gethomepage.dev/group: "Tools"
+    gethomepage.dev/icon: "searxng.png"
   hosts:
     - host: search.owo.ac
       paths:

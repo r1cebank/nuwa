@@ -43,6 +43,12 @@ kibana:
     # configure cert-manager issuer
     certmanager:
       tlsIssuer: letsencrypt-staging-issuer
+    annotations:
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Kibana"
+      gethomepage.dev/description: "Kibana: Explore, Visualize, Discover Data."
+      gethomepage.dev/group: "Monitoring"
+      gethomepage.dev/icon: "kibana.png"
 
 # LoadBalancer and DNS config
 external:
