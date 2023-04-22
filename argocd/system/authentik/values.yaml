@@ -5,7 +5,8 @@
 authentik:
   authentik:
     # Disable the existing config and use custom one for secrets
-    postgresql: {}
+    postgresql: null
+    email: null
     error_reporting:
       enabled: true
   ingress:
