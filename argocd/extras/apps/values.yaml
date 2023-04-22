@@ -41,3 +41,7 @@ apps:
     namespace: joplin
     path: argocd/extras/joplin
     syncWave: 1
+  - name: actual
+    namespace: actual
+    path: argocd/extras/actual
+    syncWave: 1

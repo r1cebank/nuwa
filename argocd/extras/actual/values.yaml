@@ -1,0 +1,34 @@
+
+########################
+# actual subchart
+########################
+actual:
+  images:
+    actualserver:
+      repository: actualbudget/actual-server
+      tag: sha-652d75a-alpine
+  podAnnotations:
+    linkerd.io/inject: enabled
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    tls: true
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: actual.owo.ac
+    hostname: actual.owo.ac
+  persistence:
+    data:
+      enabled: true
+      volumeClaimSpec:
+        accessModes: 
+          - ReadWriteOnce
+        resources: 
+          requests: 
+            storage: 2Gi
+        storageClassName: longhorn

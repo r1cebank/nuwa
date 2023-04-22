@@ -1,0 +1,7 @@
+apiVersion: v2
+name: actual
+version: 0.0.0
+dependencies:
+  - name: actual
+    version: 0.22.0
+    repository: https://belug-apps.github.io/catalog
