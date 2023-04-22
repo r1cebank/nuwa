@@ -91,7 +91,12 @@ apps:
     path: argocd/system/linkerd-jaeger
     syncWave: 15
     # Argo CD App
+  - name: authentik
+    namespace: authentik
+    path: argocd/system/authentik
+    syncWave: 16
+    # Argo CD App
   - name: argocd
     namespace: argocd
     path: argocd/bootstrap/argocd
-    syncWave: 16
+    syncWave: 17

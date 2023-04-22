@@ -1,0 +1,77 @@
+
+########################
+# authentik subchart
+########################
+authentik:
+  authentik:
+    # Disable the existing config and use custom one for secrets
+    postgresql: {}
+    error_reporting:
+      enabled: true
+  ingress:
+    enabled: true
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: authentik.owo.ac
+    hosts:
+      - host: authentik.owo.ac
+        paths:
+          - path: "/"
+            pathType: Prefix
+    tls:
+      - hosts:
+          - authentik.owo.ac
+        secretName: authentik-tls
+  redis:
+    enabled: true
+  postgresql:
+    enabled: false
+  prometheus:
+    serviceMonitor:
+      create: true
+  env:
+    AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
+    AUTHENTIK_POSTGRESQL__NAME: authentik
+    AUTHENTIK_POSTGRESQL__USER: authentik
+    AUTHENTIK_POSTGRESQL__PORT: 5432
+    AUTHENTIK_EMAIL__HOST: "in-v3.mailjet.com"
+    AUTHENTIK_EMAIL__FROM: "noreply@miku.cx"
+    AUTHENTIK_EMAIL__PORT: 587
+    AUTHENTIK_EMAIL__USE_TLS: true
+  envValueFrom:
+    AUTHENTIK_SECRET_KEY:
+      secretKeyRef:
+        name: authentik-secret
+        key: server-secret-key
+    AUTHENTIK_POSTGRESQL__PASSWORD:
+      secretKeyRef:
+        name: authentik-secret
+        key: postgres-password
+    AUTHENTIK_EMAIL__USERNAME:
+      secretKeyRef:
+        name: authentik-secret
+        key: smtp-user
+    AUTHENTIK_EMAIL__PASSWORD:
+      secretKeyRef:
+        name: authentik-secret
+        key: smtp-password
+
+########################
+# postgresql subchart
+########################
+postgresql:
+  primary:
+    podAnnotations:
+      linkerd.io/inject: enabled
+  auth:
+    username: authentik
+    database: authentik
+    existingSecret: authentik-secret
+  persistence:
+    storageClass: longhorn
+    size: 1Gi

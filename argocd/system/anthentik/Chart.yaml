@@ -1,0 +1,10 @@
+apiVersion: v2
+name: authentik
+version: 0.0.0
+dependencies:
+  - name: postgresql
+    version: 12.2.7
+    repository: https://charts.bitnami.com/bitnami
+  - name: authentik
+    version: v2023.4.1
+    repository: https://charts.goauthentik.io

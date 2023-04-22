@@ -5,13 +5,15 @@ vault:
   cluster:
     k3s:
      token: {{ k3s_token }}
+  authentik:
+    server:
+      secret_key: {{ authentik_secret_key }}
+    db:
+      password: {{ authentik_db_password }}
+    smtp:
+      username: {{ smtp_username }}
+      password: {{ smtp_password }}
   argocd:
-    webhook:
-      github: {{ argocd_github_webhook_secret }}
-    admin:
-      username: admin
-      password_hash: {{ argocd_admin_password_hash }}
-      password: {{ argocd_admin_password }}
     tunnel:
       id: {{ argocd_cloudflare_tunnel_id }}
       token: {{ argocd_cloudflare_tunnel_token }}

@@ -37,3 +37,12 @@ metadata:
   name: tracing
   annotations:
     linkerd.io/inject: enabled
+
+---
+# authentik
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: authentik
+  annotations:
+    linkerd.io/inject: enabled
