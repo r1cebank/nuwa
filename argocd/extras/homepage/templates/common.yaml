@@ -19,7 +19,7 @@ mountPath: "/app/config"
 type: "custom"
 volumeSpec:
   configMap:
-    name: {{ (default (include "bjw-s.common.lib.chart.names.fullname" .) .Values.config.useExistingConfigMap) }}
+    name: {{ (include "bjw-s.common.lib.chart.names.fullname" .) }}
 {{- end -}}
 {{- $_ := set .Values.persistence "homepage-config" (include "homepage.configVolume" . | fromYaml) -}}
 
