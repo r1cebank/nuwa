@@ -8,11 +8,10 @@ metadata:
 data:
   bookmarks.yaml: |
     - Developer:
-        - Github:
-            - abbr: GH
-              href: https://github.com/
-  docker.yaml: |
-
+      - Github:
+        - abbr: GH
+          href: https://github.com/
+  docker.yaml: ""
   kubernetes.yaml: |
     mode: cluster
 
