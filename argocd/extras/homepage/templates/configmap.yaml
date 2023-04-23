@@ -23,7 +23,7 @@ data:
 {{- else }} ""
 {{- end }}
   settings.yaml: {{- if .Values.config.settings }} |
-{{ .Values.config.settings }}
+"{{ .Values.config.settings }}"
 {{- else }} ""
 {{- end }}
   widgets.yaml: {{- if .Values.config.widgets }} |
