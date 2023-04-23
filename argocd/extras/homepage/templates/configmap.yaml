@@ -41,6 +41,9 @@ data:
     backgroundOpacity: 0.2
     headerStyle: boxed
     layout:
+      Personal:
+      Development:
+      Tools:
       Infrastructure:
         style: row
         columns: 4
@@ -50,9 +53,6 @@ data:
       Monitoring:
         style: row
         columns: 4
-      Personal:
-      Development:
-      Tools:
   widgets.yaml: |
     - logo:
         icon: homepage.png
