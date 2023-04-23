@@ -38,7 +38,7 @@ data:
     title: My Awesome Homepage
     base: https://homepage.owo.ac/
     background: "https://raw.githubusercontent.com/r1cebank/nuwa/main/resource/Konachan.com%20-%20342584%20aiha-deko%20crying%20hatsune_miku%20long_hair%20school_uniform%20signed%20sky%20stars%20tears%20vocaloid.jpg"
-    backgroundOpacity: 0.5
+    backgroundOpacity: 0.2
     headerStyle: boxed
     layout:
       Infrastructure:
