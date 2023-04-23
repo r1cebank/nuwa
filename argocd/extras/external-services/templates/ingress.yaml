@@ -1,0 +1,32 @@
+{{- range $index, $service := .Values.services }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # HTTPS as entry point
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    # Enable TLS
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # Enable cert-manager to create automatically the SSL certificate and store in Secret
+    cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+    cert-manager.io/common-name: {{ service.ingress_domain }}
+  name: {{ service.name }}-ingress
+  namespace: external-services
+spec:
+  rules:
+  - host: {{ service.ingress_domain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: external-{{ service.name }}-http
+            port:
+              number: {{ service.service_port }}
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - {{ service.ingress_domain }}
+    secretName: {{ service.ingress_domain }}-tls
+{{- end }}

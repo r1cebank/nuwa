@@ -22,7 +22,7 @@ data:
           description: Xen Orchestra
           icon: xen-orchestra.png
       - DSM:
-          href: https://nas.miku.cx/
+          href: https://nas.owo.ac/
           description: Synology DSM
           icon: synology-dsm.png
     - Networking:
@@ -31,7 +31,7 @@ data:
           description: Opnsense
           icon: opnsense.png
       - Switch:
-          href: http://10.0.10.2
+          href: https://netgear.owo.ac/
           description: Netgear internet switch
           icon: netgear.png
   settings.yaml: |

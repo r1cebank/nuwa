@@ -45,3 +45,7 @@ apps:
     namespace: actual
     path: argocd/extras/actual
     syncWave: 1
+  - name: external-services
+    namespace: external-services
+    path: argocd/extras/external-services
+    syncWave: 1
