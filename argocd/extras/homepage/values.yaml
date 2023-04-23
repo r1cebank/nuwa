@@ -3,6 +3,21 @@ homepage:
   title: My Awesome Homepage
   base: https://homepage.owo.ac/
   config:
+    background: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
+    headerStyle: boxed
+    layout:
+      Infrastructure:
+        style: row
+        columns: 4
+      Networking:
+        style: row
+        columns: 4
+      Monitoring:
+        style: row
+        columns: 4
+      Personal:
+      Development:
+      Tools:
     bookmarks:
       - Developer:
           - Github:
