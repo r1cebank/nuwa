@@ -22,6 +22,12 @@ controller:
     maxSurge: 25%
     maxUnavailable: 25%
 
+persistence:
+  logs:
+    enabled: true
+    type: emptyDir
+    mountPath: /app/config/logs
+
 ingress:
   main:
     enabled: true
