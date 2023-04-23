@@ -10,6 +10,18 @@ serviceAccount:
 # This enables the service account to access the necessary resources
 enableRbac: true
 
+service:
+  main:
+    ports:
+      http:
+        port: 3000
+
+controller:
+  strategy: RollingUpdate
+  rollingUpdate:
+    maxSurge: 25%
+    maxUnavailable: 25%
+
 ingress:
   main:
     enabled: true
