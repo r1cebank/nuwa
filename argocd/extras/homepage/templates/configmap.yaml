@@ -31,7 +31,7 @@ data:
           description: Opnsense
           icon: opnsense.png
       - Switch:
-          href: https://netgear.owo.ac/
+          href: http://10.0.10.2/
           description: Netgear internet switch
           icon: netgear.png
   settings.yaml: |

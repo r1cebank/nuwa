@@ -11,9 +11,3 @@ services:
     service_port: 80
     protocol: TCP
     ingress_domain: arch.owo.ac
-  - name: netgear-switch
-    ip: 10.0.10.2
-    source_port: 80
-    service_port: 80
-    protocol: TCP
-    ingress_domain: netgear.owo.ac
