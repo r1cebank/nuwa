@@ -12,5 +12,5 @@ spec:
     protocol: {{ $service.protocol }}
     targetPort: {{ $service.source_port }}
   clusterIP: None
-  type: ClusterIPs
+  type: ClusterIP
 {{- end }}
