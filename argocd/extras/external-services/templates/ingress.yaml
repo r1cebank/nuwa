@@ -10,23 +10,23 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
     # Enable cert-manager to create automatically the SSL certificate and store in Secret
     cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
-    cert-manager.io/common-name: {{ service.ingress_domain }}
-  name: {{ service.name }}-ingress
-  namespace: external-services
+    cert-manager.io/common-name: {{ $service.ingress_domain }}
+  name: {{ $service.name }}-ingress
+  namespace: {{ $.Release.Namespace }}
 spec:
   rules:
-  - host: {{ service.ingress_domain }}
+  - host: {{ $service.ingress_domain }}
     http:
       paths:
       - backend:
           service:
-            name: external-{{ service.name }}-http
+            name: external-{{ $service.name }}-http
             port:
-              number: {{ service.service_port }}
+              number: {{ $service.service_port }}
         path: /
         pathType: Prefix
   tls:
   - hosts:
-    - {{ service.ingress_domain }}
-    secretName: {{ service.ingress_domain }}-tls
+    - {{ $service.ingress_domain }}
+    secretName: {{ $service.ingress_domain }}-tls
 {{- end }}

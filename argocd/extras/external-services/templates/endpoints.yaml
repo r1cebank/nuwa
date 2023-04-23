@@ -3,14 +3,14 @@
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: external-{{ service.name }}-http
+  name: external-{{ $service.name }}-http
   namespace: {{ $.Release.Namespace }}
 subsets:
 - addresses:
   # list all external ips for this service
-  - ip: {{ service.ip }}
+  - ip: {{ $service.ip }}
   ports:
-  - name: {{ service.name }}
-    port: {{ service.source_port }}
-    protocol: {{ service.protocol }}
+  - name: {{ $service.name }}
+    port: {{ $service.source_port }}
+    protocol: {{ $service.protocol }}
 {{- end }}
