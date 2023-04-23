@@ -55,7 +55,7 @@ ingress:
 
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Searxng"
-    gethomepage.dev/description: "SearXNG is a free internet metasearch engine which aggregates results from various search services and databases."
+    gethomepage.dev/description: "Free internet metasearch engine."
     gethomepage.dev/group: "Tools"
     gethomepage.dev/icon: "searxng.png"
   hosts:

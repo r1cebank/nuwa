@@ -17,7 +17,7 @@ vaultwarden:
 
       gethomepage.dev/enabled: "true"
       gethomepage.dev/name: "Vaultwarden"
-      gethomepage.dev/description: " Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs"
+      gethomepage.dev/description: "Unofficial Bitwarden compatible server written in Rust"
       gethomepage.dev/group: "Tools"
       gethomepage.dev/icon: "vaultwarden.png"
     tls:

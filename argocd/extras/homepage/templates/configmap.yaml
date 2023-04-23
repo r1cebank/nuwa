@@ -32,7 +32,7 @@ data:
           icon: opnsense.png
       - Switch:
           href: http://10.0.10.2
-          description: Opnsense
+          description: Netgear internet switch
           icon: netgear.png
   settings.yaml: |
     title: My Awesome Homepage
