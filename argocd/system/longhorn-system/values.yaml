@@ -5,10 +5,10 @@ ingress:
   certmanager:
     tlsIssuer: letsencrypt-staging-issuer
   # Enabling traefik basic authorization, reusing global middleware created for Traefik
-  auth:
+  basicAuth:
     enable: true
-    middlewareName: authentik-auth
-    middlewareNamespace: authentik
+    middlewareName: basic-auth
+    middlewareNamespace: traefik
   annotations:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Longhorn"

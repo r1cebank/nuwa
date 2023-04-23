@@ -1,5 +1,3 @@
-ingress:
-  host: authentik.owo.ac
 
 ########################
 # authentik subchart
