@@ -28,10 +28,6 @@ homepage:
             href: http://10.0.10.2
             description: Opnsense
             icon: netgear.png
-      - Monitoring:
-      - Personal:
-      - Development:
-      - Tools:
     widgets:
       - logo:
           icon: homepage.png
@@ -52,6 +48,7 @@ homepage:
       title: My Awesome Homepage
       base: https://homepage.owo.ac/
       background: "https://raw.githubusercontent.com/r1cebank/nuwa/main/resource/Konachan.com%20-%20351121%20aircraft%20aqua_eyes%20aqua_hair%20clouds%20dress%20hatsune_miku%20long_hair%20night%20prinz_eugen1938%20sky%20stars%20thighhighs%20twintails%20vocaloid.jpg"
+      backgroundOpacity: 0.5
       headerStyle: boxed
       layout:
         Infrastructure:
