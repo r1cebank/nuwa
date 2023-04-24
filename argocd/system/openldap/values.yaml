@@ -1,5 +1,5 @@
 tcpIngress:
-  enabled: true
+  enabled: false
   entrypoint: ldap
 
 ###################
