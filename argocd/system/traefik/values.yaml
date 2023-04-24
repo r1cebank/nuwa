@@ -84,6 +84,7 @@ traefik:
   # Set specific LoadBalancer IP address for Ingress service
   service:
     spec:
+      externalTrafficPolicy: Local
       loadBalancerIP: 10.0.60.200
 
   providers:
