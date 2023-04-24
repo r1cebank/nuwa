@@ -95,7 +95,7 @@ authelia:
       oidc:
         enabled: false
     access_control:
-      default_policy: deny
+      default_policy: one_factor
       networks:
         - name: private
           networks:
@@ -104,18 +104,10 @@ authelia:
           networks:
             - 100.64.0.0/10
       rules:
-        - domain_regex: '^.*\.owo.ac$'
-          policy: bypass
-        - domain: homepage.owo.ac
-          policy: bypass
         - domain: "*.owo.ac"
           policy: bypass
           methods:
             - OPTIONS
-        - domain: "*.owo.ac"
-          policy: one_factor
-          networks:
-          - private
         - domain: "*.owo.ac"
           networks:
             - tailscale
