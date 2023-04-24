@@ -1,0 +1,31 @@
+tcpIngress:
+  enabled: true
+  entrypoint: ldap
+
+###################
+# openldap-stack subchart
+###################
+openldap-stack-ha:
+  global:
+    ldapDomain: owo.ac
+    existingSecret: openldap-secret
+  image:
+    tag: 2.6.4
+    pullPolicy: IfNotPresent
+  persistence:
+    storageClass: longhorn
+  ltb-passwd:
+    enabled: false
+  phpldapadmin:
+    enabled: true
+    ingress:
+      annotations:
+        # HTTPS as entry point
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        # Enable TLS
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        # Enable cert-manager to create automatically the SSL certificate and store in Secret
+        cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+        cert-manager.io/common-name: phpldapadmin.owo.ac
+      hosts:
+        - phpldapadmin.owo.ac

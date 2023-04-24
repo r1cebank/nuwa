@@ -17,6 +17,10 @@ vault:
     tunnel:
       id: {{ argocd_cloudflare_tunnel_id }}
       token: {{ argocd_cloudflare_tunnel_token }}
+  openldap:
+    admin:
+      password: {{ openldap_admin_password }}
+      config_password: {{ openldap_admin_config_password }}
   # Traefik secrets
   traefik:
     admin:

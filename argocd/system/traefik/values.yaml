@@ -73,6 +73,14 @@ traefik:
       port: 22
       expose: true
       protocol: TCP
+    ldap:
+      port: 389
+      expose: true
+      protocol: TCP
+    sslLdap:
+      port: 636
+      expose: true
+      protocol: TCP
   # Set specific LoadBalancer IP address for Ingress service
   service:
     spec:

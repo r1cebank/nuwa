@@ -4,20 +4,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: cloudflared-tunnel
-  name: cloudflared-tunnel
+    app: {{ .Release.Namespace }}
+  name: {{ .Release.Namespace }}
   namespace: {{ .Release.Namespace }}
 spec:
   selector:
     matchLabels:
-      app: cloudflared-tunnel
+      app: {{ .Release.Namespace }}
   template:
     metadata:
       labels:
-        app: cloudflared-tunnel
+        app: {{ .Release.Namespace }}
     spec:
       containers:
-      - name: cloudflared-tunnel
+      - name: {{ .Release.Namespace }}
         image: {{ .Values.tunnels.argocd.cloudflared.image }}
         imagePullPolicy: Always
         args: ["tunnel", "--no-autoupdate", "run", "--token=$(TUNNEL_TOKEN)"]
