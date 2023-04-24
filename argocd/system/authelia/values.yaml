@@ -110,6 +110,7 @@ authelia:
     session:
       redis:
         enabled: true
+        enabledSecret: true
         host: authelia-redis-master.authelia.svc.cluster.local
         port: 6379
     
@@ -120,6 +121,7 @@ authelia:
     storage:
       postgres:
         enabled: true
+        enabledSecret: true
         host: authelia-postgresql.authelia.svc.cluster.local
         port: 5432
         database: authelia
