@@ -1,0 +1,16 @@
+{{- if .Values.tcpIngress.enabled }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: openldap-tcp
+  namespace: {{ .Release.Namespace }}
+spec:
+  entryPoints:
+    - {{ .Values.tcpIngress.entrypoint }}
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: openldap
+          port: 389
+{{- end }}
