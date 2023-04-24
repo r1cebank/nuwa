@@ -108,7 +108,7 @@ authelia:
     session:
       redis:
         enabled: true
-        host: authelia-redis.authelia.svc.cluster.local
+        host: authelia-redis-master.authelia.svc.cluster.local
         port: 6379
     
     ##
