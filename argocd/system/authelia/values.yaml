@@ -83,7 +83,7 @@ authelia:
         additional_users_dn: OU=users
         additional_groups_dn: OU=groups
         user: CN=admin,DC=owo,DC=ac
-        users_filter: "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))"
+        users_filter: "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=inetOrgPerson))"
         groups_filter: "(&(uniquemember={dn})(objectclass=groupOfUniqueNames))"
         tls:
           skip_verify: true
@@ -103,7 +103,14 @@ authelia:
         - name: tailscale
           networks:
             - 100.64.0.0/10
-    
+      rules:
+        - domain: homepage.owo.ac
+          policy: bypass
+        - domain: "*.owo.ac"
+          networks:
+            - vpn
+          policy: two_factor
+
     ##
     ## Session Provider Configuration
     ##
