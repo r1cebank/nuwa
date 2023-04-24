@@ -29,6 +29,7 @@ redis:
 # authelia subchart
 ########################
 authelia:
+  domain: owo.ac
   ingress:
     enabled: true
     annotations:
@@ -38,37 +39,11 @@ authelia:
       traefik.ingress.kubernetes.io/router.tls: "true"
       # Enable cert-manager to create automatically the SSL certificate and store in Secret
       cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
-      cert-manager.io/common-name: authelia.owo.ac
+      cert-manager.io/common-name: auth.owo.ac
+    subdomain: auth
     tls:
       enabled: true
       secret: authelia-tls
-
-  # Pod configuration
-  pod:
-    kind: Deployment
-    resources:
-      limits:
-        cpu: "4.00"
-        memory: "125Mi"
-      requests:
-        cpu: "0.25"
-        memory: "50Mi"
-    extraVolumes:
-      - name: var-authelia
-        emptyDir:
-          medium: Memory
-      - name: authelia-users
-        configMap:
-          name: authelia-users
-          items:
-            - key: users.yaml
-              path: users.yaml
-    extraVolumeMounts:
-      - name: var-authelia
-        mountPath: /var/authelia
-      - name: authelia-users
-        mountPath: /config/users_database.yml
-        subPath: users.yaml
     
   # Authelia configuration
   configMap:
@@ -111,7 +86,6 @@ authelia:
       file:
         enabled: false
       
-    
     # Identity providers, specifically OIDC
     identity_providers:
       oidc:
