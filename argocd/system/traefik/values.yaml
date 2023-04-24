@@ -77,7 +77,7 @@ traefik:
       port: 389
       expose: true
       protocol: TCP
-    sslLdap:
+    sslldap:
       port: 636
       expose: true
       protocol: TCP
