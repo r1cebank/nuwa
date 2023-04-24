@@ -13,7 +13,7 @@ metadata:
 {{- if .Values.ingress.auth.enable }}
     # Use Basic Auth Midleware configured
     traefik.ingress.kubernetes.io/router.middlewares:
-      {{ .Values.ingress.auth.middlewareNamespace }}-{{ .Values.ingress.auth.middlewareName }}@kubernetescrd
+      {{ .Values.ingress.auth.middlewareName }}-{{ .Values.ingress.auth.middlewareNamespace }}@kubernetescrd
 {{- end }}
     # Enable cert-manager to create automatically the SSL certificate and store in Secret
     cert-manager.io/cluster-issuer: {{ .Values.ingress.certmanager.tlsIssuer }}
