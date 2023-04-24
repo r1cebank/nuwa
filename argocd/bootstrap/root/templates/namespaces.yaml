@@ -46,3 +46,12 @@ metadata:
   name: authentik
   annotations:
     linkerd.io/inject: enabled
+
+---
+# authelia
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: authelia
+  annotations:
+    linkerd.io/inject: enabled
