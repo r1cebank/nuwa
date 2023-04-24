@@ -42,6 +42,13 @@ authentik:
   prometheus:
     serviceMonitor:
       create: true
+  volumes:
+    - name: media
+      persistentVolumeClaim:
+        claimName: media-vol
+  volumeMounts:
+    - name: media
+      mountPath: /media
   envValueFrom:
     AUTHENTIK_SECRET_KEY:
       secretKeyRef:
