@@ -85,6 +85,8 @@ authelia:
         user: CN=admin,DC=owo,DC=ac
         users_filter: "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))"
         groups_filter: "(&(uniquemember={dn})(objectclass=groupOfUniqueNames))"
+        tls:
+          skip_verify: true
       file:
         enabled: false
       
