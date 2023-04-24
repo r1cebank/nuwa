@@ -109,6 +109,10 @@ authelia:
           methods:
             - OPTIONS
         - domain: "*.owo.ac"
+          policy: one_factor
+          networks:
+            - private
+        - domain: "*.owo.ac"
           networks:
             - tailscale
           policy: two_factor
