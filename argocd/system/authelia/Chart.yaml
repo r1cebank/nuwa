@@ -5,6 +5,9 @@ dependencies:
   - name: postgresql
     version: 12.2.7
     repository: https://charts.bitnami.com/bitnami
+  - name: redis
+    version: 17.9.5
+    repository: https://charts.bitnami.com/bitnami
   - name: authelia
     version: 0.8.57
     repository: https://charts.authelia.com

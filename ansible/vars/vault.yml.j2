@@ -17,6 +17,18 @@ vault:
     tunnel:
       id: {{ argocd_cloudflare_tunnel_id }}
       token: {{ argocd_cloudflare_tunnel_token }}
+  authelia:
+    keys:
+      jwt_token: {{ authelia_jwt_token }}
+      session_encryption_key: {{ authelia_session_encryption_key }}
+      storage_encryption_key: {{ authelia_storage_encryption_key }}
+      oidc_hmac_secret: {{ authelia_oidc_hmac_secret }}
+      oidc_private_secret: {{ authelia_oidc_private_secret }}
+    passwords:
+      ldap_password: {{ openldap_admin_password }}
+      redis_password: {{ authelia_redis_password }}
+      smtp_password: {{ smtp_password }}
+      storage_password: {{ authelia_db_password }}
   openldap:
     admin:
       password: {{ openldap_admin_password }}

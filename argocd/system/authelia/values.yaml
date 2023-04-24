@@ -1,14 +1,46 @@
-users: [ ]
+########################
+# postgresql subchart
+########################
+postgresql:
+  primary:
+    podAnnotations:
+      linkerd.io/inject: enabled
+  auth:
+    username: authelia
+    database: authelia
+    existingSecret: authelia-secret
+  persistence:
+    storageClass: longhorn
+    size: 10Gi
+########################
+# redis subchart
+########################
+redis:
+  primary:
+    podAnnotations:
+      linkerd.io/inject: enabled
+  auth:
+    enabled: true
+    existingSecret: authelia-secret
+    existingSecretPasswordKey: REDIS_PASSWORD
+
+########################
+# authelia subchart
+########################
 authelia:
-  # Root domain under Authelia protection
-  # domain: example.com
-  # Ingress configurtion
   ingress:
     enabled: true
-    # Do not configure TLS here
-    # This is handled in the global TLS config
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: authelia.owo.ac
     tls:
-      enabled: false
+      enabled: true
+      secret: authelia-tls
 
   # Pod configuration
   pod:
@@ -63,14 +95,18 @@ authelia:
     ##
     ## The available providers are: `file`, `ldap`. You must use one and only one of these providers.
     authentication_backend:
-
       # In this case Authelia is "stateless" and user data is imported from a config file, so password resets are disabled
       password_reset:
         disable: false
-      
       # Disable LDAP backend and use file instead
       ldap:
         enabled: true
+        implementation: custom
+        url: ldap://openldap.openldap.svc.cluster.local
+        base_dn: DC=owo,DC=ac
+        additional_users_dn: OU=users
+        additional_groups_dn: OU=groups
+        user: CN=admin,DC=owo,DC=ac
       file:
         enabled: false
       
@@ -79,38 +115,15 @@ authelia:
     identity_providers:
       oidc:
         enabled: false
-      
-    ##
-    ## Access Control Configuration
-    ##
-    ## Access control is a list of rules defining the authorizations applied for one resource to users or group of users.
-    ##
-    ## If 'access_control' is not defined, ACL rules are disabled and the 'bypass' rule is applied, i.e., access is allowed
-    ## to anyone. Otherwise restrictions follow the rules defined.
-    ##
-    ## Note: One can use the wildcard * to match any subdomain.
-    ## It must stand at the beginning of the pattern. (example: *.mydomain.com)
-    ##
-    ## Note: You must put patterns containing wildcards between simple quotes for the YAML to be syntactically correct.
-    ##
-    ## Definition: A 'rule' is an object with the following keys: 'domain', 'subject', 'policy' and 'resources'.
-    ##
-    ## - 'domain' defines which domain or set of domains the rule applies to.
-    ##
-    ## - 'subject' defines the subject to apply authorizations to. This parameter is optional and matching any user if not
-    ##    provided. If provided, the parameter represents either a user or a group. It should be of the form
-    ##    'user:<username>' or 'group:<groupname>'.
-    ##
-    ## - 'policy' is the policy to apply to resources. It must be either 'bypass', 'one_factor', 'two_factor' or 'deny'.
-    ##
-    ## - 'resources' is a list of regular expressions that matches a set of resources to apply the policy to. This parameter
-    ##   is optional and matches any resource if not provided.
-    ##
-    ## Note: the order of the rules is important. The first policy matching (domain, resource, subject) applies.
     access_control:
-
-      # By default require only one factor for now
-      default_policy: one_factor
+      default_policy: deny
+      networks:
+        - name: private
+          networks:
+            - 10.0.0.0/8
+        - name: tailscale
+          networks:
+            - 100.64.0.0/10
     
     ##
     ## Session Provider Configuration
@@ -118,24 +131,24 @@ authelia:
     ## The session cookies identify the user once logged in.
     ## The available providers are: `memory`, `redis`. Memory is the provider unless redis is defined.
     session:
-      
-      # Disable redis session provder and use memory instead
       redis:
         enabled: true
+        host: authelia-redis.authelia.svc.cluster.local
+        port: 6379
     
     ##
     ## Storage Provider Configuration
     ##
     ## The available providers are: `local`, `mysql`, `postgres`. You must use one and only one of these providers.
     storage:
-
-      # Use local storage in ephemeral volume
-      local:
-        enabled: false
-      mysql:
-        enabled: false
       postgres:
         enabled: true
+        host: authelia-postgresql.authelia.svc.cluster.local
+        port: 5432
+        database: authelia
+        schema: public
+        username: authelia
+        timeout: 5s
     
     ##
     ## Notification Provider
@@ -144,10 +157,19 @@ authelia:
     ## Notifications are sent to users when they require a password reset, a u2f registration or a TOTP registration.
     ## The available providers are: filesystem, smtp. You must use one and only one of these providers.
     notifier:
-      filesystem:
-        enabled: false
       smtp:
         enabled: true
+        host: in-v3.mailjet.com
+        port: 587
+        timeout: 5s
+        username: d86fa73b53b9e7b67d3f8831be6329aa
+        sender: noreply@miku.cx
+        ## Subject configuration of the emails sent.
+        ## {title} is replaced by the text from the notifier
+        subject: "[Authelia] {title}"
+        ## This address is used during the startup check to verify the email configuration is correct.
+        ## It's not important what it is except if your email server only allows local delivery.
+        startup_check_address: noreply@miku.cx
 
   ##
   ## Authelia Secret Generator.

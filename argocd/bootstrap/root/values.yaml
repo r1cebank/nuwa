@@ -99,10 +99,10 @@ apps:
     namespace: openldap
     path: argocd/system/openldap
     syncWave: 16
-  # - name: authelia
-  #   namespace: authelia
-  #   path: argocd/system/authelia
-  #   syncWave: 16
+  - name: authelia
+    namespace: authelia
+    path: argocd/system/authelia
+    syncWave: 16
     # Argo CD App
   - name: argocd
     namespace: argocd
