@@ -78,7 +78,7 @@ authelia:
       ldap:
         enabled: true
         implementation: custom
-        url: ldap://openldap.openldap.svc.cluster.local
+        url: ldaps://openldap.openldap.svc.cluster.local
         base_dn: DC=owo,DC=ac
         additional_users_dn: OU=users
         additional_groups_dn: OU=groups
@@ -138,6 +138,7 @@ authelia:
     notifier:
       smtp:
         enabled: true
+        enabledSecret: true
         host: in-v3.mailjet.com
         port: 587
         timeout: 5s
