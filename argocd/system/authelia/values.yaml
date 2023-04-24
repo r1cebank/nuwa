@@ -108,7 +108,7 @@ authelia:
           policy: bypass
         - domain: "*.owo.ac"
           networks:
-            - vpn
+            - tailscale
           policy: two_factor
 
     ##
