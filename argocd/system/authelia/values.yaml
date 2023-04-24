@@ -154,7 +154,7 @@ authelia:
   ## and use the existingSecrets. All secrets can be stored in a single k8s secret if desired using the key option.
   ##
   secret:
-    existingSecret: authelia-secrets
+    existingSecret: authelia-secret
 
   ##
   ## Authelia Persistence Configuration.
