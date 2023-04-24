@@ -16,6 +16,7 @@ postgresql:
 # redis subchart
 ########################
 redis:
+  architecture: standalone
   primary:
     podAnnotations:
       linkerd.io/inject: enabled
