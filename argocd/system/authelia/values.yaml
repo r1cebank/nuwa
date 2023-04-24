@@ -99,13 +99,23 @@ authelia:
       networks:
         - name: private
           networks:
-            - 10.0.0.0/8
+            - 10.0.0.0/16
         - name: tailscale
           networks:
             - 100.64.0.0/10
       rules:
+        - domain_regex: '^.*\.owo.ac$'
+          policy: bypass
         - domain: homepage.owo.ac
           policy: bypass
+        - domain: "*.owo.ac"
+          policy: bypass
+          methods:
+            - OPTIONS
+        - domain: "*.owo.ac"
+          policy: one_factor
+          networks:
+          - private
         - domain: "*.owo.ac"
           networks:
             - tailscale
