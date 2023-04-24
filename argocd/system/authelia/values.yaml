@@ -95,7 +95,7 @@ authelia:
       oidc:
         enabled: false
     access_control:
-      default_policy: one_factor
+      default_policy: deny
       networks:
         - name: private
           networks:
