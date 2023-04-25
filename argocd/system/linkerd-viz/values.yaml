@@ -13,8 +13,8 @@ ingress:
   # Enabling traefik basic authorization, reusing global middleware created for Traefik
   basicAuth:
     enable: true
-    middlewareName: basic-auth
-    middlewareNamespace: traefik
+    middlewareName: authelia-forwardauth
+    middlewareNamespace: authelia
   annotations:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "Linkerd"
