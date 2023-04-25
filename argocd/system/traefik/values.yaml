@@ -53,6 +53,8 @@ traefik:
     podAnnotations:
       linkerd.io/inject: ingress
       config.linkerd.io/skip-outbound-ports: "443"
+      # TODO: Remove when linkerd ships this https://github.com/linkerd/linkerd2/issues/4219
+      config.linkerd.io/skip-inbound-ports: "8000,8443"
     # Access log sidecar container
     additionalContainers:
       - name: stream-accesslog
