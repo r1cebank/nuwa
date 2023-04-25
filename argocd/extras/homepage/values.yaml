@@ -10,6 +10,48 @@ serviceAccount:
 # This enables the service account to access the necessary resources
 enableRbac: true
 
+bookmarks:
+  - Developer:
+      - Github:
+          - abbr: GH
+            href: https://github.com/
+services:
+  - Infrastructure:
+    - XOA:
+        href: https://xoa.miku.cx/
+        description: Xen Orchestra
+        icon: xen-orchestra.png
+    - Vault:
+        href: https://vault.miku.cx/
+        description: Hashicorp Vault
+        icon: vault-light.png
+    - DSM:
+        href: https://nas.owo.ac/
+        description: Synology DSM
+        icon: synology-dsm.png
+  - Networking:
+    - Opnsense:
+        href: https://opn.miku.cx/
+        description: Opnsense
+        icon: opnsense.png
+    - Network Switch:
+        href: http://10.0.10.2/
+        description: Netgear internet switch
+        icon: netgear.png
+widgets:
+  - logo:
+      icon: homepage.png
+  - search:
+      provider: custom
+      url: https://search.owo.ac/?q=
+      target: _blank
+  - openmeteo:
+      label: Burnaby
+      latitude: 49.21
+      longitude: -122.95
+      timezone: America/Vancouver
+      units: metric
+      cache: 5
 service:
   main:
     ports:
