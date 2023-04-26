@@ -13,7 +13,7 @@ ingress:
   # Enabling traefik basic authorization, reusing global middleware created for Traefik
   auth:
     enable: true
-    middlewareName: authelia-forwardauth
+    middlewareName: forwardauth-authelia
     middlewareNamespace: authelia
 
 # Prometheus servicemonitor configuration
