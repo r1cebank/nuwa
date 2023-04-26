@@ -39,8 +39,8 @@ spec:
     services:
     - kind: TraefikService
       name: api@internal
-    middlewares:
 {{- if .Values.ingress.auth.enable }}
+    middlewares:
       - name: {{ .Values.ingress.auth.middlewareName }}
         namespace: {{ .Values.ingress.auth.middlewareNamespace }}
 {{- end }}
