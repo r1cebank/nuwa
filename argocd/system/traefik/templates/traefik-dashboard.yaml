@@ -40,9 +40,9 @@ spec:
     - kind: TraefikService
       name: api@internal
     middlewares:
-{{- if .Values.ingress.basicAuth.enable }}
-      - name: {{ .Values.ingress.basicAuth.middlewareName }}
-        namespace: {{ .Values.ingress.basicAuth.middlewareNamespace }}
+{{- if .Values.ingress.auth.enable }}
+      - name: {{ .Values.ingress.auth.middlewareName }}
+        namespace: {{ .Values.ingress.auth.middlewareNamespace }}
 {{- end }}
   tls:
     secretName: traefik-secret

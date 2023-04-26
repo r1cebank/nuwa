@@ -11,7 +11,7 @@ ingress:
     tlsIssuer: letsencrypt-staging-issuer
     # tlsIssuer: ca
   # Enabling traefik basic authorization, reusing global middleware created for Traefik
-  basicAuth:
+  auth:
     enable: true
     middlewareName: authelia-forwardauth
     middlewareNamespace: authelia
