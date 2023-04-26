@@ -24,7 +24,7 @@ metadata:
   name: traefik-dashboard
   namespace: {{ .Release.Namespace }}
   annotations:
-    gethomepage.dev/href: "https://traefik.owo.ac/dashboard"
+    gethomepage.dev/href: "https://traefik.owo.ac/dashboard/"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: "The Cloud Native Application Proxy"
     gethomepage.dev/group: "Monitoring"
