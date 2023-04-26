@@ -40,4 +40,3 @@ data:
 {{- .Values.widgets | toYaml | nindent 4 }}
 {{- else }} ""
 {{- end }}
-{{ end }}
