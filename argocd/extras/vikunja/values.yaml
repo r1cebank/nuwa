@@ -1,0 +1,71 @@
+########################
+# postgresql subchart
+########################
+postgresql:
+  primary:
+    podAnnotations:
+      linkerd.io/inject: enabled
+  auth:
+    username: vikunja
+    database: vikunja
+    existingSecret: vikunja-secret
+  persistence:
+    storageClass: longhorn
+    size: 10Gi
+
+########################
+# vikunja subchart
+########################
+vikunja:
+  api:
+    config:
+      database: postgresql
+      service:
+        enableregistration: true
+    envFrom:
+      # Bind env variables from the secret
+      - name: VIKUNJA_DATABASE_USER
+        value: vikunja
+      - name: VIKUNJA_DATABASE_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: vikunja-secret
+            key: password
+      - name: VIKUNJA_DATABASE_HOST
+        value: vikunja-postgresql
+      - name: VIKUNJA_DATABASE_DATABASE
+        value: vikunja
+    persistence:
+      enabled: false
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: longhorn
+  frontend:
+    enabled: true
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: vikunja.owo.ac
+
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Vikunja"
+      gethomepage.dev/description: "The open-source, self-hostable to-do app."
+      gethomepage.dev/group: "Tools"
+      gethomepage.dev/icon: "vikunja.png"
+    hosts:
+      - host: vikunja.owo.ac
+        paths:
+        - path: /
+          pathType: Prefix
+    tls:
+      - hosts:
+          - vikunja.owo.ac
+        secretName: vikunja-tls
+  postgresqlEnabled: false
