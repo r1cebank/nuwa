@@ -21,6 +21,13 @@ kind: IngressRoute
 metadata:
   name: vikunja-https
   namespace: {{ .Release.Namespace }}
+  annotations:
+    gethomepage.dev/href: "https://{{ .Values.ingress.host }}"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: "The open-source, self-hostable to-do app."
+    gethomepage.dev/group: Tools
+    gethomepage.dev/icon: vikunja.png
+    gethomepage.dev/name: Vijunja
 spec:
   entryPoints:
     - websecure
