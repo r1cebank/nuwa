@@ -46,6 +46,11 @@ vikunja:
             storage: 10Gi
         storageClassName: longhorn
   frontend:
+    image:
+      repository: vikunja/frontend
+      pullPolicy: Always
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: "unstable"
     ingress:
       enabled: false
   postgresqlEnabled: false
