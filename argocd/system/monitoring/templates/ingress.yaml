@@ -75,7 +75,7 @@ metadata:
   name: monitoring-https
   namespace: {{ .Release.Namespace }}
   annotations:
-    gethomepage.dev/href: "{{ .Values.ingress.host }}/grafana"
+    gethomepage.dev/href: "/grafana"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Grafana dashboard
     gethomepage.dev/group: Monitoring
