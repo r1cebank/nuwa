@@ -28,7 +28,8 @@ vikunja:
     ingress:
       enabled: false
     config:
-      database: postgresql
+      database: 
+        type: postgresql
       service:
         enableregistration: true
     env:
