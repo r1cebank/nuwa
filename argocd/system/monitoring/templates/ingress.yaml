@@ -74,6 +74,13 @@ kind: IngressRoute
 metadata:
   name: monitoring-https
   namespace: {{ .Release.Namespace }}
+  annotations:
+    gethomepage.dev/href: "{{ .Values.ingress.host }}/grafana"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Grafana dashboard
+    gethomepage.dev/group: Monitoring
+    gethomepage.dev/icon: grafana.png
+    gethomepage.dev/name: Grafana
 spec:
   entryPoints:
     - websecure
