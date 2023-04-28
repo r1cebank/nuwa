@@ -32,6 +32,12 @@ vikunja:
     config:
       database: 
         type: postgres
+      mailer:
+        enabled: true
+        host: "in-v3.mailjet.com"
+        port: 587
+        username: d86fa73b53b9e7b67d3f8831be6329aa
+        fromemail: "noreply@miku.cx"
       service:
         enableregistration: true
     env:
@@ -48,6 +54,11 @@ vikunja:
           secretKeyRef:
             name: vikunja-secret
             key: password
+      - name: VIKUNJA_MAILER_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: vikunja-secret
+            key: smtp-password
     persistence:
       enabled: false
       spec:
