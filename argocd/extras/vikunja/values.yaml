@@ -57,14 +57,12 @@ vikunja:
             storage: 10Gi
         storageClassName: longhorn
   frontend:
+    apiUrl: "https://vikunja.owo.ac/api"
     image:
       repository: vikunja/frontend
       pullPolicy: Always
       # Overrides the image tag whose default is the chart appVersion.
       tag: "unstable"
-    env: 
-      - name: VIKUNJA_API_URL
-        value: https://vikunja.owo.ac/api
     securityContext:
       allowPrivilegeEscalation: true
       runAsUser: 101 #nginx
