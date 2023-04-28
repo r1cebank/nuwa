@@ -5,7 +5,7 @@ metadata:
   name: vikunja-cert
   namespace: {{ .Release.Namespace }}
 spec:
-  secretName: vikunja-secret
+  secretName: vikunja-tls
   issuerRef:
     name: {{ .Values.ingress.certmanager.tlsIssuer }}
     kind: ClusterIssuer
