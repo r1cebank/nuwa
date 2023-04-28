@@ -52,12 +52,13 @@ vikunja:
       # Overrides the image tag whose default is the chart appVersion.
       tag: "unstable"
     securityContext:
+      allowPrivilegeEscalation: true
+      runAsUser: 101 #nginx
       capabilities:
         drop:
         - ALL
-      readOnlyRootFilesystem: false
-      runAsNonRoot: true
-      runAsUser: 1000
+        add:
+        - NET_BIND_SERVICE
     ingress:
       enabled: false
   postgresqlEnabled: false
