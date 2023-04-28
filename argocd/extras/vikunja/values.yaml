@@ -1,3 +1,10 @@
+# Ingress configuration
+ingress:
+  host: vikunja.owo.ac
+  # configure cert-manager issuer
+  certmanager:
+    tlsIssuer: letsencrypt-staging-issuer
+
 ########################
 # postgresql subchart
 ########################
@@ -24,19 +31,18 @@ vikunja:
       database: postgresql
       service:
         enableregistration: true
-    envFrom:
-      # Bind env variables from the secret
+    env:
       - name: VIKUNJA_DATABASE_USER
+        value: vikunja
+      - name: VIKUNJA_DATABASE_HOST
+        value: vikunja-postgresql
+      - name: VIKUNJA_DATABASE_DATABASE
         value: vikunja
       - name: VIKUNJA_DATABASE_PASSWORD
         valueFrom:
           secretKeyRef:
             name: vikunja-secret
             key: password
-      - name: VIKUNJA_DATABASE_HOST
-        value: vikunja-postgresql
-      - name: VIKUNJA_DATABASE_DATABASE
-        value: vikunja
     persistence:
       enabled: false
       spec:
@@ -46,6 +52,7 @@ vikunja:
             storage: 10Gi
         storageClassName: longhorn
   frontend:
+    apiUrl: "https://vikunja.owo.ac/api"
     image:
       repository: vikunja/frontend
       pullPolicy: Always
