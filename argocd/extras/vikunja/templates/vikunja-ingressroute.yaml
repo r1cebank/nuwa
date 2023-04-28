@@ -38,4 +38,4 @@ spec:
       port: 80
       namespace: {{ .Release.Namespace }}
   tls:
-    secretName: vikunja-secret
+    secretName: vikunja-tls
