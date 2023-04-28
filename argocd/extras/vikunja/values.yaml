@@ -51,6 +51,13 @@ vikunja:
       pullPolicy: Always
       # Overrides the image tag whose default is the chart appVersion.
       tag: "unstable"
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: false
+      runAsNonRoot: true
+      runAsUser: 1000
     ingress:
       enabled: false
   postgresqlEnabled: false
