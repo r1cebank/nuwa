@@ -35,6 +35,8 @@ vikunja:
       service:
         enableregistration: true
     env:
+      - name: VIKUNJA_SERVICE_FRONTENDURL
+        value: https://vikunja.owo.ac/
       - name: VIKUNJA_DATABASE_USER
         value: vikunja
       - name: VIKUNJA_DATABASE_HOST
@@ -55,12 +57,14 @@ vikunja:
             storage: 10Gi
         storageClassName: longhorn
   frontend:
-    apiUrl: "https://vikunja.owo.ac/api"
     image:
       repository: vikunja/frontend
       pullPolicy: Always
       # Overrides the image tag whose default is the chart appVersion.
       tag: "unstable"
+    env: 
+      - name: VIKUNJA_API_URL
+        value: https://vikunja.owo.ac/api
     securityContext:
       allowPrivilegeEscalation: true
       runAsUser: 101 #nginx
