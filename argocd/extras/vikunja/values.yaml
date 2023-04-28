@@ -27,9 +27,11 @@ vikunja:
   api:
     ingress:
       enabled: false
+    service:
+      timezone: America/Vancouver
     config:
       database: 
-        type: postgresql
+        type: postgres
       service:
         enableregistration: true
     env:
