@@ -57,7 +57,7 @@ vikunja:
             storage: 10Gi
         storageClassName: longhorn
   frontend:
-    apiUrl: "https://vikunja.owo.ac/api"
+    apiUrl: "https://vikunja.owo.ac/api/v1"
     image:
       repository: vikunja/frontend
       pullPolicy: Always
