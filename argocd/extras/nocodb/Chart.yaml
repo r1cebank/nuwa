@@ -1,12 +1,12 @@
-apiVersion: v2
-appVersion: 0.100.2
-dependencies:
-- condition: postgresql.enabled
-  name: postgresql
-  repository: https://charts.bitnami.com/bitnami
-  version: ~11.6.6
-description: A Helm chart for Kubernetes
-maintainers: []
 name: nocodb
-type: application
-version: 0.3.0
+apiVersion: v2
+appVersion: v0.106.1
+version: 0.8.0
+dependencies:
+  - name: common
+    repository: http://bjw-s.github.io/helm-charts/
+    version: 0.2.0
+  - name: postgresql
+    version: "12.x.x"
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: postgresql.enabled
