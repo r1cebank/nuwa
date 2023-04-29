@@ -50,9 +50,20 @@ ingress:
         hosts:
           - nocodb.owo.ac
 
-storage:
+persistence:
+  # -- Configure persistence for data to use sqlite backend.
+  # @default -- See values.yaml
   data:
-    enabled: false
+    enabled: true
+    mountPath: /usr/app/data/
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: longhorn
 
 # -- Enable and configure postgresql database subchart under this key.
 #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
