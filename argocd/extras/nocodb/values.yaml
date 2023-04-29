@@ -7,6 +7,25 @@ image:
 env:
   # -- Set the container timezone
   TZ: America/Vancouver
+  NC_SMTP_FROM: "noreply@miku.cx"
+  NC_SMTP_HOST: "in-v3.mailjet.com"
+  NC_SMTP_PORT: 587
+  NC_ADMIN_EMAIL: "siyuan@owo.ac"
+  NC_ADMIN_PASSWORD:
+    valueFrom:
+        secretKeyRef:
+          name: nocodb-secret
+          key: NC_ADMIN_PASSWORD
+  NC_SMTP_USERNAME:
+    valueFrom:
+      secretKeyRef:
+        name: nocodb-secret
+        key: NC_SMTP_USERNAME
+  NC_SMTP_PASSWORD:
+    valueFrom:
+      secretKeyRef:
+        name: nocodb-secret
+        key: NC_SMTP_PASSWORD
   NC_DB:
     valueFrom:
       secretKeyRef:
