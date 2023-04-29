@@ -58,7 +58,9 @@ ingress:
     gethomepage.dev/icon: "nocodb.png"
   hosts:
     - host: nocodb.owo.ac
-      paths: []
+      paths:
+        - path: /
+          pathType: Prefix
   tls:
    - secretName: nocodb-tls
      hosts:
@@ -99,7 +101,7 @@ storage:
   storageClassName: longhorn
 
 postgresql:
-  enabled: false
+  enabled: true
   auth:
     database: nocodb
     username: nocodb

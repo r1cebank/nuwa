@@ -40,7 +40,7 @@ spec:
             - configMapRef:
                 name: {{ include "nocodb.fullname" . }}
             - secretRef:
-                name: {{- default (include "nocodb.fullname" .) .Values.existingSecret }}
+                name: {{ default (include "nocodb.fullname" .) .Values.existingSecret }}
           ports:
             - name: http
               containerPort: 8080
