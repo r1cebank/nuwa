@@ -12,11 +12,6 @@ env:
       secretKeyRef:
         name: nocodb-secret
         key: NC_DB
-  NC_AUTH_JWT_SECRET:
-    valueFrom:
-      secretKeyRef:
-        name: nocodb-secret
-        key: NC_AUTH_JWT_SECRET
 service:
   main:
     ports:

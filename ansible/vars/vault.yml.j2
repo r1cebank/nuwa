@@ -130,5 +130,6 @@ vault:
     db:
       password: {{ nocodb_db_password }}
       url: {{ nocodb_db_url }}
-    secrets:
-      jwt_secret: {{ nocodb_jwt_secret }}
+    smtp:
+      username: {{ smtp_username }}
+      password: {{ smtp_password }}
