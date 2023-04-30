@@ -36,7 +36,8 @@ nextcloud:
       smtpPasswordKey: smtp-password
     mail:
       enabled: true
-      fromAddress: "noreply@miku.cx"
+      fromAddress: noreply
+      domain: miku.cx
       smtp:
         host: "in-v3.mailjet.com"
         port: 587
