@@ -41,6 +41,14 @@ nextcloud:
       smtp:
         host: "in-v3.mailjet.com"
         port: 587
+    extraVolumes:
+      - name: nfs-syncthing
+        nfs:
+          server: 10.0.50.131
+          path: /volume2/syncthing
+    extraVolumeMounts:
+      - name: nfs-syncthing
+        mountPath: /opt/nfs/syncthing
   redis:
     enabled: true
     auth:
