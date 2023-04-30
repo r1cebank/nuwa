@@ -135,3 +135,16 @@ vault:
     smtp:
       username: {{ smtp_username }}
       password: {{ smtp_password }}
+  # nextcloud
+  nextcloud:
+    db:
+      password: {{ nextcloud_db_password }}
+      username: nextcloud
+    admin:
+      username: admin
+      password: {{ nextcloud_admin_password }}
+    smtp:
+      username: {{ smtp_username }}
+      password: {{ smtp_password }}
+    redis:
+      password: {{ nextcloud_redis_password }}

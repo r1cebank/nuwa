@@ -1,0 +1,90 @@
+########################
+# nextcloud subchart
+########################
+
+nextcloud:
+  image:
+    tag: 26.0.1-apache
+  ingress:
+    enabled: true
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: nextcloud.owo.ac
+
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Nextcloud"
+      gethomepage.dev/description: "Online collaboration platform"
+      gethomepage.dev/group: "Personal"
+      gethomepage.dev/icon: "nextcloud.png"
+    tls:
+      - hosts:
+          - nextcloud.owo.ac
+        secretName: nextcloud-tls
+    nextcloud:
+      host: nextcloud.owo.ac
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-secret
+        usernameKey: admin-username
+        passwordKey: admin-password
+        smtpUsernameKey: smtp-username
+        smtpPasswordKey: smtp-password
+      mail:
+        enabled: true
+        fromAddress: "noreply@miku.cx"
+        smtp:
+          host: "in-v3.mailjet.com"
+          port: 587
+  redis:
+    enabled: true
+    auth:
+      enabled: true
+      existingSecret: nextcloud-secret
+      existingSecretPasswordKey: redis-password
+  cronjob:
+    enabled: true
+  rbac:
+    enabled: true
+  internalDatabase:
+    enabled: false
+  externalDatabase:
+    type: postgresql
+    host: nextcloud-postgresql
+    database: nextcloud
+    existingSecret:
+      enabled: true
+      secretName: nextcloud-secret
+      usernameKey: postgres-username
+      passwordKey: postgres-password
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 10Gi
+    nextcloudData:
+      enabled: true
+      storageClass: longhorn
+      size: 100Gi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+  postgresql:
+    enabled: false
+    
+########################
+# postgresql subchart
+########################
+postgresql:
+  auth:
+    username: nextcloud
+    database: nextcloud
+    existingSecret: nextcloud-secret
+  persistence:
+    storageClass: longhorn
+    size: 10Gi

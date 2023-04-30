@@ -53,6 +53,10 @@ apps:
     namespace: nocodb
     path: argocd/extras/nocodb
     syncWave: 1
+  - name: nextcloud
+    namespace: nextcloud
+    path: argocd/extras/nextcloud
+    syncWave: 1
   - name: external-services
     namespace: external-services
     path: argocd/extras/external-services

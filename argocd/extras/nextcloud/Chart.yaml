@@ -1,0 +1,10 @@
+name: nextcloud
+apiVersion: v2
+version: 0.0.0
+dependencies:
+  - name: postgresql
+    version: 12.2.7
+    repository: https://charts.bitnami.com/bitnami
+  - name: nextcloud
+    repository: https://nextcloud.github.io/helm/
+    version: 3.5.12
