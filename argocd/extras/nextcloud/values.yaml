@@ -25,21 +25,21 @@ nextcloud:
       - hosts:
           - nextcloud.owo.ac
         secretName: nextcloud-tls
-    nextcloud:
-      host: nextcloud.owo.ac
-      existingSecret:
-        enabled: true
-        secretName: nextcloud-secret
-        usernameKey: admin-username
-        passwordKey: admin-password
-        smtpUsernameKey: smtp-username
-        smtpPasswordKey: smtp-password
-      mail:
-        enabled: true
-        fromAddress: "noreply@miku.cx"
-        smtp:
-          host: "in-v3.mailjet.com"
-          port: 587
+  nextcloud:
+    host: nextcloud.owo.ac
+    existingSecret:
+      enabled: true
+      secretName: nextcloud-secret
+      usernameKey: admin-username
+      passwordKey: admin-password
+      smtpUsernameKey: smtp-username
+      smtpPasswordKey: smtp-password
+    mail:
+      enabled: true
+      fromAddress: "noreply@miku.cx"
+      smtp:
+        host: "in-v3.mailjet.com"
+        port: 587
   redis:
     enabled: true
     auth:
