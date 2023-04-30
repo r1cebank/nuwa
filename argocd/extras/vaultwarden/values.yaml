@@ -20,6 +20,7 @@ vaultwarden:
       gethomepage.dev/description: "Unofficial Bitwarden compatible server written in Rust"
       gethomepage.dev/group: "Tools"
       gethomepage.dev/icon: "vaultwarden.png"
+      gethomepage.dev/href: "https://vaultwarden.owo.ac"
     tls:
       - hosts:
           - vaultwarden.owo.ac
