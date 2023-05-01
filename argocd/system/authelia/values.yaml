@@ -89,12 +89,17 @@ authelia:
           skip_verify: true
       file:
         enabled: false
-      
+        
     # Identity providers, specifically OIDC
     identity_providers:
       oidc:
         enabled: false
+
     access_control:
+      ## TODO: use separate configuration for OIDC, this uses acl configuration for custom config
+      secret:
+        key: configuration.yaml
+        existingSecret: "authelia-oidc-secret"
       default_policy: deny
       networks:
         - name: private
@@ -176,12 +181,6 @@ authelia:
   secret:
     existingSecret: authelia-secret
   
-  ## TODO: use separate configuration for OIDC, this uses acl configuration for custom config
-  access_control:
-    secret:
-      key: configuration.yaml
-      existingSecret: "authelia-oidc-secret"
-
   ##
   ## Authelia Persistence Configuration.
   ##
