@@ -16,7 +16,5 @@ spec:
     database: keycloak
   ingress:
       enabled: false
-  http:
-    tlsSecret: keycloak-tls
   hostname:
     hostname: {{ .Values.ingress.host }}
