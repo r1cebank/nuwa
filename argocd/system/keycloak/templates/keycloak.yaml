@@ -1,3 +1,21 @@
+---
+# Create certificate
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kc-self-cert
+  namespace: {{ .Release.Namespace }}
+spec:
+  secretName: kc-self-secret
+  issuerRef:
+    name: ca-issuer
+    kind: ClusterIssuer
+  commonName: {{ .Values.ingress.host }}
+  dnsNames:
+  - {{ .Values.ingress.host }}
+  privateKey:
+    algorithm: ECDSA
+---
 apiVersion: k8s.keycloak.org/v2alpha1
 kind: Keycloak
 metadata:
@@ -16,5 +34,7 @@ spec:
     database: keycloak
   ingress:
       enabled: false
+  http:
+    tlsSecret: kc-self-secret
   hostname:
     hostname: {{ .Values.ingress.host }}
