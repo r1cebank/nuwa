@@ -74,6 +74,10 @@ Selector labels
       key:  N8N_ENCRYPTION_KEY
       name: {{ include "n8n.fullname" . }}
 {{ end }}
+- name: "N8N_HOST"
+  value: {{ get .Values.n8n "host" | default "localhost" | quote }}
+- name: "N8N_PROTOCOL"
+  value: {{ get .Values.n8n "protocol" | default "http" | quote }}
 {{- if or .Values.config .Values.secret }}
 - name: "N8N_CONFIG_FILES"
   value: {{ include "n8n.configFiles" . | quote }}
