@@ -53,14 +53,14 @@ spec:
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- if $.Values.scaling.webhook.enabled }}
-          # - path: {{ . }}webhook/
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: {{ $fullName }}-webhooks
-          #       port:
-          #         number: {{ $svcPort }}
           - path: {{ . }}webhook-test/
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+          - path: {{ . }}webhook/
             pathType: Prefix
             backend:
               service:
