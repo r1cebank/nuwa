@@ -96,11 +96,7 @@ authelia:
         enabled: false
 
     access_control:
-      ## TODO: use separate configuration for OIDC, this uses acl configuration for custom config
-      secret:
-        key: configuration.yaml
-        existingSecret: "authelia-oidc-secret"
-      default_policy: one_factor
+      default_policy: deny
       networks:
         - name: private
           networks:
