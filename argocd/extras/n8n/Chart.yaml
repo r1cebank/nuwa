@@ -1,6 +1,7 @@
 name: n8n
 apiVersion: v2
 version: 0.0.0
+appVersion: 0.226.0
 dependencies:
   - name: postgresql
     version: 12.2.7
@@ -8,6 +9,3 @@ dependencies:
   - name: redis
     version: 17.9.5
     repository: https://charts.bitnami.com/bitnami
-  - name: n8n
-    repository: https://8gears.container-registry.com/chartrepo/library/
-    version: 0.10.0
