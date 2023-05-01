@@ -1,0 +1,8 @@
+name: grocy
+apiVersion: v2
+version: 0.0.0
+appVersion: 3.3.2
+dependencies:
+  - name: common
+    repository: http://bjw-s.github.io/helm-charts/
+    version: 0.2.0

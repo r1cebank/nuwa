@@ -1,0 +1,63 @@
+image:
+  repository: linuxserver/grocy
+  pullPolicy: IfNotPresent
+
+env:
+  # -- Set the container timezone
+  TZ: America/Vancouver
+
+service:
+  main:
+    ports:
+      http:
+        port: 80
+
+ingress:
+  # -- Enable and configure ingress settings for the chart under this key.
+  # @default -- See values.yaml
+  main:
+    enabled: true
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: grocy.owo.ac
+
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Grocy"
+      gethomepage.dev/description: "ERP beyond your fridge"
+      gethomepage.dev/group: "Tools"
+      gethomepage.dev/icon: "grocy.png"
+    hosts:
+      - host: grocy.owo.ac
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: grocy-tls
+        hosts:
+          - grocy.owo.ac
+
+# -- Configure persistence settings for the chart under this key.
+# @default -- See values.yaml
+persistence:
+  config:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: longhorn
+  # Let the viewcache only persist for the lifetime of the pod, otherwise
+  # there will cases of blank pages when upgrading the image that require
+  # manually clearing the directory
+  viewcache:
+    enabled: true
+    type: emptyDir
+    mountPath: /config/data/viewcache

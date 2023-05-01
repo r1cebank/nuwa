@@ -57,6 +57,10 @@ apps:
     namespace: nextcloud
     path: argocd/extras/nextcloud
     syncWave: 1
+  - name: grocy
+    namespace: grocy
+    path: argocd/extras/grocy
+    syncWave: 1
   - name: external-services
     namespace: external-services
     path: argocd/extras/external-services
