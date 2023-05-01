@@ -24,5 +24,4 @@ spec:
               service:
                 name: kc-service
                 port:
-                  number: 8443
-                scheme: https
+                  number: 8080
