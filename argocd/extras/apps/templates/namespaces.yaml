@@ -7,3 +7,11 @@ metadata:
   name: apps
   annotations:
     linkerd.io/inject: enabled
+---
+# n8n namespace
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: n8n
+  annotations:
+    linkerd.io/inject: enabled
