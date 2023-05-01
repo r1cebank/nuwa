@@ -35,8 +35,10 @@ spec:
   ingress:
       enabled: false
   http:
-    httpEnabled: true
-    httpPort: 8080
+    httpEnabled: false
     tlsSecret: kc-self-secret
+  additionalOptions:
+    - name: proxy
+      value: reencrypt
   hostname:
     hostname: {{ .Values.ingress.host }}

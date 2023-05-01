@@ -24,4 +24,4 @@ spec:
               service:
                 name: kc-service
                 port:
-                  number: 8080
+                  number: 8443
