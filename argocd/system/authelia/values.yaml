@@ -175,6 +175,12 @@ authelia:
   ##
   secret:
     existingSecret: authelia-secret
+  
+  ## TODO: use separate configuration for OIDC, this uses acl configuration for custom config
+  access_control:
+    secret:
+      key: configuration.yaml
+      existingSecret: "authelia-oidc-secret"
 
   ##
   ## Authelia Persistence Configuration.
