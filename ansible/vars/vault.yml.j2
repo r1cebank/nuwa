@@ -29,6 +29,10 @@ vault:
       redis_password: {{ authelia_redis_password }}
       smtp_password: {{ smtp_password }}
       storage_password: {{ authelia_db_password }}
+  keycloak:
+    db:
+      password: {{ keycloak_db_password }}
+      username: keycloak
   openldap:
     admin:
       password: {{ openldap_admin_password }}

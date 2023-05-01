@@ -1,0 +1,25 @@
+ingress:
+  host: keycloak.owo.ac
+  tlsIssuer: letsencrypt-staging-issuer
+  annotations:
+    # HTTPS as entry point
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    # Enable TLS
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # Enable cert-manager to create automatically the SSL certificate and store in Secret
+    cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+    cert-manager.io/common-name: keycloak.owo.ac
+
+
+
+########################
+# postgresql subchart
+########################
+postgresql:
+  auth:
+    username: keycloak
+    database: keycloak
+    existingSecret: keycloak-secret
+  persistence:
+    storageClass: longhorn
+    size: 1Gi

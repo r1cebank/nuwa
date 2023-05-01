@@ -5,3 +5,6 @@ dependencies:
   - name: keycloak-operator
     version: 0.0.4
     repository: https://kbumsik.io/keycloak-kubernetes/
+  - name: postgresql
+    version: 12.2.7
+    repository: https://charts.bitnami.com/bitnami
