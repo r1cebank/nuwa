@@ -35,6 +35,7 @@ spec:
   ingress:
       enabled: false
   http:
+    httpEnabled: true
     tlsSecret: kc-self-secret
   hostname:
     hostname: {{ .Values.ingress.host }}
