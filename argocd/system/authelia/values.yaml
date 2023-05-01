@@ -100,7 +100,7 @@ authelia:
       secret:
         key: configuration.yaml
         existingSecret: "authelia-oidc-secret"
-      default_policy: deny
+      default_policy: one_factor
       networks:
         - name: private
           networks:
