@@ -47,6 +47,7 @@ spec:
           args: ["webhook"]
           env:
             {{- include "n8n.deploymentPodEnvironments" . | nindent 12 }}
+            {{- toYaml .Values.n8n.extraEnvs | nindent 12 }}
           ports:
             - name: http
               containerPort: {{ get .Values.config "port" | default 5678 }}

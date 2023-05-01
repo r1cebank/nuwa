@@ -78,6 +78,8 @@ Selector labels
   value: {{ get .Values.n8n "host" | default "localhost" | quote }}
 - name: "N8N_PROTOCOL"
   value: {{ get .Values.n8n "protocol" | default "http" | quote }}
+- name: "WEBHOOK_URL"
+  value: {{ get .Values.n8n "webhook" | default "localhost" | quote }}
 {{- if or .Values.config .Values.secret }}
 - name: "N8N_CONFIG_FILES"
   value: {{ include "n8n.configFiles" . | quote }}

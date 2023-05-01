@@ -3,7 +3,11 @@
 n8n:
   host: n8n.owo.ac
   protocol: https
+  webhook: https://n8n.owo.ac/
   encryption_key: # n8n creates a random encryption key automatically on the first launch and saves it in the ~/.n8n folder. That key is used to encrypt the credentials before they get saved to the database.
+  extraEnvs:
+    - name: "GENERIC_TIMEZONE"
+      value: America/Vancouver
 defaults:
 
 config: 
