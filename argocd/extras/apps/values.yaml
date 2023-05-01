@@ -61,6 +61,10 @@ apps:
     namespace: grocy
     path: argocd/extras/grocy
     syncWave: 1
+  - name: n8n
+    namespace: n8n
+    path: argocd/extras/n8n
+    syncWave: 1
   - name: external-services
     namespace: external-services
     path: argocd/extras/external-services
