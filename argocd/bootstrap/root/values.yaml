@@ -103,10 +103,6 @@ apps:
     namespace: authelia
     path: argocd/system/authelia
     syncWave: 16
-  - name: keycloak
-    namespace: keycloak
-    path: argocd/system/keycloak
-    syncWave: 16
     # Argo CD App
   - name: argocd
     namespace: argocd

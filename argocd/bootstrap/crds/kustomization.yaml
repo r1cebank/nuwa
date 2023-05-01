@@ -6,4 +6,3 @@ resources:
   - ./external-secrets
   - ./traefik
   - ./kube-prometheus-stack
-  - ./keycloak
