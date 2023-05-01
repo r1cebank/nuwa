@@ -13,5 +13,3 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: n8n
-  annotations:
-    linkerd.io/inject: enabled

@@ -11,6 +11,11 @@ n8n:
 defaults:
 
 config: 
+  database:
+    type: postgresdb
+    postgresdb:
+      host: n8n-postgresql
+      database: n8n
   executions:
     pruneData: "true" # prune executions by default
     pruneDataMaxAge: 3760 # Per defaut we store 1 year of history
@@ -31,11 +36,6 @@ secret: # Dict with all n8n json config options, unlike config the values here w
 
 ## ALL possible n8n Values
 
-database:
-  type: postgresdb
-  postgresdb:
-    host: n8n-postgresql
-    database: n8n
 #
 #database:
 #  type:             # Type of database to use - Other possible types ['sqlite', 'mariadb', 'mysqldb', 'postgresdb'] - default: sqlite
