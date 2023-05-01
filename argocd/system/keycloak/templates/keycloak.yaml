@@ -36,6 +36,7 @@ spec:
       enabled: false
   http:
     httpEnabled: true
+    httpPort: 8080
     tlsSecret: kc-self-secret
   hostname:
     hostname: {{ .Values.ingress.host }}
