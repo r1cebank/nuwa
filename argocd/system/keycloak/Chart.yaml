@@ -1,0 +1,7 @@
+apiVersion: v2
+name: keycloak
+version: 0.0.0
+dependencies:
+  - name: keycloak-operator
+    version: 0.0.4
+    repository: https://kbumsik.io/keycloak-kubernetes/
