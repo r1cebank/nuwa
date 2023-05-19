@@ -75,7 +75,7 @@ metadata:
   name: monitoring-https
   namespace: {{ .Release.Namespace }}
   annotations:
-  {{- if .Values.ingress.homepage.enabled -}}
+  {{- if .Values.ingress.homepage.enabled }}
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: {{ .Values.ingress.homepage.name }}
     gethomepage.dev/description: {{ .Values.ingress.homepage.description }}

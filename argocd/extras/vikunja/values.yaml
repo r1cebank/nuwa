@@ -9,7 +9,7 @@ ingress:
     icon: "vikunja.png"
   # configure cert-manager issuer
   certmanager:
-    tlsIssuer: letsencrypt-prod-issuer
+    tlsIssuer: letsencrypt-staging-issuer
 
 ########################
 # postgresql subchart
