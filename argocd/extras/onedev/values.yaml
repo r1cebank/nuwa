@@ -31,6 +31,12 @@ service:
 ingress:
   host: "onedev.owo.ac"
   class: traefik
+  homepage:
+    enabled: true
+    name: "Onedev"
+    description: "Self-hosted Git Server with CI/CD and Kanban"
+    group: "Development"
+    icon: "onedev.png"
   annotations:
     # HTTPS as entry point
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -39,12 +45,6 @@ ingress:
     # Enable cert-manager to create automatically the SSL certificate and store in Secret
     cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
     cert-manager.io/common-name: onedev.owo.ac
-
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "Onedev"
-    gethomepage.dev/description: "Self-hosted Git Server with CI/CD and Kanban"
-    gethomepage.dev/group: "Development"
-    gethomepage.dev/icon: "onedev.png"
   tls: true
 
 onedev:

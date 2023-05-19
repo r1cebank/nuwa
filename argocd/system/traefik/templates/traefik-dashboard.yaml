@@ -24,12 +24,14 @@ metadata:
   name: traefik-dashboard
   namespace: {{ .Release.Namespace }}
   annotations:
-    gethomepage.dev/href: "https://traefik.owo.ac/dashboard/"
+  {{- if .Values.ingress.homepage.enabled -}}
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/description: "The Cloud Native Application Proxy"
-    gethomepage.dev/group: "Monitoring"
-    gethomepage.dev/icon: "traefik.png"
-    gethomepage.dev/name: "Traefik"
+    gethomepage.dev/name: {{ .Values.ingress.homepage.name }}
+    gethomepage.dev/description: {{ .Values.ingress.homepage.description }}
+    gethomepage.dev/group: {{ .Values.ingress.homepage.group }}
+    gethomepage.dev/icon: {{ .Values.ingress.homepage.icon }}
+    gethomepage.dev/href: "https://traefik.owo.ac/dashboard/"
+  {{- end }}
 spec:
   entryPoints:
     - websecure

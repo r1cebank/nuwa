@@ -9,12 +9,12 @@ ingress:
     enable: true
     middlewareName: forwardauth-authelia
     middlewareNamespace: authelia
-  annotations:
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "Longhorn"
-    gethomepage.dev/description: "Cloud-Native distributed storage"
-    gethomepage.dev/group: "Monitoring"
-    gethomepage.dev/icon: "longhorn.png"
+  homepage:
+    enabled: true
+    name: "Longhorn"
+    description: "Cloud-Native distributed storage"
+    group: "Monitoring"
+    icon: "longhorn.png"
 
 # Backup S3 backend URL
 backup:

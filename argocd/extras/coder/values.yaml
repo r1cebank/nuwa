@@ -1,6 +1,12 @@
 # Ingress configuration
 ingress:
   host: coder.owo.ac
+  homepage:
+    enabled: true
+    name: "Coder"
+    description: "Your Self-Hosted Remote Development Platform"
+    group: "Development"
+    icon: "coder.png"
   annotations:
     # HTTPS as entry point
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -9,12 +15,6 @@ ingress:
     # Enable cert-manager to create automatically the SSL certificate and store in Secret
     cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
     cert-manager.io/common-name: coder.owo.ac
-
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "Coder"
-    gethomepage.dev/description: "Your Self-Hosted Remote Development Platform"
-    gethomepage.dev/group: "Development"
-    gethomepage.dev/icon: "coder.png"
 
 ########################
 # postgresql subchart

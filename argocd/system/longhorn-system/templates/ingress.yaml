@@ -21,6 +21,13 @@ metadata:
     {{- with .Values.ingress.annotations }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
+    {{- if .Values.ingress.homepage.enabled -}}
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: {{ .Values.ingress.homepage.name }}
+    gethomepage.dev/description: {{ .Values.ingress.homepage.description }}
+    gethomepage.dev/group: {{ .Values.ingress.homepage.group }}
+    gethomepage.dev/icon: {{ .Values.ingress.homepage.icon }}
+    {{- end }}
 spec:
   tls:
     - hosts:

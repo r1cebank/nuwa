@@ -22,12 +22,14 @@ metadata:
   name: vikunja-https
   namespace: {{ .Release.Namespace }}
   annotations:
-    gethomepage.dev/href: "https://{{ .Values.ingress.host }}"
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/description: "The open-source, self-hostable to-do app."
-    gethomepage.dev/group: Personal
-    gethomepage.dev/icon: vikunja.png
-    gethomepage.dev/name: Vijunja
+    {{- if .Values.ingress.homepage.enabled -}}
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: {{ .Values.ingress.homepage.name }}
+      gethomepage.dev/description: {{ .Values.ingress.homepage.description }}
+      gethomepage.dev/group: {{ .Values.ingress.homepage.group }}
+      gethomepage.dev/icon: {{ .Values.ingress.homepage.icon }}
+      gethomepage.dev/href: "https://{{ .Values.ingress.host }}"
+    {{- end }}
 spec:
   entryPoints:
     - websecure

@@ -15,12 +15,12 @@ ingress:
     enable: true
     middlewareName: forwardauth-authelia
     middlewareNamespace: authelia
-  annotations:
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "Linkerd"
-    gethomepage.dev/description: "Service mesh dashboard."
-    gethomepage.dev/group: "Monitoring"
-    gethomepage.dev/icon: "https://raw.githubusercontent.com/linkerd/linkerd2/main/web/app/img/favicon.png"
+  homepage:
+    enabled: true
+    name: "Linkerd"
+    description: "Service mesh dashboard."
+    group: "Monitoring"
+    icon: "https://raw.githubusercontent.com/linkerd/linkerd2/main/web/app/img/favicon.png"
 
 ########################
 # linkerd-viz subchart

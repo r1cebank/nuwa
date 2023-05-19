@@ -1,6 +1,12 @@
 # Ingress configuration
 ingress:
   host: vikunja.owo.ac
+  homepage:
+    enabled: true
+    name: "Vijunja"
+    description: "The open-source, self-hostable to-do app."
+    group: "Personal"
+    icon: "vikunja.png"
   # configure cert-manager issuer
   certmanager:
     tlsIssuer: letsencrypt-prod-issuer

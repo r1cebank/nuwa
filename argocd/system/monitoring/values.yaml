@@ -5,6 +5,12 @@ ingress:
   certmanager:
     tlsIssuer: letsencrypt-staging-issuer
   # Enabling traefik basic authorization, reusing global middleware created for Traefik
+  homepage:
+    enabled: true
+    description: Grafana dashboard
+    group: Monitoring
+    icon: grafana.png
+    name: Grafana
   auth:
     enable: true
     middlewareName: forwardauth-authelia

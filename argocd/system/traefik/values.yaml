@@ -15,6 +15,12 @@ ingress:
     enable: true
     middlewareName: forwardauth-authelia
     middlewareNamespace: authelia
+  homepage:
+    enabled: true
+    description: "The Cloud Native Application Proxy"
+    group: "Monitoring"
+    icon: "traefik.png"
+    name: "Traefik"
 
 # Prometheus servicemonitor configuration
 serviceMonitor:
