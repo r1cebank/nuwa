@@ -7,7 +7,7 @@ module "arch_mirror" {
   cpus           = var.arch_mirror_resources.cpus
   max_memory     = var.arch_mirror_resources.memory_max
   disk_size      = var.arch_mirror_resources.disk_size
-  sr_id          = data.xenorchestra_sr.sr_sata.id
+  sr_id          = data.xenorchestra_sr.cerulean_sata.id
   network_id     = data.xenorchestra_network.default_network.id
   template_id    = data.xenorchestra_template.vm_template_2204.id
   affinity_host  = data.xenorchestra_host.cerulean.id

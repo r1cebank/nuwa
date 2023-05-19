@@ -7,7 +7,7 @@ module "minio_server" {
   cpus           = var.minio_host_resources.cpus
   max_memory     = var.minio_host_resources.memory_max
   disk_size      = var.minio_host_resources.disk_size
-  sr_id          = data.xenorchestra_sr.sr_sata.id
+  sr_id          = data.xenorchestra_sr.cerulean_sata.id
   network_id     = data.xenorchestra_network.default_network.id
   template_id    = data.xenorchestra_template.vm_template_2204.id
   affinity_host  = data.xenorchestra_pool.pool.master
@@ -23,7 +23,7 @@ module "minio_server" {
 
   additional_disk      = true
   additional_disk_size = var.minio_host_resources.additional_disk_size
-  additional_disk_sr_id = data.xenorchestra_sr.sr_sata.id
+  additional_disk_sr_id = data.xenorchestra_sr.cerulean_sata.id
 
   tags = [
     "minio"
