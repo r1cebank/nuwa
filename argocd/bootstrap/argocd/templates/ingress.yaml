@@ -13,8 +13,13 @@ metadata:
     # Enable cert-manager to create automatically the SSL certificate and store in Secret
     cert-manager.io/cluster-issuer: {{ .Values.ingress.certmanager.tlsIssuer }}
     cert-manager.io/common-name: {{ .Values.ingress.host }}
-    {{- with .Values.ingress.annotations }}
-      {{- toYaml . | nindent 4 }}
+    
+    {{- if .Values.ingress.homepage.enabled -}}
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: {{ .Values.ingress.homepage.name }}
+    gethomepage.dev/description: {{ .Values.ingress.homepage.description }}
+    gethomepage.dev/group: {{ .Values.ingress.homepage.group }}
+    gethomepage.dev/icon: {{ .Values.ingress.homepage.icon }}
     {{- end }}
 spec:
   tls:

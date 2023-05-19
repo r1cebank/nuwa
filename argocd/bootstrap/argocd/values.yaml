@@ -4,12 +4,12 @@ ingress:
   # configure cert-manager issuer
   certmanager:
     tlsIssuer: letsencrypt-staging-issuer
-  annotations:
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "Argo CD"
-    gethomepage.dev/description: "Declarative GitOps CD for Kubernetes"
-    gethomepage.dev/group: "Infrastructure"
-    gethomepage.dev/icon: "arggocd.png"
+  homepage:
+    enabled: true
+    name: "Argo CD"
+    description: "Declarative GitOps CD for Kubernetes"
+    group: "Infrastructure"
+    icon: "arggocd.png"
 
 argo-cd:
   secret:
