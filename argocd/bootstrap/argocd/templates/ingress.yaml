@@ -1,15 +1,4 @@
 ---
-# Traefik Middleware adding linkerd custom header
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: l5d-header-middleware-argocd
-  namespace: {{ .Release.Namespace }}
-spec:
-  headers:
-    customRequestHeaders:
-      l5d-dst-override: argocd-server.{{ .Release.Namespace }}.svc.cluster.local:80
----
 # HTTPS Ingres
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -24,8 +13,6 @@ metadata:
     # Enable cert-manager to create automatically the SSL certificate and store in Secret
     cert-manager.io/cluster-issuer: {{ .Values.ingress.certmanager.tlsIssuer }}
     cert-manager.io/common-name: {{ .Values.ingress.host }}
-    # Linkerd header
-    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-l5d-header-middleware-argocd@kubernetescrd
   {{- if .Values.ingress.homepage.enabled }}
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: {{ .Values.ingress.homepage.name }}
