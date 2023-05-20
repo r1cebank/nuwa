@@ -29,7 +29,7 @@ openldap-stack-ha:
         cert-manager.io/common-name: phpldapadmin.owo.ac
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "phpLDAPadmin"
-        gethomepage.dev/description: "Web-based LDAP browser to manage your LDAP server"
+        gethomepage.dev/description: "Web-based LDAP browser"
         gethomepage.dev/group: "Infrastructure"
         gethomepage.dev/icon: "phpldapadmin.png"
       hosts:
