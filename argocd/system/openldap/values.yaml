@@ -27,5 +27,10 @@ openldap-stack-ha:
         # Enable cert-manager to create automatically the SSL certificate and store in Secret
         cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
         cert-manager.io/common-name: phpldapadmin.owo.ac
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: "phpLDAPadmin"
+        gethomepage.dev/description: "Web-based LDAP browser to manage your LDAP server"
+        gethomepage.dev/group: "Infrastructure"
+        gethomepage.dev/icon: "phpldapadmin.png"
       hosts:
         - phpldapadmin.owo.ac
