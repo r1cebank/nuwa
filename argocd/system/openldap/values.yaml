@@ -7,7 +7,7 @@ tcpIngress:
 ###################
 openldap-stack-ha:
   global:
-    ldapDomain: ldap.owo.ac
+    ldapDomain: owo.ac
     existingSecret: openldap-secret
   image:
     tag: 2.6.4
