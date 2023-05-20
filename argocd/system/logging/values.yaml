@@ -17,9 +17,9 @@ elasticsearch:
   # Limiting resources of elasticsearch pod
   podSpecResources:
     requests:
-      memory: "2Gi"
+      memory: "4Gi"
     limits:
-      memory: "2Gi"
+      memory: "4Gi"
 
   # Ingress configuration
   ingress:

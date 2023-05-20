@@ -4,7 +4,7 @@
 variable "k3s_master_cluster_resources" {
   default = {
     memory_max = 16 * 1024 * 1024 * 1024   # 16gb
-    disk_size  = 100 * 1024 * 1024 * 1024 # 100gb
+    disk_size  = 200 * 1024 * 1024 * 1024 # 200gb
     size       = 3
     cpus       = 4
     ips = [
@@ -18,8 +18,8 @@ variable "k3s_master_cluster_resources" {
 variable "k3s_worker_cluster_resources" {
   default = {
     memory_max           = 32 * 1024 * 1024 * 1024  # 32gb
-    disk_size            = 100 * 1024 * 1024 * 1024  # 100gb
-    additional_disk_size = 500 * 1024 * 1024 * 1024 # 500gb
+    disk_size            = 200 * 1024 * 1024 * 1024  # 200gb
+    additional_disk_size = 1024 * 1024 * 1024 * 1024 # 1tb
     size                 = 3
     cpus                 = 8
     ips = [
