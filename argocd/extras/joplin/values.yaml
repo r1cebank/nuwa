@@ -9,7 +9,7 @@ image:
   # -- image repository
   repository: joplin/server
     # -- image tag
-  tag: 2.10.10-beta
+  tag: 2.11.1-beta
   # -- image pull policy
   pullPolicy: IfNotPresent
 
