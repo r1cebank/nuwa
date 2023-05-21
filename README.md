@@ -46,3 +46,61 @@ kubectl --kubeconfig ~/.kube/k3s.yaml get pods -n longhorn-system --no-headers=t
 ```
 kubectl --kubeconfig ~/.kube/k3s.yaml --namespace longhorn-system port-forward --address 0.0.0.0 service/longhorn-frontend 5080:80
 ```
+
+### NUT on Xcp-ng host
+
+#### Enable epel library
+```
+yum --enablerepo=* install epel-release
+
+yum --enablerepo=* install nut-client.x86_64
+```
+
+#### Set NUT client to netclient
+
+```
+nano /etc/ups/nut.conf
+MODE=netclient
+```
+
+#### Set monitor address
+
+```
+nano /etc/ups/upsmon.conf
+MONITOR ups@10.0.50.103 1 monuser secret slave
+SHUTDOWNCMD "/etc/ups/xen-shutdown.sh"
+```
+
+#### Download the xen-shutdown.sh script
+```
+cd /etc/ups
+wget https://raw.githubusercontent.com/r1cebank/nuwa/main/xen-shutdown.sh
+chmod +x xen-shutdown.sh
+```
+
+#### Create nut-monitor service
+
+```
+mkdir /run/nut/
+nano /etc/systemd/system/nut-monitor.service
+
+[Unit]
+Description=Network UPS Tools - XenServer Shutdown
+After=local-fs.target network.target
+ 
+[Service]
+ExecStart=/usr/sbin/upsmon
+PIDFile=/run/nut/upsmon.pid
+Type=forking
+ 
+[Install]
+WantedBy=multi-user.target
+```
+
+#### Enable and start service
+
+```
+systemctl enable nut-monitor.service
+systemctl daemon-reload
+systemctl start nut-monitor
+```
