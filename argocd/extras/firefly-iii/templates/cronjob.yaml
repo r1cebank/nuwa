@@ -7,8 +7,6 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: {{ include "common.names.fullname" . }}-recurring-transactions
-  labels:
-    {{- include "common.labels" . | nindent 4 }}
 spec:
   schedule: {{ .Values.cronjobs.recurring.schedule | quote }}
   concurrencyPolicy: Replace
