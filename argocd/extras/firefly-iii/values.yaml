@@ -1,0 +1,96 @@
+image:
+  repository: fireflyiii/core
+  pullPolicy: IfNotPresent
+  tag: version-6.0.10
+
+envFrom:
+  - configMapRef:
+    name: firefly-iii-cm
+
+env:
+  # -- Set the container timezone
+  TZ: America/Vancouver
+  SITE_OWNER: siyuangao@pm.me
+  APP_KEY:
+    valueFrom:
+      secretKeyRef:
+        name: fireflyiii-secret
+        key: api-token
+  STATIC_CRON_TOKEN:
+    valueFrom:
+      secretKeyRef:
+        name: fireflyiii-secret
+        key: cron-token
+  APP_URL: https://firefly.owo.ac
+  DB_CONNECTION: pgsql
+  DB_HOST: firefly-iii-postgresql
+  DB_PORT: 5432
+  DB_DATABASE: firefly
+  DB_USERNAME: firefly
+  DB_PASSWORD:
+    valueFrom:
+      secretKeyRef:
+        name: fireflyiii-secret
+        key: postgres-password
+  MAIL_MAILER: smtp
+  MAIL_HOST: in-v3.mailjet.com
+  MAIL_PORT: 587
+  MAIL_FROM: noreply@dacong.io
+  MAIL_USERNAME:
+    valueFrom:
+      secretKeyRef:
+        name: fireflyiii-secret
+        key: smtp-user
+  MAIL_PASSWORD:
+    valueFrom:
+      secretKeyRef:
+        name: fireflyiii-secret
+        key: smtp-password
+
+service:
+  main:
+    ports:
+      http:
+        port: 8080
+
+ingress:
+  main:
+    enabled: true
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
+      cert-manager.io/common-name: firefly.owo.ac
+
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Firefly"
+      gethomepage.dev/description: "A free and open source personal finance manager"
+      gethomepage.dev/group: "Personal"
+      gethomepage.dev/icon: "firefly.png"
+    hosts:
+      - host: firefly.owo.ac
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: firefly-tls
+        hosts:
+          - firefly.owo.ac
+
+########################
+# postgresql subchart
+########################
+postgresql:
+  primary:
+    podAnnotations:
+      linkerd.io/inject: enabled
+  auth:
+    username: firefly
+    database: firefly
+    existingSecret: firefly-secret
+  persistence:
+    storageClass: longhorn
+    size: 10Gi

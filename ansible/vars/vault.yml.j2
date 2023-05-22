@@ -156,3 +156,13 @@ vault:
   n8n:
     db:
       password: {{ n8n_db_password }}
+  # firefly-iii
+  fireflyiii:
+    token:
+      cron: {{ fireflyiii_cron_token }}
+      api: {{ fireflyiii_api_token }}
+    db:
+      password: {{ fireflyiii_db_password }}
+    smtp:
+      username: {{ smtp_username }}
+      password: {{ smtp_password }}
