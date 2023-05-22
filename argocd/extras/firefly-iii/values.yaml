@@ -10,6 +10,11 @@ envFrom:
 env:
   # -- Set the container timezone
   TZ: America/Vancouver
+  APP_ENV: local
+  DEFAULT_LANGUAGE: en_US
+  TRUSTED_PROXIES: "**"
+  CACHE_DRIVER: file
+  SESSION_DRIVER: file
   SITE_OWNER: siyuangao@pm.me
   APP_KEY:
     valueFrom:
