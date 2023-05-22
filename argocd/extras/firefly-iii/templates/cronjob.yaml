@@ -64,4 +64,3 @@ spec:
           securityContext: {{- toYaml . | nindent 12 }}
           {{- end }}
           restartPolicy: {{ .Values.cronjobs.recurring.restartPolicy }}
-{{- end -}}
