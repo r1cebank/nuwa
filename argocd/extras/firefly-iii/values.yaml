@@ -3,10 +3,6 @@ image:
   pullPolicy: IfNotPresent
   tag: version-6.0.10
 
-envFrom:
-  - configMapRef:
-    name: firefly-iii-cm
-
 env:
   # -- Set the container timezone
   TZ: America/Vancouver
