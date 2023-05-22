@@ -90,7 +90,7 @@ postgresql:
   auth:
     username: firefly
     database: firefly
-    existingSecret: firefly-secret
+    existingSecret: fireflyiii-secret
   persistence:
     storageClass: longhorn
     size: 10Gi
