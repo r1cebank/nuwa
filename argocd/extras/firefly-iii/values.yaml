@@ -2,6 +2,30 @@ image:
   repository: fireflyiii/core
   pullPolicy: IfNotPresent
   tag: version-6.0.10
+cronjobs:
+  recurring:
+    # -- Enable cronjob for creating recurring transactions
+    enabled: true
+    # -- Schedule time in UTC
+    schedule: "0 3 * * *"
+    image:
+      repository: curlimages/curl
+      pullPolicy: IfNotPresent
+      tag: 7.81.0
+    # -- How many pods to keep around for successful jobs
+    successfulJobsHistoryLimit: 3
+    # -- How many pods to keep around for failed jobs
+    failedJobsHistoryLimit: 1
+    # -- How to treat failed jobs
+    restartPolicy: OnFailure
+    imagePullSecrets: []
+    podAnnotations: {}
+    securityContext: {}
+    podSecurityContext: {}
+    resources: {}
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
 
 env:
   # -- Set the container timezone
@@ -63,7 +87,7 @@ ingress:
       # Enable TLS
       traefik.ingress.kubernetes.io/router.tls: "true"
       # Enable cert-manager to create automatically the SSL certificate and store in Secret
-      cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
+      cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
       cert-manager.io/common-name: firefly.owo.ac
 
       gethomepage.dev/enabled: "true"
