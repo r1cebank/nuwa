@@ -31,6 +31,10 @@ postgresql:
 ########################
 vikunja:
   api:
+    image:
+      repository: vikunja/api
+      pullPolicy: Always
+      tag: "unstable"
     ingress:
       enabled: false
     service:
