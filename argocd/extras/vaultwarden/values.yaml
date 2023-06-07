@@ -2,6 +2,10 @@
 # vaultwarden subchart
 ########################
 vaultwarden:
+  image:
+    pullPolicy: IfNotPresent
+    repository: vaultwarden/server
+    tag: "1.28.1-alpine"
   ingress:
     enabled: true
     className: traefik

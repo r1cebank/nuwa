@@ -8,7 +8,7 @@ image:
   repository: searxng/searxng
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "2023.4.12-b07e44e5"
+  tag: "2023.6.6-b295b497"
 
 imagePullSecrets: []
 nameOverride: ""

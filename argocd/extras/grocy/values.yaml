@@ -1,6 +1,7 @@
 image:
   repository: linuxserver/grocy
   pullPolicy: IfNotPresent
+  tag: 3.3.2
 
 env:
   # -- Set the container timezone

@@ -4,7 +4,7 @@
 
 nextcloud:
   image:
-    tag: 26.0.1-apache
+    tag: 26.0.2-apache
   ingress:
     enabled: true
     annotations:
