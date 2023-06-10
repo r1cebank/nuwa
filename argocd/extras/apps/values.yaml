@@ -65,10 +65,10 @@ apps:
     namespace: n8n
     path: argocd/extras/n8n
     syncWave: 1
-  - name: firefly-iii
-    namespace: firefly-iii
-    path: argocd/extras/firefly-iii
-    syncWave: 1
+  # - name: firefly-iii
+  #   namespace: firefly-iii
+  #   path: argocd/extras/firefly-iii
+  #   syncWave: 1
   - name: external-services
     namespace: external-services
     path: argocd/extras/external-services
