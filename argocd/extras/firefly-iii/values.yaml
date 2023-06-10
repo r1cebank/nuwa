@@ -30,6 +30,7 @@ cronjobs:
 env:
   # -- Set the container timezone
   TZ: America/Vancouver
+  SEND_ERROR_MESSAGE: false
   APP_ENV: local
   DEFAULT_LANGUAGE: en_US
   TRUSTED_PROXIES: "**"
