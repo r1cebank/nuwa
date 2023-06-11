@@ -13,6 +13,9 @@ image:
   # -- image pull policy
   pullPolicy: IfNotPresent
 
+env:
+  MEMOS_PORT: 5230
+
 # -- Configures service settings for the chart.
 # @default -- See values.yaml
 service:
