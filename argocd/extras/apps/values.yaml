@@ -65,6 +65,10 @@ apps:
     namespace: n8n
     path: argocd/extras/n8n
     syncWave: 1
+  - name: memos
+    namespace: memos
+    path: argocd/extras/memos
+    syncWave: 1
   # - name: firefly-iii
   #   namespace: firefly-iii
   #   path: argocd/extras/firefly-iii
