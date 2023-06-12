@@ -8,6 +8,8 @@ spec:
   count: 1
   elasticsearchRef:
     name: {{ .Values.eck.clusterName }}
+  config:
+    server.publicBaseUrl: https://{{ .Values.kibana.ingress.host }}
   http:
     tls:
       selfSignedCertificate:
