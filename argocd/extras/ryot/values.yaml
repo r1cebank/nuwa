@@ -16,6 +16,10 @@ image:
 env:
   WEB_INSECURE_COOKIE: false
 
+podSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+
 # -- Configures service settings for the chart.
 # @default -- See values.yaml
 service:
