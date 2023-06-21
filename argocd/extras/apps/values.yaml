@@ -69,6 +69,10 @@ apps:
     namespace: memos
     path: argocd/extras/memos
     syncWave: 1
+  - name: ryot
+    namespace: ryot
+    path: argocd/extras/ryot
+    syncWave: 1
   # - name: firefly-iii
   #   namespace: firefly-iii
   #   path: argocd/extras/firefly-iii
