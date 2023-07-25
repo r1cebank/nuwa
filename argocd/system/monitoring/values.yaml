@@ -114,6 +114,17 @@ kube-prometheus-stack:
                 storage: 20Gi
       # Retention period
       retention: 7d
+      # Removing default filter Prometheus selectors
+      # Default selector filters
+      # matchLabels:
+      #   release: {{ $.Release.Name | quote }}
+      # ServiceMonitor, PodMonitor, Probe and Rules need to have label 'release' equals to kube-prom helm release
+
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
+
     serviceMonitor:
       relabelings:
         # Replace job value
