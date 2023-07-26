@@ -165,7 +165,7 @@ image:
   repository: n8nio/n8n
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.232.0-debian"
+  tag: "1.1.0"
 
 imagePullSecrets: []
 nameOverride: ""

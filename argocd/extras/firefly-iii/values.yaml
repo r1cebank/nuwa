@@ -1,7 +1,7 @@
 image:
   repository: fireflyiii/core
   pullPolicy: IfNotPresent
-  tag: version-6.0.11
+  tag: version-6.0.18
 cronjobs:
   recurring:
     # -- Enable cronjob for creating recurring transactions

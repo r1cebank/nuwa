@@ -3,6 +3,6 @@ tunnels:
   argocd:
     enabled: true
     cloudflared:
-      image: cloudflare/cloudflared:2023.4.0
+      image: cloudflare/cloudflared:2023.7.3
       token:
         existingSecret: argocd-tunnel-secret

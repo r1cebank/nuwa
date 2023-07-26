@@ -9,7 +9,7 @@ image:
   # -- image repository
   repository: neosmemo/memos
   # -- image tag
-  tag: "0.13"
+  tag: "0.14"
   # -- image pull policy
   pullPolicy: IfNotPresent
 
