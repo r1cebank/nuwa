@@ -2,6 +2,9 @@ name: ryot
 apiVersion: v2
 version: 0.0.0
 dependencies:
+  - name: postgresql
+    version: 12.2.7
+    repository: https://charts.bitnami.com/bitnami
   - name: common
     repository: http://bjw-s.github.io/helm-charts/
     version: 0.2.0

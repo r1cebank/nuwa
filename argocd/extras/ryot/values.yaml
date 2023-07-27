@@ -15,6 +15,11 @@ image:
 
 env:
   WEB_INSECURE_COOKIE: false
+  DATABASE_URL:
+    valueFrom:
+        secretKeyRef:
+          name: ryot-secret
+          key: DATABASE_URL
 
 podSecurityContext:
   runAsUser: 1001
@@ -73,3 +78,18 @@ persistence:
         requests:
           storage: 10Gi
       storageClassName: longhorn
+
+########################
+# postgresql subchart
+########################
+postgresql:
+  primary:
+    podAnnotations:
+      linkerd.io/inject: enabled
+  auth:
+    username: ryot
+    database: ryot
+    existingSecret: ryot-secret
+  persistence:
+    storageClass: longhorn
+    size: 10Gi
