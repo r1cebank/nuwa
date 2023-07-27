@@ -53,7 +53,7 @@ ingress:
       gethomepage.dev/name: "Ryot"
       gethomepage.dev/description: "Roll your own tracker!"
       gethomepage.dev/group: "Personal"
-      gethomepage.dev/icon: "https://github.com/IgnisDa/ryot/blob/78d8e667a3a7e0e05f0812dea4b71be019edd41a/apps/frontend/public/ryot-logo.png"
+      gethomepage.dev/icon: "https://raw.githubusercontent.com/IgnisDa/ryot/78d8e667a3a7e0e05f0812dea4b71be019edd41a/apps/frontend/public/icon-512x512.png"
     hosts:
       - host: ryot.owo.ac
         paths:
