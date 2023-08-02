@@ -1,0 +1,9 @@
+#############################
+# Arch Mirror configuration #
+#############################
+
+arch_mirror_hostname: "arch.miku.cx"
+arch_mirror_dir: /archmirror/arch
+arch_mirror_sync_script_path: /archmirror/syncrepo.sh
+arch_mirror_repo_rsync_source: rsync://mirror.csclub.uwaterloo.ca/archlinux/
+arch_mirror_repo_lastupdate: http://mirror.csclub.uwaterloo.ca/archlinux/lastupdate

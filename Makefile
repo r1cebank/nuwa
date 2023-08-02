@@ -56,6 +56,10 @@ k3s-bootstrap:
 k3s-apps:
 	ansible-playbook ansible/k3s_apps.yml --vault-password-file=./ansible/.vault/vault_pass.sh
 
+.PHONY: arch-mirror
+arch-mirror:
+	ansible-playbook ansible/arch_mirror.yml --vault-password-file=./ansible/.vault/vault_pass.sh
+
 .PHONY: k3s-uninstall
 k3s-uninstall:
 	ansible-playbook ansible/k3s_uninstall.yml

@@ -1,0 +1,26 @@
+---
+
+- name: Setup arch mirror server
+  hosts: arch_mirror
+  remote_user: archmirror
+  gather_facts: true
+  pre_tasks:
+    # Include vault variables
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+    # Include acme variables
+    - name: Include acme variables
+      include_vars: "vars/acme.yml"
+    # Include arch_mirror variables
+    - name: Include arch_mirror variables
+      include_vars: "vars/arch_mirror.yml"
+  roles:
+    - role: install_caddy
+    - role: create_arch_repo_sync_job
+  vars:
+    caddy:
+      hosts:
+        - hostname: "{{ arch_mirror_hostname }}"
+          file_root: "{{ arch_mirror_dir }}"
+      dns_resolver_email: "{{ cloudflare_email }}"
+      dns_resolver_token: "{{ cloudflare_api_token }}"

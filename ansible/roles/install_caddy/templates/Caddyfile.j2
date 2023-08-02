@@ -4,10 +4,16 @@
             dns cloudflare {{ caddy.dns_resolver_token }}
             resolvers 1.1.1.1
     }
+    {% if host.port is defined %}
     reverse_proxy http://127.0.0.1:{{ host.port }}
     request_body {
         max_size 2048MB
     }
+    {% endif %}
+    {% if host.file_root is defined %}
+    root * {{ host.file_root }}
+    file_server browse
+    {% endif %}
 }
 {% endfor %}
 
