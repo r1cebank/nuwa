@@ -6,6 +6,9 @@ tcpIngress:
 # openldap-stack subchart
 ###################
 openldap-stack-ha:
+  replicaCount: 1
+  customTLS:
+    enabled: false
   global:
     ldapDomain: owo.ac
     existingSecret: openldap-secret
