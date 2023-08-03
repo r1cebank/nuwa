@@ -86,3 +86,7 @@ ingress:
         paths:
           - path: /
             pathType: Prefix
+    tls:
+      - secretName: homepage-tls
+        hosts:
+          - homepage.owo.ac

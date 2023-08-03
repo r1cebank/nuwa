@@ -35,7 +35,10 @@ ingress:
         paths:
           - path: /
             pathType: Prefix
-
+    tls:
+    - hosts:
+        - actual.owo.ac
+      secretName: actual-tls
 persistence:
   data:
     enabled: true
