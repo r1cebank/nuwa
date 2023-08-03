@@ -10,7 +10,7 @@ openldap-stack-ha:
     ldapDomain: owo.ac
     existingSecret: openldap-secret
   image:
-    tag: 2.6.4
+    tag: 2.6.6
     pullPolicy: IfNotPresent
   persistence:
     storageClass: longhorn
@@ -34,7 +34,3 @@ openldap-stack-ha:
         gethomepage.dev/icon: "phpldapadmin.png"
       hosts:
         - phpldapadmin.owo.ac
-      tls:
-        - hosts:
-            - phpldapadmin.owo.ac
-          secretName: phpldapadmin-tls
