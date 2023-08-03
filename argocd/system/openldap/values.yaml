@@ -9,10 +9,8 @@ openldap-stack-ha:
   global:
     ldapDomain: owo.ac
     existingSecret: openldap-secret
-  env:
-    LDAP_TLS_VERIFY_CLIENT: try
   image:
-    tag: 2.6.6
+    tag: 2.6.4
     pullPolicy: IfNotPresent
   persistence:
     storageClass: longhorn
