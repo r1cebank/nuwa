@@ -6,6 +6,8 @@ tcpIngress:
 # openldap-stack subchart
 ###################
 openldap-stack-ha:
+  env:
+    LDAP_EXTRA_SCHEMAS: "cosine,inetorgperson,nis"
   global:
     ldapDomain: owo.ac
     existingSecret: openldap-secret
