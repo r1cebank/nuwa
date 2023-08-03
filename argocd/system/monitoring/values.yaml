@@ -3,7 +3,7 @@ ingress:
   host: monitoring.owo.ac
   # configure cert-manager issuer
   certmanager:
-    tlsIssuer: letsencrypt-staging-issuer
+    tlsIssuer: letsencrypt-prod-issuer
   # Enabling traefik basic authorization, reusing global middleware created for Traefik
   homepage:
     enabled: true

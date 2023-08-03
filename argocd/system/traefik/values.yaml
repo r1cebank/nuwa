@@ -9,7 +9,7 @@ ingress:
   certmanager:
     # tlsIssuer=letsecrypt to generate valid TLS certficiate using IONOS API
     # tlsIssuer=ca to generate a CA-signed certificate (not valid)
-    tlsIssuer: letsencrypt-staging-issuer
+    tlsIssuer: letsencrypt-prod-issuer
   # Enabling traefik basic authorization, reusing global middleware created for Traefik
   auth:
     enable: true

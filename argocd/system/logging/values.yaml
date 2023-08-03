@@ -26,7 +26,7 @@ elasticsearch:
     host: elasticsearch.owo.ac
     # configure cert-manager issuer
     certmanager:
-      tlsIssuer: letsencrypt-staging-issuer
+      tlsIssuer: letsencrypt-prod-issuer
 
 # Kibana configuration
 kibana:
@@ -42,7 +42,7 @@ kibana:
     host: kibana.owo.ac
     # configure cert-manager issuer
     certmanager:
-      tlsIssuer: letsencrypt-staging-issuer
+      tlsIssuer: letsencrypt-prod-issuer
     annotations:
       gethomepage.dev/enabled: "true"
       gethomepage.dev/name: "Kibana"
