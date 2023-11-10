@@ -5,7 +5,7 @@ vaultwarden:
   image:
     pullPolicy: IfNotPresent
     repository: vaultwarden/server
-    tag: "1.29.0-alpine"
+    tag: "1.30.0-alpine"
   ingress:
     enabled: true
     className: traefik
