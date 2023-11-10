@@ -77,8 +77,6 @@ gitea:
     config:
       server:
         ENABLE_PPROF: true
-    podAnnotations:
-      linkerd.io/inject: enabled
   postgresql:
     enabled: true
   memcached:

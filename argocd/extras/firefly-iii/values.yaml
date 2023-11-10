@@ -110,9 +110,6 @@ ingress:
 # postgresql subchart
 ########################
 postgresql:
-  primary:
-    podAnnotations:
-      linkerd.io/inject: enabled
   auth:
     username: firefly
     database: firefly

@@ -30,10 +30,10 @@ apps:
     path: argocd/system/cert-manager
     syncWave: 4
     # Linkerd service mesh
-  - name: linkerd
-    namespace: linkerd
-    path: argocd/system/linkerd
-    syncWave: 5
+  # - name: linkerd
+  #   namespace: linkerd
+  #   path: argocd/system/linkerd
+  #   syncWave: 5
     # Traefik Ingress Controller
   - name: traefik
     namespace: traefik
@@ -68,28 +68,28 @@ apps:
     path: argocd/system/logging
     syncWave: 11
     # Kube-prometheus-stack
-  - name: monitoring
-    namespace: monitoring
-    path: argocd/system/monitoring
-    syncWave: 12
+  # - name: monitoring
+  #   namespace: monitoring
+  #   path: argocd/system/monitoring
+  #   syncWave: 12
     helm:
       # skip installation kube-prometheus-stack CDRs
       skipCrds: true
     # Linkerd-viz
-  - name: linkerd-viz
-    namespace: linkerd-viz
-    path: argocd/system/linkerd-viz
-    syncWave: 13
+  # - name: linkerd-viz
+  #   namespace: linkerd-viz
+  #   path: argocd/system/linkerd-viz
+  #   syncWave: 13
     # Tracing: Tempo
-  - name: tracing
-    namespace: tracing
-    path: argocd/system/tracing
-    syncWave: 14
+  # - name: tracing
+  #   namespace: tracing
+  #   path: argocd/system/tracing
+  #   syncWave: 14
     # Linkerd-jaeger
-  - name: linkerd-jaeger
-    namespace: linkerd-jaeger
-    path: argocd/system/linkerd-jaeger
-    syncWave: 15
+  # - name: linkerd-jaeger
+  #   namespace: linkerd-jaeger
+  #   path: argocd/system/linkerd-jaeger
+  #   syncWave: 15
     # Authentik
   # - name: authentik
   #   namespace: authentik

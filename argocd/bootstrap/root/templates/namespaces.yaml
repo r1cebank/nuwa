@@ -19,24 +19,18 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: logging
-  annotations:
-    linkerd.io/inject: enabled
 ---
 # monitoring
 kind: Namespace
 apiVersion: v1
 metadata:
   name: monitoring
-  annotations:
-    linkerd.io/inject: enabled
 ---
 # tracing
 kind: Namespace
 apiVersion: v1
 metadata:
   name: tracing
-  annotations:
-    linkerd.io/inject: enabled
 
 ---
 # authentik
@@ -44,8 +38,6 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: authentik
-  annotations:
-    linkerd.io/inject: enabled
 
 ---
 # authelia
@@ -53,5 +45,3 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: authelia
-  annotations:
-    linkerd.io/inject: enabled

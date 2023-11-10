@@ -44,9 +44,6 @@ service:
       http:
         port: 8000
 
-podAnnotations:
-    linkerd.io/inject: enabled
-
 ingress:
   main:
     enabled: true
@@ -93,9 +90,6 @@ persistence:
 # postgresql subchart
 ########################
 postgresql:
-  primary:
-    podAnnotations:
-      linkerd.io/inject: enabled
   auth:
     username: ryot
     database: ryot

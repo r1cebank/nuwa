@@ -49,16 +49,11 @@ vaultwarden:
   database:
     type: postgresql
     existingSecret: vaultwarden-secret
-  podAnnotations:
-    linkerd.io/inject: enabled
 
 ########################
 # postgresql subchart
 ########################
 postgresql:
-  primary:
-    podAnnotations:
-      linkerd.io/inject: enabled
   auth:
     username: vaultwarden
     database: vaultwarden

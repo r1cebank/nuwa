@@ -40,7 +40,3 @@ velero:
     features: EnableCSI
   credentials:
     existingSecret: velero-secret
-
-  # Enable linkerd
-  podAnnotations:
-    linkerd.io/inject: enabled

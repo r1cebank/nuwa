@@ -71,9 +71,6 @@ authentik:
 # postgresql subchart
 ########################
 postgresql:
-  primary:
-    podAnnotations:
-      linkerd.io/inject: enabled
   auth:
     username: authentik
     database: authentik

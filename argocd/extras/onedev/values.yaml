@@ -55,8 +55,6 @@ onedev:
     size: 100Gi
   resources:
     memory: 1024Mi
-  podAnnotations:
-    linkerd.io/inject: enabled
 
 database:
   existingSecret: onedev-db-secret
@@ -65,8 +63,6 @@ database:
   storage:
     storageClassName: longhorn
     size: 20Gi
-  podAnnotations:
-    linkerd.io/inject: enabled
 
 initial:
   serverUrl: ""  

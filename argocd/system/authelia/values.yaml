@@ -2,9 +2,6 @@
 # postgresql subchart
 ########################
 postgresql:
-  primary:
-    podAnnotations:
-      linkerd.io/inject: enabled
   auth:
     username: authelia
     database: authelia
@@ -17,9 +14,6 @@ postgresql:
 ########################
 redis:
   architecture: standalone
-  primary:
-    podAnnotations:
-      linkerd.io/inject: enabled
   auth:
     enabled: true
     existingSecret: authelia-secret
