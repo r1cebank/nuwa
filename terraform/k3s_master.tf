@@ -13,7 +13,7 @@ module "k3s_master_cluster" {
     data.xenorchestra_sr.cerulean_nvme.id
   ], count.index)
   network_id     = data.xenorchestra_network.default_network.id
-  template_id    = data.xenorchestra_template.vm_template_2204.id
+  template_id    = data.xenorchestra_template.vm_template_22043.id
   affinity_host  = element([
     data.xenorchestra_host.aero.id,
     data.xenorchestra_host.arctic.id,

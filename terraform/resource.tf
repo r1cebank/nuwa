@@ -2,8 +2,12 @@ data "xenorchestra_pool" "pool" {
   name_label = "owo-xenlab"
 }
 
-data "xenorchestra_template" "vm_template_2204" {
-  name_label = "[cloud-init] Ubuntu Jammy Jellyfish 22.04.2"
+data "xenorchestra_template" "vm_template_22043" {
+  name_label = "[cloud-init] Ubuntu Jammy Jellyfish 22.04.3"
+}
+
+data "xenorchestra_template" "vm_template_debian_12" {
+  name_label = "[cloud-init] Debian Bookworm 12"
 }
 
 data "xenorchestra_sr" "arctic_sata" {

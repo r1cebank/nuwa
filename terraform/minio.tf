@@ -9,7 +9,7 @@ module "minio_server" {
   disk_size      = var.minio_host_resources.disk_size
   sr_id          = data.xenorchestra_sr.cerulean_sata.id
   network_id     = data.xenorchestra_network.default_network.id
-  template_id    = data.xenorchestra_template.vm_template_2204.id
+  template_id    = data.xenorchestra_template.vm_template_22043.id
   affinity_host  = data.xenorchestra_pool.pool.master
 
   cloud_config_file         = "resource/minio_cloudconfig.tftpl"
