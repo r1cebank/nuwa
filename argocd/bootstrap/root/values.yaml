@@ -63,10 +63,10 @@ apps:
     path: argocd/system/velero
     syncWave: 10
     # Logging: Loki and EFK stack
-  - name: logging
-    namespace: logging
-    path: argocd/system/logging
-    syncWave: 11
+  # - name: logging
+  #   namespace: logging
+  #   path: argocd/system/logging
+  #   syncWave: 11
     # Kube-prometheus-stack
   # - name: monitoring
   #   namespace: monitoring
