@@ -6,13 +6,6 @@ services:
     protocol: TCP
     ingress_domain: nas.owo.ac
     cluster_issuer: letsencrypt-prod-issuer
-  - name: arch-mirror
-    ip: 10.0.60.106
-    source_port: 80
-    service_port: 80
-    protocol: TCP
-    ingress_domain: arch.owo.ac
-    cluster_issuer: letsencrypt-prod-issuer
   - name: crafty-server
     ip: 10.0.60.20
     source_port: 80
