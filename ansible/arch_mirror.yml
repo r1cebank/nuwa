@@ -21,6 +21,6 @@
     caddy:
       hosts:
         - hostname: "{{ arch_mirror_hostname }}"
-          file_root: "{{ arch_mirror_dir }}"
+          file_root: "{{ arch_mirror_packages_dir }}"
       dns_resolver_email: "{{ cloudflare_email }}"
       dns_resolver_token: "{{ cloudflare_api_token }}"
