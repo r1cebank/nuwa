@@ -5,7 +5,7 @@ image:
   pullPolicy: IfNotPresent
   # -- image tag
   # this example is not automatically updated, so be sure to use the latest image
-  tag: sha-20c2f19-alpine
+  tag: sha-6e9edde-alpine
 
 # -- Configures service settings for the chart.
 service:
