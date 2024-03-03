@@ -1,0 +1,15 @@
+---
+
+- name: Configure Cluster Nodes
+  hosts: k3s_nodes
+  gather_facts: true
+  tags: [setup]
+  become: true
+  pre_tasks:
+    - name: Include vault variables
+      include_vars: "vars/vault.yml"
+      tags: ["always"]
+  roles:
+    # OS basic setup tasks
+    - role: basic_setup
+      tags: [os]
