@@ -37,11 +37,6 @@ env:
           name: vikunja-secret
           key: postgres-password
 
-podSecurityContext:
-  runAsUser: 1000
-  runAsGroup: 1000
-  fsGroup: 1000
-
 # -- Configures service settings for the chart.
 # @default -- See values.yaml
 service:
