@@ -1,15 +1,96 @@
-# Ingress configuration
+#
+# IMPORTANT NOTE
+#
+# This chart inherits from our common library chart. You can check the default values/options here:
+# https://github.com/geek-cookbook/library-charts/tree/main/charts/stable/common/values.yaml
+#
+
+image:
+  # -- image repository
+  repository: vikunja/vikunja
+  # -- image tag
+  tag: "0.23.0"
+  # -- image pull policy
+  pullPolicy: IfNotPresent
+
+env:
+  TZ: America/Vancouver
+  VIKUNJA_SERVICE_PUBLICURL: "https://vikunja.owo.ac"
+  VIKUNJA_DATABASE_DATABASE: vikunja
+  VIKUNJA_DATABASE_TYPE: postgres
+  VIKUNJA_DATABASE_HOST: vikunja-postgresql
+  VIKUNJA_DATABASE_USER: vikunja
+  VIKUNJA_MAILER_ENABLED: true
+  VIKUNJA_MAILER_HOST: "in-v3.mailjet.com"
+  VIKUNJA_MAILER_PORT: 587
+  VIKUNJA_MAILER_USERNAME: d86fa73b53b9e7b67d3f8831be6329aa
+  VIKUNJA_MAILER_FROMEMAIL: "noreply@miku.cx"
+  VIKUNJA_SERVICE_ENABLEREGISTRATION: true
+  VIKUNJA_MAILER_PASSWORD:
+    valueFrom:
+        secretKeyRef:
+            name: vikunja-secret
+            key: smtp-password
+  VIKUNJA_DATABASE_PASSWORD:
+    valueFrom:
+        secretKeyRef:
+          name: vikunja-secret
+          key: postgres-password
+
+podSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+
+# -- Configures service settings for the chart.
+# @default -- See values.yaml
+service:
+  main:
+    ports:
+      http:
+        port: 3456
+
 ingress:
-  host: vikunja.owo.ac
-  homepage:
+  main:
     enabled: true
-    name: "Vijunja"
-    description: "The open-source, self-hostable to-do app."
-    group: "Personal"
-    icon: "vikunja.png"
-  # configure cert-manager issuer
-  certmanager:
-    tlsIssuer: letsencrypt-prod-issuer
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
+      cert-manager.io/common-name: vikunja.owo.ac
+
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Vijunja"
+      gethomepage.dev/description: "The open-source, self-hostable to-do app."
+      gethomepage.dev/group: "Personal"
+      gethomepage.dev/icon: "vikunja.png"
+    hosts:
+      - host: vikunja.owo.ac
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: vikunja-tls
+        hosts:
+          - vikunja.owo.ac
+
+persistence:
+  # -- Configure persistence for data to use sqlite backend.
+  # @default -- See values.yaml
+  data:
+    enabled: true
+    mountPath: /app/vikunja/files
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: longhorn
 
 ########################
 # postgresql subchart
@@ -22,73 +103,3 @@ postgresql:
   persistence:
     storageClass: longhorn
     size: 10Gi
-
-########################
-# vikunja subchart
-########################
-vikunja:
-  api:
-    image:
-      repository: vikunja/api
-      pullPolicy: Always
-      tag: "unstable"
-    ingress:
-      enabled: false
-    service:
-      timezone: America/Vancouver
-    config:
-      database: 
-        type: postgres
-      mailer:
-        enabled: true
-        host: "in-v3.mailjet.com"
-        port: 587
-        username: d86fa73b53b9e7b67d3f8831be6329aa
-        fromemail: "noreply@miku.cx"
-      service:
-        enableregistration: true
-    env:
-      - name: VIKUNJA_SERVICE_FRONTENDURL
-        value: https://vikunja.owo.ac/
-      - name: VIKUNJA_DATABASE_USER
-        value: vikunja
-      - name: VIKUNJA_DATABASE_HOST
-        value: vikunja-postgresql
-      - name: VIKUNJA_DATABASE_DATABASE
-        value: vikunja
-      - name: VIKUNJA_DATABASE_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: vikunja-secret
-            key: password
-      - name: VIKUNJA_MAILER_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: vikunja-secret
-            key: smtp-password
-    persistence:
-      enabled: false
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 10Gi
-        storageClassName: longhorn
-  frontend:
-    apiUrl: "https://vikunja.owo.ac/api/v1"
-    image:
-      repository: vikunja/frontend
-      pullPolicy: Always
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: "unstable"
-    securityContext:
-      allowPrivilegeEscalation: true
-      runAsUser: 101 #nginx
-      capabilities:
-        drop:
-        - ALL
-        add:
-        - NET_BIND_SERVICE
-    ingress:
-      enabled: false
-  postgresqlEnabled: false
