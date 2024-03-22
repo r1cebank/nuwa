@@ -28,8 +28,7 @@ velero:
   configuration:
     # Configure Minio as backup backend
     backupStorageLocation:
-    - name: minio
-      provider: aws
+    - provider: aws
       bucket: k3s-velero
       config:
         region: us-west-1
