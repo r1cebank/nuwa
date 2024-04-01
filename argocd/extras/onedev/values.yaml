@@ -5,7 +5,7 @@ sshingress:
 
 image:
   repository: 1dev/server
-  tag: 10.2.1
+  tag: 10.3.3
 
 ## Set this as true to stop OneDev server to perform various maintenance tasks such as backup, restore.
 ## Check https://code.onedev.io/onedev/manual/~files/main/pages/backup-restore.md for details
