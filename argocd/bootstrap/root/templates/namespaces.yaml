@@ -45,3 +45,10 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: authelia
+
+---
+# authelia
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: velero

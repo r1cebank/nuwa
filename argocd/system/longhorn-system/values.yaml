@@ -34,3 +34,5 @@ longhorn:
     backupTarget: "s3://k3s-longhorn@us-west-1/"
     backupTargetCredentialSecret: longhorn-minio-secret
     defaultDataPath: /mnt/longhorn
+  helmPreUpgradeCheckerJob:
+    enabled: false

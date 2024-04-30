@@ -72,9 +72,9 @@ apps:
   #   namespace: monitoring
   #   path: argocd/system/monitoring
   #   syncWave: 12
-    helm:
-      # skip installation kube-prometheus-stack CDRs
-      skipCrds: true
+    # helm:
+    #   # skip installation kube-prometheus-stack CDRs
+    #   skipCrds: true
     # Linkerd-viz
   # - name: linkerd-viz
   #   namespace: linkerd-viz
