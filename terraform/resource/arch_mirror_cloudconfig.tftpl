@@ -1,5 +1,10 @@
 #cloud-config
 hostname: ${hostname}
+write_files:
+  - path: /etc/resolv.conf
+    content: |
+      search miku.cx
+      nameserver 10.0.60.1
 users:
   - name: archmirror
     gecos: arch-mirror user
@@ -11,8 +16,7 @@ users:
     ssh-authorized-keys:
       - ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOGLjBlTAAI+SiATOlioa7Zgl04F8eoUCYiRikUAhLNGMHoWPgyFl1xcfLkjOrbVOmHK44V/cyWDRC9FB7fEZlk= Home-Servers@secretive.Hachune-M2A.local
     shell: /bin/bash
-  - name: ubuntu
-    sudo: false
+  - name: debian
     ssh_redirect_user: true
 preserve_hostname: false
 resize_rootfs: true

@@ -27,19 +27,19 @@ resource "local_file" "inventory" {
   content  = <<EOF
   [all]
   %{for i, v in module.k3s_master_cluster}
-  ${replace(module.k3s_master_cluster[i].label, "-", "_")} ansible_host=${module.k3s_master_cluster[i].network[0].ipv4_addresses[0]}
+  ${replace(module.k3s_master_cluster[i].label, "-", "_")} ansible_host=${module.k3s_master_cluster[i].default_ipv4_address}
   %{endfor}
   %{for i, v in module.k3s_worker_cluster}
-  ${replace(module.k3s_worker_cluster[i].label, "-", "_")} ansible_host=${module.k3s_worker_cluster[i].network[0].ipv4_addresses[0]}
+  ${replace(module.k3s_worker_cluster[i].label, "-", "_")} ansible_host=${module.k3s_worker_cluster[i].default_ipv4_address}
   %{endfor}
   %{for i, v in module.arch_mirror}
-  ${replace(module.arch_mirror[i].label, "-", "_")} ansible_host=${module.arch_mirror[i].network[0].ipv4_addresses[0]}
+  ${replace(module.arch_mirror[i].label, "-", "_")} ansible_host=${module.arch_mirror[i].default_ipv4_address}
   %{endfor}
   %{for i, v in module.minio_server}
-  ${replace(module.minio_server[i].label, "-", "_")} ansible_host=${module.minio_server[i].network[0].ipv4_addresses[0]}
+  ${replace(module.minio_server[i].label, "-", "_")} ansible_host=${module.minio_server[i].default_ipv4_address}
   %{endfor}
     %{for i, v in module.hashicorp_vault}
-  ${replace(module.hashicorp_vault[i].label, "-", "_")} ansible_host=${module.hashicorp_vault[i].network[0].ipv4_addresses[0]}
+  ${replace(module.hashicorp_vault[i].label, "-", "_")} ansible_host=${module.hashicorp_vault[i].default_ipv4_address}
   %{endfor}
 
   [minio_nodes]

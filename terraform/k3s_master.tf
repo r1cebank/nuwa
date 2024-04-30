@@ -1,5 +1,5 @@
 module "k3s_master_cluster" {
-  source = "./modules/xenvm"
+  source = "./modules/proxmoxvm"
   count  = var.k3s_master_cluster_resources.size
 
   vm_description = "K3S Master Host"
@@ -7,19 +7,13 @@ module "k3s_master_cluster" {
   cpus           = var.k3s_master_cluster_resources.cpus
   max_memory     = var.k3s_master_cluster_resources.memory_max
   disk_size      = var.k3s_master_cluster_resources.disk_size
-  sr_id          = element([
-    data.xenorchestra_sr.aero_nvme.id,
-    data.xenorchestra_sr.arctic_nvme.id,
-    data.xenorchestra_sr.cerulean_nvme.id
-  ], count.index)
-  network_id     = data.xenorchestra_network.default_network.id
-  template_id    = data.xenorchestra_template.vm_template_22043.id
-  affinity_host  = element([
-    data.xenorchestra_host.aero.id,
-    data.xenorchestra_host.arctic.id,
-    data.xenorchestra_host.cerulean.id
-  ], count.index)
+  network_id     = "vmbr0"
+  template_id    = "debian-12-cloudinit-template"
+  affinity_host_name  = element(var.k3s_master_cluster_resources.node_names, count.index)
+  affinity_host = element(var.k3s_master_cluster_resources.node_hosts, count.index)
+  main_disk_storage = "ceph"
 
+  cloud_init_storage = "local-lvm"
   cloud_config_file         = "resource/k3s_cloudconfig.tftpl"
   cloud_network_config_file = "resource/networkconfig_static.tftpl"
   cloud_network_config_args = {
@@ -29,6 +23,8 @@ module "k3s_master_cluster" {
     dns_server1     = "1.1.1.1"
   }
 
+  # set other required values
+  external_env = data.external.env.result
   tags = [
     "k3s",
     "master",

@@ -1,5 +1,5 @@
 module "minio_server" {
-  source = "./modules/xenvm"
+  source = "./modules/proxmoxvm"
   count  = 1
 
   vm_description = "Minio Host"
@@ -7,11 +7,13 @@ module "minio_server" {
   cpus           = var.minio_host_resources.cpus
   max_memory     = var.minio_host_resources.memory_max
   disk_size      = var.minio_host_resources.disk_size
-  sr_id          = data.xenorchestra_sr.cerulean_sata.id
-  network_id     = data.xenorchestra_network.default_network.id
-  template_id    = data.xenorchestra_template.vm_template_22043.id
-  affinity_host  = data.xenorchestra_pool.pool.master
+  network_id     = "vmbr0"
+  template_id    = "debian-12-cloudinit-template"
+  affinity_host_name = var.minio_host_resources.node_names[0]
+  affinity_host = var.minio_host_resources.node_hosts[0]
+  main_disk_storage = "ceph"
 
+  cloud_init_storage = "local-lvm"
   cloud_config_file         = "resource/minio_cloudconfig.tftpl"
   cloud_network_config_file = "resource/networkconfig_static.tftpl"
   cloud_network_config_args = {
@@ -23,8 +25,10 @@ module "minio_server" {
 
   additional_disk      = true
   additional_disk_size = var.minio_host_resources.additional_disk_size
-  additional_disk_sr_id = data.xenorchestra_sr.cerulean_sata.id
+  additional_disk_storage = "local-lvm"
 
+  # set other required values
+  external_env = data.external.env.result
   tags = [
     "minio"
   ]

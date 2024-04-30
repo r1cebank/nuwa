@@ -1,5 +1,5 @@
 module "hashicorp_vault" {
-  source = "./modules/xenvm"
+  source = "./modules/proxmoxvm"
   count  = 1
 
   vm_description = "Hashicorp Vault Host"
@@ -7,10 +7,12 @@ module "hashicorp_vault" {
   cpus           = var.hashicorp_vault_resources.cpus
   max_memory     = var.hashicorp_vault_resources.memory_max
   disk_size      = var.hashicorp_vault_resources.disk_size
-  sr_id          = data.xenorchestra_sr.cerulean_sata.id
-  network_id     = data.xenorchestra_network.default_network.id
-  template_id    = data.xenorchestra_template.vm_template_22043.id
-  affinity_host  = data.xenorchestra_host.cerulean.id
+  network_id     = "vmbr0"
+  template_id    = "debian-12-cloudinit-template"
+  affinity_host_name = var.hashicorp_vault_resources.node_names[0]
+  affinity_host = var.hashicorp_vault_resources.node_hosts[0]
+  cloud_init_storage = "local-lvm"
+  main_disk_storage = "ceph"
 
   cloud_config_file         = "resource/hashicorp_vault_cloudconfig.tftpl"
   cloud_network_config_file = "resource/networkconfig_static.tftpl"
@@ -21,6 +23,8 @@ module "hashicorp_vault" {
     dns_server1     = "1.1.1.1"
   }
 
+  # set other required values
+  external_env = data.external.env.result
   tags = [
     "vault"
   ]
