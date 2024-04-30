@@ -37,10 +37,10 @@ apps:
     namespace: homepage
     path: argocd/extras/homepage
     syncWave: 1
-  - name: joplin
-    namespace: joplin
-    path: argocd/extras/joplin
-    syncWave: 1
+  # - name: joplin
+  #   namespace: joplin
+  #   path: argocd/extras/joplin
+  #   syncWave: 1
   - name: actual
     namespace: actual
     path: argocd/extras/actual
@@ -49,10 +49,10 @@ apps:
     namespace: vikunja
     path: argocd/extras/vikunja
     syncWave: 1
-  - name: nocodb
-    namespace: nocodb
-    path: argocd/extras/nocodb
-    syncWave: 1
+  # - name: nocodb
+  #   namespace: nocodb
+  #   path: argocd/extras/nocodb
+  #   syncWave: 1
   # - name: nextcloud
   #   namespace: nextcloud
   #   path: argocd/extras/nextcloud
