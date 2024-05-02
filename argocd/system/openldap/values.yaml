@@ -10,7 +10,7 @@ openldap-stack-ha:
     ldapDomain: owo.ac
     existingSecret: openldap-secret
   image:
-    tag: 2.6.4
+    tag: 2.6.6-fix
     pullPolicy: IfNotPresent
   persistence:
     storageClass: longhorn
@@ -25,8 +25,8 @@ openldap-stack-ha:
         # Enable TLS
         traefik.ingress.kubernetes.io/router.tls: "true"
         # Enable cert-manager to create automatically the SSL certificate and store in Secret
-        cert-manager.io/cluster-issuer: letsencrypt-staging-issuer
-        cert-manager.io/common-name: phpldapadmin.owo.ac
+        cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
+        cert-manager.io/common-name: ldap.owo.ac
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "phpLDAPadmin"
         gethomepage.dev/description: "Web-based LDAP browser"
