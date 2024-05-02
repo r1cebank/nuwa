@@ -22,7 +22,7 @@ acme:
 # CDRs installed as part of CDR application
 cert-manager:
   installCRDs: false
-  dnsPolicy: None
+  podDnsPolicy: None
   podDnsConfig:
     nameservers:
       - "1.1.1.1"
