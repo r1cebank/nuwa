@@ -26,11 +26,15 @@ openldap-stack-ha:
         traefik.ingress.kubernetes.io/router.tls: "true"
         # Enable cert-manager to create automatically the SSL certificate and store in Secret
         cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
-        cert-manager.io/common-name: ldap.owo.ac
+        cert-manager.io/common-name: phpldapadmin.owo.ac
         gethomepage.dev/enabled: "true"
         gethomepage.dev/name: "phpLDAPadmin"
         gethomepage.dev/description: "Web-based LDAP browser"
         gethomepage.dev/group: "Infrastructure"
         gethomepage.dev/icon: "phpldapadmin.png"
       hosts:
-        - ldap.owo.ac
+        - phpldapadmin.owo.ac
+      tls:
+      - hosts:
+          - phpldapadmin.owo.ac
+        secretName: phpldapadmin-tls
