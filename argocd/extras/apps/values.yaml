@@ -49,10 +49,10 @@ apps:
     namespace: vikunja
     path: argocd/extras/vikunja
     syncWave: 1
-  # - name: nocodb
-  #   namespace: nocodb
-  #   path: argocd/extras/nocodb
-  #   syncWave: 1
+  - name: nocodb
+    namespace: nocodb
+    path: argocd/extras/nocodb
+    syncWave: 1
   # - name: nextcloud
   #   namespace: nextcloud
   #   path: argocd/extras/nextcloud
