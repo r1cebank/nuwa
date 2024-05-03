@@ -17,7 +17,7 @@ bookmarks:
             href: https://github.com/
 services:
   - Infrastructure:
-    - XOA:
+    - Proxmox:
         href: https://aero.miku.cx/
         description: Proxmox
         icon: proxmox.png
