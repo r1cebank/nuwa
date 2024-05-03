@@ -18,7 +18,7 @@ bookmarks:
 services:
   - Infrastructure:
     - Proxmox:
-        href: https://aero.miku.cx/
+        href: https://aero.miku.cx:8006/
         description: Proxmox
         icon: proxmox.png
     - Vault:
