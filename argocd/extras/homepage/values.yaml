@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/benphelps/homepage
+  repository: ghcr.io/gethomepage/homepage
   tag: v0.8.12
 
 # The service account is necessary to allow discovery of other services
