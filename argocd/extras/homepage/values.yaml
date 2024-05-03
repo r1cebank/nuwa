@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/benphelps/homepage
-  tag: v0.6.23
+  tag: v0.8.12
 
 # The service account is necessary to allow discovery of other services
 serviceAccount:
