@@ -9,7 +9,7 @@ image:
   # -- image repository
   repository: ghcr.io/hay-kot/homebox
   # -- image tag
-  tag: "0.10.3"
+  tag: "v0.10.3"
   # -- image pull policy
   pullPolicy: IfNotPresent
 
