@@ -73,6 +73,10 @@ apps:
     namespace: ryot
     path: argocd/extras/ryot
     syncWave: 1
+  - name: homebox
+    namespace: homebox
+    path: argocd/extras/homebox
+    syncWave: 1
   # - name: firefly-iii
   #   namespace: firefly-iii
   #   path: argocd/extras/firefly-iii
