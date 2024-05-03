@@ -18,9 +18,9 @@ bookmarks:
 services:
   - Infrastructure:
     - XOA:
-        href: https://xoa.miku.cx/
-        description: Xen Orchestra
-        icon: xen-orchestra.png
+        href: https://aero.miku.cx/
+        description: Proxmox
+        icon: proxmox.png
     - Vault:
         href: https://vault.miku.cx/
         description: Hashicorp Vault
