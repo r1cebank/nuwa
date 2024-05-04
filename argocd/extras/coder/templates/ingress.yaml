@@ -15,6 +15,7 @@ metadata:
     gethomepage.dev/description: {{ .Values.ingress.homepage.description }}
     gethomepage.dev/group: {{ .Values.ingress.homepage.group }}
     gethomepage.dev/icon: {{ .Values.ingress.homepage.icon }}
+    gethomepage.dev/pod-selector: "app.kubernetes.io/name=coder"
     {{- end }}
 spec:
   tls:
