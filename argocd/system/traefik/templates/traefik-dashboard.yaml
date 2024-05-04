@@ -31,6 +31,7 @@ metadata:
     gethomepage.dev/group: {{ .Values.ingress.homepage.group }}
     gethomepage.dev/icon: {{ .Values.ingress.homepage.icon }}
     gethomepage.dev/href: "https://traefik.owo.ac/dashboard/"
+    gethomepage.dev/pod-selector: "app.kubernetes.io/name=traefik"
   {{- end }}
 spec:
   entryPoints:
