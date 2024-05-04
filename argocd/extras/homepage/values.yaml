@@ -21,23 +21,28 @@ services:
         href: https://aero.miku.cx:8006/
         description: Proxmox
         icon: proxmox.png
+        ping: aero.miku.cx
     - Vault:
         href: https://vault.miku.cx/
         description: Hashicorp Vault
         icon: vault-light.png
+        ping: vault.miku.cx
     - DSM:
         href: https://nas.owo.ac/
         description: Synology DSM
         icon: synology-dsm.png
+        ping: nas.owo.ac
   - Networking:
     - Opnsense:
         href: https://opn.miku.cx/
         description: Opnsense
         icon: opnsense.png
+        ping: opn.miku.cx
     - Network Switch:
         href: http://10.0.10.2/
         description: Netgear internet switch
         icon: netgear.png
+        ping: 10.0.10.2
 widgets:
   - logo:
       icon: homepage.png
