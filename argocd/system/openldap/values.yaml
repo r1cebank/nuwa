@@ -32,6 +32,7 @@ openldap-stack-ha:
         gethomepage.dev/description: "Web-based LDAP browser"
         gethomepage.dev/group: "Infrastructure"
         gethomepage.dev/icon: "phpldapadmin.png"
+        gethomepage.dev/pod-selector: "app.kubernetes.io/name=openldap-stack-ha"
       hosts:
         - phpldapadmin.owo.ac
       tls:
