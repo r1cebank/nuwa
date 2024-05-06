@@ -9,7 +9,7 @@ image:
   # -- image repository
   repository: ghcr.io/ignisda/ryot
   # -- image tag
-  tag: "v1.17.6"
+  tag: "v5.2.0"
   # -- image pull policy
   pullPolicy: IfNotPresent
 
