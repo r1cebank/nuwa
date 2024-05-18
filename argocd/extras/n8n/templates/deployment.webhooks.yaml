@@ -11,6 +11,11 @@ spec:
   {{- end }}
   strategy:
     type: {{ .Values.deploymentStrategy.type }}
+    {{- if eq .Values.deploymentStrategy.type "RollingUpdate" }}
+    rollingUpdate:
+      maxSurge: {{ default "25%" .Values.deploymentStrategy.maxSurge  }}
+      maxUnavailable: {{ default "25%" .Values.deploymentStrategy.maxUnavailable }}
+    {{- end }}
   selector:
     matchLabels:
       {{- include "n8n.selectorLabels" . | nindent 6 }}
@@ -37,6 +42,10 @@ spec:
       serviceAccountName: {{ include "n8n.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.initContainers }}
+      initContainers:
+      {{ tpl (toYaml .Values.initContainers) . | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -47,7 +56,6 @@ spec:
           args: ["webhook"]
           env:
             {{- include "n8n.deploymentPodEnvironments" . | nindent 12 }}
-            {{- toYaml .Values.n8n.extraEnvs | nindent 12 }}
           ports:
             - name: http
               containerPort: {{ get .Values.config "port" | default 5678 }}
@@ -56,12 +64,12 @@ spec:
             {{- toYaml .Values.webhookResources | nindent 12 }}
           volumeMounts:
             - name: data
-              mountPath: /root/.n8n
+              mountPath: {{ if semverCompare ">=1.0" (.Values.image.tag | default .Chart.AppVersion) }}/home/node/.n8n{{ else }}/root/.n8n{{ end }}
             {{- if .Values.config }}
             - name: config-volume
               mountPath: /n8n-config
             {{- end }}
-            {{- if .Values.secret }}
+            {{- if or (.Values.secret) (.Values.existingSecret) }}
             - name: secret-volume
               mountPath: /n8n-secret
                 {{- end }}
@@ -85,10 +93,10 @@ spec:
           configMap:
             name: {{ include "n8n.fullname" . }}
         {{- end }}
-        {{- if .Values.secret }}
+        {{- if or (.Values.secret) (.Values.existingSecret) }}
         - name: secret-volume
           secret:
-            secretName: {{ include "n8n.fullname" . }}
+            secretName: {{ if .Values.existingSecret }}{{ .Values.existingSecret }}{{ else }}{{ include "n8n.fullname" . }}{{ end }}
             items:
               - key: "secret.json"
                 path: "secret.json"

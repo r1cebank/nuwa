@@ -67,19 +67,13 @@ Selector labels
 {{ end }}
 - name: "N8N_PORT" #! we better set the port once again as ENV Var, see: https://community.n8n.io/t/default-config-is-not-set-or-the-port-to-be-more-precise/3158/3?u=vad1mo
   value: {{ get .Values.config "port" | default "5678" | quote }}
-{{- if or .Values.secret .Values.n8n.encryption_key }}
+{{- if .Values.n8n.encryption_key }}
 - name: "N8N_ENCRYPTION_KEY"
   valueFrom:
     secretKeyRef:
       key:  N8N_ENCRYPTION_KEY
       name: {{ include "n8n.fullname" . }}
-{{ end }}
-- name: "N8N_HOST"
-  value: {{ get .Values.n8n "host" | default "localhost" | quote }}
-- name: "N8N_PROTOCOL"
-  value: {{ get .Values.n8n "protocol" | default "http" | quote }}
-- name: "WEBHOOK_URL"
-  value: {{ get .Values.n8n "webhook" | default "localhost" | quote }}
+{{- end }}
 {{- if or .Values.config .Values.secret }}
 - name: "N8N_CONFIG_FILES"
   value: {{ include "n8n.configFiles" . | quote }}
@@ -90,7 +84,7 @@ Selector labels
   value: "{{ .Values.scaling.redis.host }}"
   {{ else }}
   value: "{{ .Release.Name }}-redis-master"
-  {{ end }}  
+  {{ end }}
 - name: "EXECUTIONS_MODE"
   value: "queue"
 {{ end }}
@@ -123,10 +117,10 @@ Create the name of the service account to use
     {{- if .Values.config }}
         {{- $conf_val = "/n8n-config/config.json" }}
     {{- end }}
-    {{- if .Values.secret }}
+    {{- if or .Values.secret .Values.existingSecret }}
         {{- $sec_val = "/n8n-secret/secret.json" }}
     {{- end }}
-    {{- if and .Values.config .Values.secret }}
+    {{- if and .Values.config (or .Values.secret .Values.existingSecret) }}
         {{- $separator  = "," }}
     {{- end }}
     {{- print $conf_val $separator $sec_val }}

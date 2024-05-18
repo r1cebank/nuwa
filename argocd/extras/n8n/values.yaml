@@ -1,11 +1,13 @@
 # Default helm values for n8n.
 # Default values within the n8n application can be found under https://github.com/n8n-io/n8n/blob/master/packages/cli/config/index.ts
 n8n:
-  host: n8n.owo.ac
-  protocol: https
-  webhook: https://n8n-webhook.miku.cx/
-  encryption_key: # n8n creates a random encryption key automatically on the first launch and saves it in the ~/.n8n folder. That key is used to encrypt the credentials before they get saved to the database.
-  extraEnvs:
+ extraEnvs:
+    - name: N8N_PROTOCOL
+      value: https
+    - name: N8N_HOST
+      value: n8n.owo.ac
+    - name: WEBHOOK_TUNNEL_URL
+      value: https://n8n-webhook.miku.cx/
     - name: "GENERIC_TIMEZONE"
       value: America/Vancouver
 
