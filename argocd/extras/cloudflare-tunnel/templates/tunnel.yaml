@@ -1,11 +1,10 @@
-{{- range $key, $value := .Values.tunnels }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: {{ .Release.Namespace }}
-  name: {{ $key }}-cloudflare-tunnel
+  name: {{ .Release.Namespace }}
   namespace: {{ .Release.Namespace }}
 spec:
   selector:
@@ -17,6 +16,7 @@ spec:
         app: {{ .Release.Namespace }}
     spec:
       containers:
+      {{- range $key, $value := .Values.tunnels }}
       - name: {{ $key }}-cloudflare-tunnel
         image: {{ $value.cloudflared.image }}
         imagePullPolicy: Always
@@ -27,6 +27,6 @@ spec:
               secretKeyRef:
                 name: {{ $value.cloudflared.token.existingSecret }}
                 key: tunnel-token
+      {{ end }}
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
-{{ end }}
