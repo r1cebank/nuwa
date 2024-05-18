@@ -8,10 +8,6 @@ n8n:
   extraEnvs:
     - name: "GENERIC_TIMEZONE"
       value: America/Vancouver
-  extraEnvSecrets:
-    N8N_ENCRYPTION_KEY:
-      - name: n8n-secret
-        key: N8N_ENCRYPTION_KEY
 
 defaults:
 
@@ -123,6 +119,9 @@ extraEnvSecrets:
   DB_POSTGRESDB_PASSWORD:
     name: n8n-secret
     key: postgres-password
+  N8N_ENCRYPTION_KEY:
+    name: n8n-secret
+    key: n8n-encryption-key
 
 ##
 ##
