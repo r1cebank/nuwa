@@ -6,3 +6,9 @@ tunnels:
       image: cloudflare/cloudflared:2024.5.0
       token:
         existingSecret: argocd-tunnel-secret
+  n8n:
+      enabled: true
+      cloudflared:
+        image: cloudflare/cloudflared:2024.5.0
+        token:
+          existingSecret: n8n-tunnel-secret
