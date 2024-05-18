@@ -3,11 +3,9 @@
 n8n:
   host: n8n.owo.ac
   protocol: https
-  webhook: https://n8n.owo.ac/
+  webhook: https://n8n-webhook.miku.cx/
   encryption_key: # n8n creates a random encryption key automatically on the first launch and saves it in the ~/.n8n folder. That key is used to encrypt the credentials before they get saved to the database.
   extraEnvs:
-    - name: "WEBHOOK_URL"
-      value: "https://n8n-webhook.miku.cx/"
     - name: "GENERIC_TIMEZONE"
       value: America/Vancouver
 defaults:
