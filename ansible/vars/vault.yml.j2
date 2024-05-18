@@ -156,6 +156,9 @@ vault:
   n8n:
     db:
       password: {{ n8n_db_password }}
+    tunnel:
+      id: {{ n8n_cloudflare_tunnel_id }}
+      token: {{ n8n_cloudflare_tunnel_token }}
   # firefly-iii
   fireflyiii:
     token:

@@ -6,6 +6,8 @@ n8n:
   webhook: https://n8n.owo.ac/
   encryption_key: # n8n creates a random encryption key automatically on the first launch and saves it in the ~/.n8n folder. That key is used to encrypt the credentials before they get saved to the database.
   extraEnvs:
+    - name: "WEBHOOK_URL"
+      value: "https://n8n-webhook.miku.cx/"
     - name: "GENERIC_TIMEZONE"
       value: America/Vancouver
 defaults:
@@ -165,7 +167,7 @@ image:
   repository: n8nio/n8n
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.1.0"
+  tag: "1.41.1"
 
 imagePullSecrets: []
 nameOverride: ""
