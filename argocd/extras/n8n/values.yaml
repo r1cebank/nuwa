@@ -8,6 +8,11 @@ n8n:
   extraEnvs:
     - name: "GENERIC_TIMEZONE"
       value: America/Vancouver
+  extraEnvSecrets:
+    N8N_ENCRYPTION_KEY:
+      - name: n8n-secret
+        key: N8N_ENCRYPTION_KEY
+
 defaults:
 
 config: 

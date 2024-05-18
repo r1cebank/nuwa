@@ -156,6 +156,8 @@ vault:
   n8n:
     db:
       password: {{ n8n_db_password }}
+    worker:
+      encryption_key: {{ n8n_worker_key }}
     tunnel:
       id: {{ n8n_cloudflare_tunnel_id }}
       token: {{ n8n_cloudflare_tunnel_token }}
