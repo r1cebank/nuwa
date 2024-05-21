@@ -77,6 +77,10 @@ apps:
     namespace: homebox
     path: argocd/extras/homebox
     syncWave: 1
+  - name: selenium-grid
+    namespace: selenium-grid
+    path: argocd/extras/selenium-grid
+    syncWave: 1
   # - name: firefly-iii
   #   namespace: firefly-iii
   #   path: argocd/extras/firefly-iii
