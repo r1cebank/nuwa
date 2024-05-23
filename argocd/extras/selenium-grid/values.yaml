@@ -26,18 +26,3 @@ selenium-grid:
     enabled: true
   basicAuth:
     enabled: false
-  chromeNode:
-    scaledOptions:
-      minReplicaCount: 1
-      maxReplicaCount: 16
-      pollingInterval: 10
-  firefoxNode:
-    scaledOptions:
-      minReplicaCount: 1
-      maxReplicaCount: 16
-      pollingInterval: 10
-  edgeNode:
-    scaledOptions:
-      minReplicaCount: 1
-      maxReplicaCount: 16
-      pollingInterval: 10
