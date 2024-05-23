@@ -1,3 +1,24 @@
 selenium-grid:
   ingress:
-    enabled: false
+    enabled: true
+    annotations:
+      # HTTPS as entry point
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # Enable TLS
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      # Enable cert-manager to create automatically the SSL certificate and store in Secret
+      cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
+      cert-manager.io/common-name: selenium.owo.ac
+
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: "Selenium Grid"
+      gethomepage.dev/description: "Selenium Grid allows the execution of WebDriver"
+      gethomepage.dev/group: "Tools"
+      gethomepage.dev/icon: "https://www.selenium.dev/images/logos/grid.svg"
+      gethomepage.dev/href: "https://selenium.owo.ac"
+    tls:
+      - hosts:
+          - selenium.owo.ac
+        secretName: selenium-tls
+  autoscaling:
+    enabled: true
