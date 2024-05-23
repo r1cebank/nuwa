@@ -24,3 +24,5 @@ selenium-grid:
         secretName: selenium-tls
   autoscaling:
     enabled: true
+  basicAuth:
+    enabled: false
