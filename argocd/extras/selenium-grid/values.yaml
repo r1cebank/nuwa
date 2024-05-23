@@ -2,7 +2,7 @@ selenium-grid:
   ingress:
     enabled: true
     className: traefik
-    host: selenium.owo.ac
+    hostname: selenium.owo.ac
     annotations:
       # HTTPS as entry point
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
