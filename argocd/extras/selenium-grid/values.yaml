@@ -24,5 +24,6 @@ selenium-grid:
         secretName: selenium-tls
   autoscaling:
     enabled: true
+    scalingType: deployment
   basicAuth:
     enabled: false
