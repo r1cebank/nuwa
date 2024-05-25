@@ -27,3 +27,6 @@ selenium-grid:
     scalingType: deployment
   basicAuth:
     enabled: false
+  extraEnvironmentVariables:
+    - name: VNC_NO_PASSWORD
+      value: "true"
