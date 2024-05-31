@@ -81,6 +81,10 @@ apps:
     namespace: selenium-grid
     path: argocd/extras/selenium-grid
     syncWave: 1
+  - name: webminidisc
+    namespace: webminidisc
+    path: argocd/extras/webminidisc
+    syncWave: 1
   # - name: firefly-iii
   #   namespace: firefly-iii
   #   path: argocd/extras/firefly-iii
