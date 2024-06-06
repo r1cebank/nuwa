@@ -166,7 +166,7 @@ image:
   repository: n8nio/n8n
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.41.1"
+  tag: "1.45.0"
 
 imagePullSecrets: []
 nameOverride: ""
