@@ -5,7 +5,7 @@ image:
   pullPolicy: IfNotPresent
   # -- image tag
   # this example is not automatically updated, so be sure to use the latest image
-  tag: sha-2221fd8-alpine
+  tag: sha-f5307e4-alpine
 
 # -- Configures service settings for the chart.
 service:
@@ -36,9 +36,9 @@ ingress:
           - path: /
             pathType: Prefix
     tls:
-    - hosts:
-        - actual.owo.ac
-      secretName: actual-tls
+      - hosts:
+          - actual.owo.ac
+        secretName: actual-tls
 persistence:
   data:
     enabled: true
