@@ -4,7 +4,7 @@ n8n:
   encryption_key: # if not specified n8n on first launch creates a random encryption key for encrypting saved credentials and saves it in the ~/.n8n folder
 defaults:
 
-config: 
+config:
   database:
     type: postgresdb
     postgresdb:
@@ -14,7 +14,6 @@ config:
     pruneData: "true" # prune executions by default
     pruneDataMaxAge: 3760 # Per defaut we store 1 year of history
 
-    
 secret: # Dict with all n8n json config options, unlike config the values here will end up in a secret.
 
 # Typical Example of a config in combination with a secret.
@@ -166,7 +165,7 @@ image:
   repository: n8nio/n8n
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.45.0"
+  tag: "1.49.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -188,7 +187,8 @@ podLabels: {}
 podSecurityContext: {}
 # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -211,7 +211,7 @@ service:
   type: ClusterIP
   port: 80
   annotations: {}
-    
+
 ingress:
   enabled: true
   annotations:
@@ -232,10 +232,10 @@ ingress:
     - host: n8n.owo.ac
       paths: ["/"]
   tls:
-   - secretName: n8n-tls
-     hosts:
-       - n8n.owo.ac
-  
+    - secretName: n8n-tls
+      hosts:
+        - n8n.owo.ac
+
   # define a custom incressClassName, like "traefik" or "nginx"
   className: ""
 
@@ -243,7 +243,8 @@ workerResources: {}
 
 webhookResources: {}
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -270,7 +271,7 @@ affinity: {}
 
 scaling:
   enabled: true
-  
+
   worker:
     count: 2
     concurrency: 2
