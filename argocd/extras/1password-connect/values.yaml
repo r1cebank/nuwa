@@ -1,0 +1,49 @@
+connect:
+  connect:
+    dataVolume:
+      type: longhorn
+    operator:
+      token:
+        name: op-connect-secret
+        key: token
+    # Ingress allows ingress services to be created to allow external access
+    # from Kubernetes to access 1Password Connect pods.
+    # In order to expose the service, use the route section below
+    ingress:
+      enabled: true
+      labels: {}
+        # traffic: external
+      annotations:
+        # HTTPS as entry point
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        # Enable TLS
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        # Enable cert-manager to create automatically the SSL certificate and store in Secret
+        cert-manager.io/cluster-issuer: letsencrypt-prod-issuer
+        cert-manager.io/common-name: opconnect.owo.ac
+
+      # Optionally use ingressClassName instead of deprecated annotation.
+      # See: https://kubernetes.io/docs/concepts/services-networking/ingress/#deprecated-annotation
+      ingressClassName: "traefik"
+
+      # As of Kubernetes 1.19, all Ingress Paths must have a pathType configured. The default value below should be sufficient in most cases.
+      # See: https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types for other possible values.
+      pathType: Prefix
+      hosts:
+        - host: opconnect.owo.ac
+          paths:
+            - path: /
+              pathType: Prefix
+      # Extra paths to prepend to the host configuration.
+      # This is useful when working with annotation based services.
+      extraPaths: []
+      # - path: /*
+      #   backend:
+      #     service:
+      #       name: ssl-redirect
+      #       port:
+      #         number: use-annotation
+      tls:
+       - secretName: op-connect-tls
+         hosts:
+           - opconnect.owo.ac
