@@ -85,6 +85,9 @@ apps:
     namespace: webminidisc
     path: argocd/extras/webminidisc
     syncWave: 1
+  - name: onepassword-connect
+    namespace: onepassword-connect
+    path: argocd/extras/1password-connect
   # - name: firefly-iii
   #   namespace: firefly-iii
   #   path: argocd/extras/firefly-iii
