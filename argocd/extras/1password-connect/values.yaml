@@ -1,7 +1,5 @@
 connect:
   connect:
-    dataVolume:
-      type: longhorn
     operator:
       token:
         name: op-connect-secret
