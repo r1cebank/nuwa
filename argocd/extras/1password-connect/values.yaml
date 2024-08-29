@@ -1,6 +1,9 @@
 connect:
   connect:
+    credentialsName: op-connect-secret
+    credentialsKey: op-credentials-json
     operator:
+      create: true
       token:
         name: op-connect-secret
         key: token
