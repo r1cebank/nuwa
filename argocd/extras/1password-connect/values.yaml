@@ -2,11 +2,6 @@ connect:
   connect:
     credentialsName: op-connect-secret
     credentialsKey: op-credentials-json
-    operator:
-      create: true
-      token:
-        name: op-connect-secret
-        key: token
     # Ingress allows ingress services to be created to allow external access
     # from Kubernetes to access 1Password Connect pods.
     # In order to expose the service, use the route section below
@@ -46,3 +41,8 @@ connect:
        - secretName: op-connect-tls
          hosts:
            - opconnect.owo.ac
+  operator:
+    create: true
+    token:
+      name: op-connect-secret
+      key: token
