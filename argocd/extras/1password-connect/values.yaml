@@ -45,4 +45,4 @@ connect:
     create: true
     token:
       name: op-connect-secret
-      key: token
+      key: op-connect-token
