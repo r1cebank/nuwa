@@ -31,9 +31,7 @@ connect:
       pathType: Prefix
       hosts:
         - host: opconnect.owo.ac
-          paths:
-            - path: /
-              pathType: Prefix
+          paths: []
       # Extra paths to prepend to the host configuration.
       # This is useful when working with annotation based services.
       extraPaths: []
