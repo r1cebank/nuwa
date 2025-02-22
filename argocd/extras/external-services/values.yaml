@@ -20,3 +20,10 @@ services:
     protocol: TCP
     ingress_domain: moss.owo.ac
     cluster_issuer: letsencrypt-prod-issuer
+  - name: jellyfin
+    ip: 10.0.60.52
+    source_port: 8096
+    service_port: 8096
+    protocol: TCP
+    ingress_domain: jellyfin.owo.ac
+    cluster_issuer: letsencrypt-prod-issuer
